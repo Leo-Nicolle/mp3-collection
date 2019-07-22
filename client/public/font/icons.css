@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "icons";
+    src: url("./icons.eot?dd7208a838b2bb20bc9dd0c097b45d2a?#iefix") format("embedded-opentype"),
+url("./icons.woff2?dd7208a838b2bb20bc9dd0c097b45d2a") format("woff2"),
+url("./icons.woff?dd7208a838b2bb20bc9dd0c097b45d2a") format("woff"),
+url("./icons.ttf?dd7208a838b2bb20bc9dd0c097b45d2a") format("truetype"),
+url("./icons.svg?dd7208a838b2bb20bc9dd0c097b45d2a#icons") format("svg");
+}
+
+i[class^="icon-"]:before, i[class*=" icon-"]:before {
+    font-family: icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-audio-file:before {
+    content: "\f101";
+}
+.icon-file:before {
+    content: "\f102";
+}
+.icon-folder:before {
+    content: "\f103";
+}
+.icon-mp3-player:before {
+    content: "\f104";
+}
+.icon-open-folder:before {
+    content: "\f105";
+}

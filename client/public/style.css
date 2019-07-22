@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Oswald";
+  src: url("./font/oswald.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+document {
+  background: red;
+}
+body {
+  font-family: Oswald;
+}
