@@ -2,7 +2,7 @@
   <div class="header">
     <div class="mp3-button">
       <i class="icon-mp3-player" @click="onMp3Click()"></i>
-      <FileModal ref="FileModal" />
+      <FileModal ref="FileModal" @validate="onValidate" />
     </div>
   </div>
 </template>
@@ -24,6 +24,9 @@ export default {
   methods: {
     onMp3Click(evt) {
       this.$refs.FileModal.show();
+    },
+    onValidate(path) {
+      this.$store.commit("setMp3Path", path);
     }
   },
   components: {
