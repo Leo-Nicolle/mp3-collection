@@ -28,6 +28,7 @@
 
 <script>
 import axios from "axios";
+import { serverUrl } from "../js/utils";
 export default {
   name: "FileModal",
   props: {
@@ -83,7 +84,7 @@ export default {
     },
     async getFolderContent() {
       this.files = await axios
-        .post(`http://localhost:4000/folder`, {
+        .post(`${serverUrl}folder`, {
           path: this.path
         })
         .then(({ data }) => data);

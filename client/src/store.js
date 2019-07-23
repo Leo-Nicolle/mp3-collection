@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import { serverUrl } from "./js/utils";
 
 Vue.use(Vuex);
 
 function upload(state) {
-  axios.post("http://localhost:4000/state", { state });
+  axios.post(`${serverUrl}state`, { state });
 }
 
 export default new Vuex.Store({
