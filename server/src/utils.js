@@ -1,7 +1,9 @@
 import * as mm from "music-metadata";
 import bs from "binary-search";
 const fs = require("fs");
+const path = require("path");
 
+const MAX_FILES_PER_FOLDER = 65000;
 export const supportedFiles = ["mp3", , "mp4", "ogg", "wav", "flac"];
 export function isFileSupported(file) {
   const name = typeof file === "string" ? file : file.name;
@@ -49,10 +51,24 @@ function fillBlanksMetadata({ common }) {
 
 export class Database {
   constructor() {
-    this.rootPath = "data/database.json";
-    this.filesIndex = 0;
-    if (fs.existsSync(this.rootPath)) {
-      this.data = JSON.parse(fs.readFileSync(this.rootPath));
+    this.statePath = "data/database-state.json";
+    this.databasePath = "data/database.json";
+    this.audioFolderRoot = "audio";
+    this.dataFolderRoot = "data/files";
+
+    if (fs.existsSync(this.statePath) && false) {
+      this.state = JSON.parse(fs.readFileSync(this.statePath));
+    } else {
+      this.state = {
+        audioFolderIndex: 0,
+        audioFileIndex: 0,
+        dataFolderIndex: 0,
+        dataFileIndex: 0,
+        audioFilesToCopy: []
+      };
+    }
+    if (fs.existsSync(this.databasePath) && false) {
+      this.data = JSON.parse(fs.readFileSync(this.databasePath));
     } else {
       this.data = {
         artists: []
@@ -64,59 +80,100 @@ export class Database {
       if (!isFileSupported(file)) continue;
       await this._add(file);
     }
-    this.export();
   }
   save() {
-    fs.writeFileSync(this.rootPath, JSON.stringify(this.data));
+    this._mkdirRec(this.databasePath);
+    this._mkdirRec(this.statePath);
+    fs.writeFileSync(this.databasePath, JSON.stringify(this.data));
+    fs.writeFileSync(this.statePath, JSON.stringify(this.state));
   }
-  export(path = "data/tests") {
+  export() {
+    this.save();
+    const dataFilesToCopy = this._createDataFiles();
+    this.copyDataFiles(dataFilesToCopy);
+    this.copyAudioFiles();
+    this.save();
+  }
+  copyAudioFiles() {
+    this.state.audioFilesToCopy.forEach(({ source, target }, i) => {
+      const filePath = path.join(this.audioFolderRoot, target);
+      this._mkdirRec(filePath);
+      fs.copyFileSync(source, filePath);
+      this.state.audioFilesToCopy[i].state = "saved";
+    });
+    this.state.audioFilesToCopy = this.state.audioFilesToCopy.filter(
+      ({ state }) => "saved"
+    );
+  }
+  copyDataFiles(dataFiles) {
+    dataFiles.forEach(({ name, content }) => {
+      const filePath = path.join(this.dataFolderRoot, name);
+      this._mkdirRec(filePath);
+      fs.writeFileSync(filePath, content);
+    });
+  }
+  _createDataFiles() {
     let allArtistsFile = "";
     const separator = String.fromCharCode(1);
-    const allArtistsFileName = this._getIndexName();
-    let files = [allArtistsFile];
-    console.log(this.data.artists);
+    const allArtistsFileName = this._getDataFilePath();
+    const dataFiles = [];
+
     this.data.artists.forEach(artist => {
-      const artistFilename = this._getIndexName();
+      const artistFilename = this._getDataFilePath();
       allArtistsFile += `${artist.name}${separator}${artistFilename}\n`;
       let artistFile = "";
       artist.albums.forEach(album => {
-        const albumFilename = this._getIndexName();
+        const albumFilename = this._getDataFilePath();
         artistFile += `${album.name}${separator}${albumFilename}\n`;
         let albumFile = "";
         album.tracks.forEach(track => {
-          albumFile += `${track.name}${separator}${track.file}\n`;
+          albumFile += `${track.name}${separator}${track.files.target}\n`;
         });
-        files.push({ content: albumFile, name: albumFilename });
+        dataFiles.push({ content: albumFile, name: albumFilename });
       });
-      files.push({ content: artistFile, name: artistFilename });
+      dataFiles.push({ content: artistFile, name: artistFilename });
     });
-    files.push({ content: allArtistsFile, name: allArtistsFileName });
-    console.log(files);
+    dataFiles.push({ content: allArtistsFile, name: allArtistsFileName });
 
-    files.forEach(({ name, content }) =>
-      fs.writeFileSync(path + "/" + name, content)
-    );
+    return dataFiles;
   }
-  _getIndexName({ increment = true, ext = ".txt" } = {}) {
-    const name = this._getName(this.filesIndex, ext);
-    if (increment) {
-      this.filesIndex++;
+  _getAudioFilePath(sourceFile) {
+    if (this.state.audioFileIndex === MAX_FILES_PER_FOLDER) {
+      this.state.audioFileIndex = 0;
+      this.state.audioFolderIndex++;
     }
-    return name;
+    const ext = sourceFile.slice(sourceFile.length - 4);
+    const name = this._getFileName(this.state.audioFileIndex, ext);
+    this.state.audioFileIndex++;
+    return path.join(this._getFileName(this.state.audioFolderIndex), name);
   }
-  _getName(number, ext) {
+  _getDataFilePath() {
+    if (this.state.dataFileIndex === MAX_FILES_PER_FOLDER) {
+      this.state.dataFileIndex = 0;
+      this.state.dataFolderIndex++;
+    }
+    const name = this._getFileName(this.state.dataFileIndex, ".txt");
+    this.state.dataFileIndex++;
+    return path.join(this._getFileName(this.state.dataFolderIndex), name);
+  }
+  _getFileName(number, ext = "") {
     return ("00000000" + number).substr(-8) + ext;
   }
 
   async _add(file) {
     const metadata = await extractMusicTags(file);
-    console.log(this);
-    this._addToArtists({ metadata, file });
+    const target = this._getAudioFilePath(file);
+    metadata.files = {
+      source: file,
+      target,
+      state: "toSave"
+    };
+    this._addToArtists(metadata);
+    this.state.audioFilesToCopy.push(metadata.files);
   }
 
-  _addToArtists({ metadata, file }) {
+  _addToArtists(metadata) {
     const common = metadata.common;
-    console.log("data", this);
     let artist = this.data.artists.find(({ name }) => name === common.artist);
     if (!artist) {
       this.data.artists.push({
@@ -134,6 +191,19 @@ export class Database {
       });
       album = artist.albums[artist.albums.length - 1];
     }
-    album.tracks.push({ name: common.title, file });
+    album.tracks.push({ name: common.title, files: metadata.files });
+  }
+  _mkdirRec(filePath) {
+    //get the folder names, filter the file names
+    const folders = filePath
+      .split(path.sep)
+      .filter(element => !element.match(/.*\.\w\w\w\w?$/i));
+
+    let totalPath = "";
+    folders.forEach(folder => {
+      totalPath = path.join(totalPath, folder);
+      if (fs.existsSync(totalPath)) return;
+      fs.mkdirSync(totalPath);
+    });
   }
 }

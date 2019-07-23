@@ -68,11 +68,9 @@ app.post("/metadata", async (req, res) => {
   }
 
   const files = fs.readdirSync(filePath).map(f => filePath + "/" + f);
-  const promises = files
-    .filter(f => isFileSupported(f))
-    .map(f => extractMusicTags(f));
+  const promises = files.filter(f => isFileSupported(f));
   await database.add(files);
-  database.save();
+  database.export();
   res.send(database.data);
 });
 
