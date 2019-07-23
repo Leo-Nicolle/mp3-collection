@@ -1,6 +1,5 @@
-import * as mm from "music-metadata/lib/core";
 import express from "express";
-import { isFileSupported } from "./utils";
+import { isFileSupported, extractMusicTags, Database } from "./utils";
 const path = require("path");
 const cors = require("cors");
 const fs = require("fs");
@@ -8,6 +7,8 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const port = 4000;
+const database = new Database();
+database.add([]);
 
 if (!fs.existsSync("data")) {
   fs.mkdirSync("data");
@@ -52,6 +53,27 @@ app.get("/state", (req, res) => {
   }
   const state = fs.readFileSync("data/state.json");
   res.send(state);
+});
+
+app.post("/metadata", async (req, res) => {
+  const file = req.body.file;
+  const filePath = path.resolve(file.path);
+  if (!fs.existsSync(filePath)) {
+    res.send(500);
+    return;
+  }
+  if (file.type !== "folder") {
+    res.send(500);
+    return;
+  }
+
+  const files = fs.readdirSync(filePath).map(f => filePath + "/" + f);
+  const promises = files
+    .filter(f => isFileSupported(f))
+    .map(f => extractMusicTags(f));
+  await database.add(files);
+  database.save();
+  res.send(database.data);
 });
 
 app.listen(port, () => {
