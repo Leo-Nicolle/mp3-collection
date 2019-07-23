@@ -4,5 +4,7 @@
     "file": "\\f103",
     "folder": "\\f104",
     "mp3-player": "\\f105",
-    "open-folder": "\\f106"
+    "music-note": "\\f106",
+    "open-folder": "\\f107",
+    "refresh": "\\f108"
 }

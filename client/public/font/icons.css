@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?e4e7746df98b92374f8c9f2f46dc19b2?#iefix") format("embedded-opentype"),
-url("./icons.woff2?e4e7746df98b92374f8c9f2f46dc19b2") format("woff2"),
-url("./icons.woff?e4e7746df98b92374f8c9f2f46dc19b2") format("woff"),
-url("./icons.ttf?e4e7746df98b92374f8c9f2f46dc19b2") format("truetype"),
-url("./icons.svg?e4e7746df98b92374f8c9f2f46dc19b2#icons") format("svg");
+    src: url("./icons.eot?817693062471b94e55d4792080f5ae45?#iefix") format("embedded-opentype"),
+url("./icons.woff2?817693062471b94e55d4792080f5ae45") format("woff2"),
+url("./icons.woff?817693062471b94e55d4792080f5ae45") format("woff"),
+url("./icons.ttf?817693062471b94e55d4792080f5ae45") format("truetype"),
+url("./icons.svg?817693062471b94e55d4792080f5ae45#icons") format("svg");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -33,6 +33,12 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-mp3-player:before {
     content: "\f105";
 }
-.icon-open-folder:before {
+.icon-music-note:before {
     content: "\f106";
+}
+.icon-open-folder:before {
+    content: "\f107";
+}
+.icon-refresh:before {
+    content: "\f108";
 }

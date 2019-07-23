@@ -9,10 +9,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 4000;
 
-// const corsOptions = {
-//   origin: "http://localhost",
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// };
+if (!fs.existsSync("data")) {
+  fs.mkdirSync("data");
+}
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -29,20 +28,30 @@ app.post("/folder", (req, res) => {
       {
         name: "..",
         path: path.resolve(req.body.path) + "/..",
-        type: "directory"
+        type: "folder"
       }
     ].concat(
       files.map(f => ({
         name: f.name,
         path: path.resolve(req.body.path) + "/" + f.name,
-        type: f.isDirectory()
-          ? "directory"
-          : isFileSupported(f)
-          ? "audio"
-          : "file"
+        type: f.isDirectory() ? "folder" : isFileSupported(f) ? "audio" : "file"
       }))
     )
   );
+});
+
+app.post("/state", (req, res) => {
+  console.log(req.body.state);
+  fs.writeFileSync("data/state.json", JSON.stringify(req.body.state));
+  res.send(200);
+});
+app.get("/state", (req, res) => {
+  if (!fs.existsSync("data/state.json")) {
+    res.send(500);
+    return;
+  }
+  const state = fs.readFileSync("data/state.json");
+  res.send(state);
 });
 
 app.listen(port, () => {

@@ -6,11 +6,13 @@
         <p>
           <strong>{{ title }}</strong> {{ path }}
         </p>
+        <i class="icon-refresh" @click="refresh()"></i>
       </div>
       <div class="modal-body">
         <div>
           <ul>
             <li v-for="file in files" @click="onDirClick(file)">
+              <i :class="getIconClass(file)"></i>
               {{ file.name }}
             </li>
           </ul>
@@ -32,6 +34,10 @@ export default {
     title: {
       type: String,
       default: ""
+    },
+    value: {
+      type: String,
+      default: "."
     }
   },
   data() {
@@ -43,7 +49,18 @@ export default {
     };
   },
   methods: {
+    getIconClass({ type }) {
+      return (
+        "icon-" +
+        (type === "folder"
+          ? "folder"
+          : type === "audio"
+          ? "music-note"
+          : "file")
+      );
+    },
     onDirClick(file) {
+      if (file.type !== "folder") return;
       this.path = file.path;
       this.getFolderContent();
     },
@@ -61,6 +78,9 @@ export default {
     show() {
       this.visible = true;
     },
+    refresh() {
+      this.getFolderContent();
+    },
     async getFolderContent() {
       this.files = await axios
         .post(`http://localhost:4000/folder`, {
@@ -70,11 +90,12 @@ export default {
     }
   },
   components: {},
-  mounted() {
-    this.getFolderContent().then(() => {
-      const path = this.files[0].path;
-      this.path = path.slice(0, path.length - 3);
-    });
+  mounted() {},
+  watch: {
+    value: function(newValue, oldValue) {
+      this.path = newValue;
+      this.getFolderContent();
+    }
   }
 };
 </script>
@@ -119,12 +140,21 @@ export default {
   overflow-y: auto;
   /* margin: 0.25em; */
 }
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+}
 .modal-title p {
   margin: 0;
   margin-top: 0.5em;
   margin-left: 1.5em;
-  font-size: 0.85em;
 }
+.modal-title i {
+  margin-top: 0.5em;
+  margin-right: 1.5em;
+  cursor: pointer;
+}
+
 .modal-footer {
   position: relative;
   bottom: 0;
@@ -162,5 +192,8 @@ li:nth-child(odd) {
 }
 li:nth-child(even) {
   background-color: #333;
+}
+li > i {
+  margin-right: 5px;
 }
 </style>

@@ -4,13 +4,19 @@
       <i class="icon-mp3-player" @click="onMp3Click()"></i>
       <FileModal
         ref="mp3Modal"
-        :title="mp3 location: "
+        :title="'mp3 location:'"
         @validate="onMp3ModalValidate"
+        :value="$store.state.mp3Path"
       />
     </span>
     <span>
       <i class="icon-add" @click="onAddClick()"></i>
-      <FileModal ref="FileModal" :title="to add: " @validate="onAddValidate" />
+      <FileModal
+        ref="addModal"
+        :title="'to add:'"
+        @validate="onAddValidate"
+        :value="$store.state.addPath"
+      />
     </span>
   </div>
 </template>
@@ -30,6 +36,9 @@ export default {
   methods: {
     onMp3Click(evt) {
       this.$refs.mp3Modal.show();
+    },
+    onAddClick(evt) {
+      this.$refs.addModal.show();
     },
     onMp3ModalValidate(path) {
       this.$store.commit("setMp3Path", path);
@@ -52,7 +61,7 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.header span {
+.header > span > i {
   font-size: 2em;
   cursor: pointer;
 }
