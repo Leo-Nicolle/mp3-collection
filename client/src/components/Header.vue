@@ -1,9 +1,17 @@
 <template>
   <div class="header">
-    <div class="mp3-button">
+    <span class="mp3-button">
       <i class="icon-mp3-player" @click="onMp3Click()"></i>
-      <FileModal ref="FileModal" @validate="onValidate" />
-    </div>
+      <FileModal
+        ref="mp3Modal"
+        :title="mp3 location: "
+        @validate="onMp3ModalValidate"
+      />
+    </span>
+    <span>
+      <i class="icon-add" @click="onAddClick()"></i>
+      <FileModal ref="FileModal" :title="to add: " @validate="onAddValidate" />
+    </span>
   </div>
 </template>
 
@@ -17,16 +25,17 @@ export default {
     msg: String
   },
   data() {
-    return {
-      modalVisible: true
-    };
+    return {};
   },
   methods: {
     onMp3Click(evt) {
-      this.$refs.FileModal.show();
+      this.$refs.mp3Modal.show();
     },
-    onValidate(path) {
+    onMp3ModalValidate(path) {
       this.$store.commit("setMp3Path", path);
+    },
+    onAddValidate(path) {
+      this.$store.commit("setAddPath", path);
     }
   },
   components: {
@@ -40,8 +49,10 @@ export default {
 <style scoped>
 .header {
   margin: 1em 1em 1em 1em;
+  display: flex;
+  justify-content: space-between;
 }
-.icon-mp3-player {
+.header span {
   font-size: 2em;
   cursor: pointer;
 }

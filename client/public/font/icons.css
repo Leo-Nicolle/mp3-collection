@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?dd7208a838b2bb20bc9dd0c097b45d2a?#iefix") format("embedded-opentype"),
-url("./icons.woff2?dd7208a838b2bb20bc9dd0c097b45d2a") format("woff2"),
-url("./icons.woff?dd7208a838b2bb20bc9dd0c097b45d2a") format("woff"),
-url("./icons.ttf?dd7208a838b2bb20bc9dd0c097b45d2a") format("truetype"),
-url("./icons.svg?dd7208a838b2bb20bc9dd0c097b45d2a#icons") format("svg");
+    src: url("./icons.eot?e4e7746df98b92374f8c9f2f46dc19b2?#iefix") format("embedded-opentype"),
+url("./icons.woff2?e4e7746df98b92374f8c9f2f46dc19b2") format("woff2"),
+url("./icons.woff?e4e7746df98b92374f8c9f2f46dc19b2") format("woff"),
+url("./icons.ttf?e4e7746df98b92374f8c9f2f46dc19b2") format("truetype"),
+url("./icons.svg?e4e7746df98b92374f8c9f2f46dc19b2#icons") format("svg");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -18,18 +18,21 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-audio-file:before {
+.icon-add:before {
     content: "\f101";
 }
-.icon-file:before {
+.icon-audio-file:before {
     content: "\f102";
 }
-.icon-folder:before {
+.icon-file:before {
     content: "\f103";
 }
-.icon-mp3-player:before {
+.icon-folder:before {
     content: "\f104";
 }
-.icon-open-folder:before {
+.icon-mp3-player:before {
     content: "\f105";
+}
+.icon-open-folder:before {
+    content: "\f106";
 }

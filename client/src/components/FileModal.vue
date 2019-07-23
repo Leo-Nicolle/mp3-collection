@@ -3,7 +3,9 @@
     <div class="overlay"></div>
     <div class="modal-content">
       <div class="modal-title">
-        <p><strong>mp3 location:</strong> {{ path }}</p>
+        <p>
+          <strong>{{ title }}</strong> {{ path }}
+        </p>
       </div>
       <div class="modal-body">
         <div>
@@ -26,9 +28,15 @@
 import axios from "axios";
 export default {
   name: "FileModal",
+  props: {
+    title: {
+      type: String,
+      default: ""
+    }
+  },
   data() {
     return {
-      visible: true,
+      visible: false,
       content: "",
       path: ".",
       files: []
