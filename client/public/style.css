@@ -10,7 +10,9 @@ document {
 body {
   font-family: Oswald;
 }
-
+i {
+  cursor: pointer;
+}
 ul {
   color: #fff;
   padding-left: 0;
@@ -35,4 +37,11 @@ li:nth-child(odd) {
 }
 li:nth-child(even) {
   background-color: #333;
+}
+input[type="submit"] {
+  background: #538ac5;
+  border: 0;
+  color: white;
+  border-radius: 2px;
+  padding: 0.3em;
 }

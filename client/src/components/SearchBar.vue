@@ -1,9 +1,16 @@
 <template>
-  <div class="search-bar">
-    <form>
-      <input type="search" name="search" v-model="value" />
-    </form>
-  </div>
+  <span class="search-bar">
+    <div class="search-container">
+      <i class="icon-search"></i>
+      <input
+        type="search"
+        name="search"
+        v-model="value"
+        placeholder="Search..."
+      />
+      <input type="submit" value="Search" class="searchButton" />
+    </div>
+  </span>
 </template>
 
 <script>
@@ -74,9 +81,20 @@ export default {
 
   methods: {},
   components: {},
-  mounted() {}
+  mounted() {
+    this.$store.commit("setSearchFilter", {});
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.search-container {
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+</style>

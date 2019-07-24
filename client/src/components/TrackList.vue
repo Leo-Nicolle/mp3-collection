@@ -37,7 +37,6 @@ export default {
       rows: [],
       indexToPropMap: ["artist", "album", "track"],
       propToIndexMap: { artist: 0, album: 1, track: 2 }
-      // filteredRows: []
     };
   },
   computed: {
@@ -45,7 +44,6 @@ export default {
     filteredRows: function() {
       const searchFilter = this.searchFilter;
       if (!Object.keys(searchFilter).length) {
-        // this.filteredRows = ;
         return this.rows;
       }
       return this.rows

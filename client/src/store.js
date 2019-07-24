@@ -6,7 +6,9 @@ import { serverUrl } from "./js/utils";
 Vue.use(Vuex);
 
 function upload(state) {
-  axios.post(`${serverUrl}state`, { state });
+  const stateCopy = Object.assign({}, state);
+  stateCopy.searchFilter = {};
+  axios.post(`${serverUrl}state`, { stateCopy });
 }
 
 export default new Vuex.Store({

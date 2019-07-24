@@ -1,10 +1,12 @@
 {
     "add": "\\f101",
     "audio-file": "\\f102",
-    "file": "\\f103",
-    "folder": "\\f104",
-    "mp3-player": "\\f105",
-    "music-note": "\\f106",
-    "open-folder": "\\f107",
-    "refresh": "\\f108"
+    "delete": "\\f103",
+    "file": "\\f104",
+    "folder": "\\f105",
+    "mp3-player": "\\f106",
+    "music-note": "\\f107",
+    "open-folder": "\\f108",
+    "refresh": "\\f109",
+    "search": "\\f10a"
 }

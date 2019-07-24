@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?817693062471b94e55d4792080f5ae45?#iefix") format("embedded-opentype"),
-url("./icons.woff2?817693062471b94e55d4792080f5ae45") format("woff2"),
-url("./icons.woff?817693062471b94e55d4792080f5ae45") format("woff"),
-url("./icons.ttf?817693062471b94e55d4792080f5ae45") format("truetype"),
-url("./icons.svg?817693062471b94e55d4792080f5ae45#icons") format("svg");
+    src: url("./icons.eot?72d1d675f8dc31f61ed9723b63b74e01?#iefix") format("embedded-opentype"),
+url("./icons.woff2?72d1d675f8dc31f61ed9723b63b74e01") format("woff2"),
+url("./icons.woff?72d1d675f8dc31f61ed9723b63b74e01") format("woff"),
+url("./icons.ttf?72d1d675f8dc31f61ed9723b63b74e01") format("truetype"),
+url("./icons.svg?72d1d675f8dc31f61ed9723b63b74e01#icons") format("svg");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -24,21 +24,27 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-audio-file:before {
     content: "\f102";
 }
-.icon-file:before {
+.icon-delete:before {
     content: "\f103";
 }
-.icon-folder:before {
+.icon-file:before {
     content: "\f104";
 }
-.icon-mp3-player:before {
+.icon-folder:before {
     content: "\f105";
 }
-.icon-music-note:before {
+.icon-mp3-player:before {
     content: "\f106";
 }
-.icon-open-folder:before {
+.icon-music-note:before {
     content: "\f107";
 }
-.icon-refresh:before {
+.icon-open-folder:before {
     content: "\f108";
+}
+.icon-refresh:before {
+    content: "\f109";
+}
+.icon-search:before {
+    content: "\f10a";
 }
