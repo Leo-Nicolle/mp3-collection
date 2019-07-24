@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <SearchBar />
 
     <TrackList />
@@ -23,4 +23,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.content {
+  margin: 12px;
+}
+</style>

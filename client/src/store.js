@@ -13,7 +13,8 @@ export default new Vuex.Store({
   state: {
     mp3Path: ".",
     addPath: ".",
-    query: {}
+    query: {},
+    searchFilter: {}
   },
   mutations: {
     setMp3Path(state, path) {
@@ -31,6 +32,11 @@ export default new Vuex.Store({
     },
     setQuery(state, query) {
       state.query = query;
+      upload(state);
+    },
+    setSearchFilter(state, filter) {
+      state.searchFilter = filter;
+      state.filter = Object.assign({}, state.filterFilter, state.searchFilter);
       upload(state);
     }
   },

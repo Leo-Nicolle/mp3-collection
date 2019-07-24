@@ -7,7 +7,7 @@
         <span class="album-title">Album</span>
         <span class="artist-title">Artist</span>
       </li>
-      <li v-for="row in rows" class="row">
+      <li v-for="row in filteredRows" class="row">
         <span class="track" @click="onClick(row, 'track', 2)">{{
           row[2]
         }}</span>
@@ -24,7 +24,7 @@
 
 <script>
 import axios from "axios";
-import { serverUrl, requestQuery } from "../js/utils";
+import { serverUrl } from "../js/utils";
 import { mapState } from "vuex";
 import escapeStringRegexp from "escape-string-regexp";
 export default {
@@ -34,16 +34,47 @@ export default {
   },
   data() {
     return {
-      rows: []
+      rows: [],
+      indexToPropMap: ["artist", "album", "track"],
+      propToIndexMap: { artist: 0, album: 1, track: 2 }
+      // filteredRows: []
     };
   },
-  computed: mapState(["query"]),
+  computed: {
+    ...mapState(["query", "searchFilter"]),
+    filteredRows: function() {
+      const searchFilter = this.searchFilter;
+      if (!Object.keys(searchFilter).length) {
+        // this.filteredRows = ;
+        return this.rows;
+      }
+      return this.rows
+        .map(row => ({
+          row,
+          points: Object.entries(searchFilter).reduce(
+            (points, [key, weightAndReg]) => {
+              const weight = weightAndReg.weight;
+              if (!weight) return points;
+              const reg = weightAndReg.reg;
+              return points + row[this.propToIndexMap[key]].match(reg)
+                ? weight
+                : 0;
+            },
+            0
+          )
+        }))
+        .filter(({ points }) => points)
+        .sort((a, b) => a.points - b.points)
+        .map(({ row }) => row);
+    }
+  },
   methods: {
     onClick(row, type, index) {
       const query = {};
       query[type] = escapeStringRegexp(row[index]);
       this.$store.commit("setQuery", query);
     },
+    filterRows() {},
     requestQuery() {
       axios
         .post(`${serverUrl}query`, {
@@ -51,6 +82,7 @@ export default {
         })
         .then(({ data }) => {
           this.rows = data;
+          this.filterRows();
         });
     }
   },
@@ -68,9 +100,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-ul {
-  margin: 12px;
-}
 li {
   display: flex;
   justify-content: space-between;
