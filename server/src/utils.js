@@ -2,7 +2,7 @@ import * as mm from "music-metadata";
 import bs from "binary-search";
 const fs = require("fs");
 const path = require("path");
-const mmh3 = require("murmurhash3");
+// const mmh3 = require("murmurhash3");
 
 const MAX_FILES_PER_FOLDER = 65500;
 export const supportedFiles = ["mp3", , "mp4", "ogg", "wav", "flac"];
@@ -50,14 +50,14 @@ function fillBlanksMetadata({ common }) {
   }
 }
 
-export class Database {
+class Database {
   constructor() {
     this.statePath = "data/database-state.json";
     this.databasePath = "data/database.json";
     this.audioFolderRoot = "audio";
     this.dataFolderRoot = "data/files";
 
-    if (fs.existsSync(this.statePath) && false) {
+    if (fs.existsSync(this.statePath)) {
       this.state = JSON.parse(fs.readFileSync(this.statePath));
     } else {
       this.state = {
@@ -74,7 +74,7 @@ export class Database {
         allTracksFile: this._getDataFilePath()
       };
     }
-    if (fs.existsSync(this.databasePath) && false) {
+    if (fs.existsSync(this.databasePath)) {
       this.data = JSON.parse(fs.readFileSync(this.databasePath));
     } else {
       this.data = {
@@ -178,7 +178,7 @@ export class Database {
   }
 
   _checkIfExists(file) {
-    // murmur32(key [,seed], callback);
+    // mmh3.murmur32(file [,seed], callback);
   }
 
   _addToArtists({ metadata, file }) {
@@ -228,3 +228,4 @@ export class Database {
     });
   }
 }
+export const database = new Database();

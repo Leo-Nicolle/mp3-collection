@@ -10,3 +10,29 @@ document {
 body {
   font-family: Oswald;
 }
+
+ul {
+  color: #fff;
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 0;
+  font-size: 0.8em;
+}
+li {
+  padding: 0.5em;
+  margin-bottom: 0.125em;
+  cursor: pointer;
+}
+li:hover {
+  font-size: 1em;
+  /* padding: 0.45em; */
+}
+li:first-child {
+  margin-top: 0.25em;
+}
+li:nth-child(odd) {
+  background-color: #444;
+}
+li:nth-child(even) {
+  background-color: #333;
+}

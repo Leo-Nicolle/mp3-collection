@@ -1,12 +1,23 @@
 <template>
-  <div></div>
+  <div>
+    <SearchBar />
+
+    <TrackList />
+  </div>
 </template>
 
 <script>
+import TrackList from "./TrackList";
+import SearchBar from "./SearchBar";
+
 export default {
   name: "Content",
   props: {
     msg: String
+  },
+  components: {
+    TrackList,
+    SearchBar
   }
 };
 </script>

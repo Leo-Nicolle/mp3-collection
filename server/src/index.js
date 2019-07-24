@@ -1,5 +1,7 @@
 import express from "express";
-import { isFileSupported, extractMusicTags, Database } from "./utils";
+import { isFileSupported, extractMusicTags, database } from "./utils";
+import Query from "./query";
+
 const path = require("path");
 const cors = require("cors");
 const fs = require("fs");
@@ -7,8 +9,6 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const port = 4000;
-const database = new Database();
-database.add([]);
 
 if (!fs.existsSync("data")) {
   fs.mkdirSync("data");
@@ -72,6 +72,9 @@ app.post("/metadata", async (req, res) => {
   await database.add(files);
   database.export();
   res.send(database.data);
+});
+app.post("/query", async (req, res) => {
+  res.send(Query.select(req.body.query));
 });
 
 app.listen(port, () => {

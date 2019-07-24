@@ -12,7 +12,8 @@ function upload(state) {
 export default new Vuex.Store({
   state: {
     mp3Path: ".",
-    addPath: "."
+    addPath: ".",
+    query: {}
   },
   mutations: {
     setMp3Path(state, path) {
@@ -27,6 +28,10 @@ export default new Vuex.Store({
       Object.entries(newState).forEach(([key, value]) => {
         state[key] = value;
       });
+    },
+    setQuery(state, query) {
+      state.query = query;
+      upload(state);
     }
   },
   actions: {}

@@ -61,6 +61,16 @@ export default {
       );
     },
     onDirClick(file) {
+      axios
+        .post(`${serverUrl}metadata`, {
+          file: {
+            path: this.path,
+            type: "folder"
+          }
+        })
+        .then(({ data }) => console.log(data));
+      return;
+
       if (file.type !== "folder") return;
       this.path = file.path;
       this.getFolderContent();
@@ -170,13 +180,13 @@ export default {
   margin-left: 5px;
   cursor: pointer;
 }
-ul {
+/* ul {
   color: #fff;
   padding-left: 0;
   list-style: none;
   margin-bottom: 0;
-}
-li {
+} */
+/* li {
   padding: 1em;
   margin-bottom: 0.125em;
   cursor: pointer;
@@ -193,7 +203,7 @@ li:nth-child(odd) {
 }
 li:nth-child(even) {
   background-color: #333;
-}
+} */
 li > i {
   margin-right: 5px;
 }
