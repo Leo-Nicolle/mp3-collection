@@ -55,6 +55,10 @@ app.get("/state", (req, res) => {
   res.send(state);
 });
 
+app.get("/xhr", (req, res) => {
+  res.send({ xhr: database.state.xhr });
+});
+
 app.post("/add", async (req, res) => {
   const file = req.body.file;
   const filePath = path.resolve(file.path);

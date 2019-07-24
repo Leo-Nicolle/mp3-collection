@@ -61,15 +61,6 @@ export default {
       );
     },
     onDirClick(file) {
-      axios
-        .post(`${serverUrl}add`, {
-          file: {
-            path: this.path,
-            type: "folder"
-          }
-        })
-        .then(({ data }) => console.log(data));
-      return;
       if (file.type !== "folder") return;
       this.path = file.path;
       this.getFolderContent();

@@ -1,5 +1,9 @@
 <template>
   <div class="header">
+    <ProgressBar
+      :visible="progressVisible"
+      @progress-stop="progressVisible = false"
+    />
     <div>
       <span class="mp3-button">
         <i class="icon-mp3-player" @click="onMp3Click()"></i>
@@ -35,11 +39,18 @@
 import axios from "axios";
 import FileModal from "./FileModal";
 import SearchBar from "./SearchBar";
+import ProgressBar from "./ProgressBar";
+
+import { serverUrl } from "../js/utils";
 
 import { mapState } from "vuex";
-
 export default {
   name: "Header",
+  data() {
+    return {
+      progressVisible: true
+    };
+  },
   computed: {
     ...mapState(["query"]),
     filters: function() {
@@ -67,10 +78,18 @@ export default {
     },
     onAddValidate(path) {
       this.$store.commit("setAddPath", path);
+      axios.post(`${serverUrl}add`, {
+        file: {
+          path,
+          type: "folder"
+        }
+      });
+      this.progressVisible = true;
     }
   },
   components: {
     FileModal,
+    ProgressBar,
     SearchBar
   },
   mounted() {}

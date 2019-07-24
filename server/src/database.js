@@ -4,40 +4,6 @@ import { extractMusicTags, getHash, isFileSupported } from "./utils";
 import Query from "./query";
 const MAX_FILES_PER_FOLDER = 65500;
 
-function isNotValidFied(field) {
-  return !field || !field.length;
-}
-
-function fillBlanksMetadata({ common }) {
-  const unknown = "unknown";
-  if (isNotValidFied(common.title)) {
-    common.title = unknown;
-  }
-  if (!isNotValidFied(common.artists[0])) {
-    if (common.artists.length) {
-      common.artists[0] = unknown;
-    } else {
-      common.artists.push(unknown);
-    }
-  }
-  if (isNotValidFied(common.artist)) {
-    common.artist = common.artists[0];
-  }
-  if (isNotValidFied(common.artist)) {
-    common.artist = common.artists[0];
-  }
-
-  if (isNotValidFied(common.genre)) {
-    common.genre = unknown;
-  }
-  if (isNotValidFied(common.album)) {
-    common.album = unknown;
-  }
-  if (isNotValidFied(common.year)) {
-    common.year = 5000;
-  }
-}
-
 class Database {
   constructor() {
     this.statePath = "data/database-state.json";
@@ -53,7 +19,8 @@ class Database {
         audioFileIndex: 0,
         dataFolderIndex: 0,
         dataFileIndex: 0,
-        audioFilesToCopy: []
+        audioFilesToCopy: [],
+        xhr: 0
       };
       this.state.files = {
         allArtistsFile: this._getDataFilePath(),
@@ -71,10 +38,18 @@ class Database {
     }
   }
   async add(files) {
-    for (let file of files) {
+    for (let i = 0; i < files.length; i++) {
+      this.state.xhr = i / files.length;
+      const file = files[i];
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
       if (!isFileSupported(file)) continue;
       await this._add(file);
     }
+    this.state.xhr = 1;
   }
   save() {
     this._mkdirRec(this.databasePath);
