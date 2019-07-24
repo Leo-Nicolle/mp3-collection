@@ -2,6 +2,7 @@ import * as mm from "music-metadata";
 import bs from "binary-search";
 const hasha = require("hasha");
 const fs = require("fs");
+const path = require("path");
 
 export const supportedFiles = ["mp3", , "mp4", "ogg", "wav", "flac"];
 
@@ -14,7 +15,7 @@ export function isFileSupported(file) {
 
 export async function extractMusicTags(file) {
   const metadata = await mm.parseFile(file, { native: true });
-  fillBlanksMetadata(metadata);
+  fillBlanksMetadata({ ...metadata, file });
   return metadata;
 }
 
@@ -25,17 +26,40 @@ export async function getHash(file) {
 function isNotValidFied(field) {
   return !field || !field.length;
 }
+export function getFilenameFromPath(
+  filepath,
+  { removeExtension = false } = {}
+) {
+  const splited = filepath.split(path.sep);
+  let filename = splited[splited.length - 1];
+  if (removeExtension) {
+    filename = filename.slice(0, filename.length - 4);
+  }
+  return filename;
+}
 
-export function fillBlanksMetadata({ common }) {
+export function fillBlanksMetadata({ common, file }) {
   const unknown = "unknown";
   if (isNotValidFied(common.title)) {
-    common.title = unknown;
+    common.title = getFilenameFromPath(file, { removeExtension: true });
   }
   if (!common.artists) {
-    if (common.artist) {
-      common.artists = [common.artist];
+    console.log("here");
+    if (isNotValidFied(common.artist)) {
+      common.artists = [unknown];
+      common.artist = unknown;
+      console.log(
+        "unvalid:",
+        JSON.stringify(common.artists),
+        JSON.stringify(common.artist)
+      );
     } else {
-      common.artists = [];
+      common.artists = [common.artist];
+      console.log(
+        "valid",
+        JSON.stringify(common.artists),
+        JSON.stringify(common.artist)
+      );
     }
   }
   if (!isNotValidFied(common.artists[0])) {

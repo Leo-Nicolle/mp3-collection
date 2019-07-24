@@ -5,7 +5,7 @@
       <div class="meter">
         <span :style="getProgressStyle()"></span>
       </div>
-      <p class="task">{{ task }} {{ xhr }}</p>
+      <p class="task">{{ task }}</p>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      xhr: 0.5,
+      xhr: 0,
       task: "copyFIle",
       interval: 0
     };
@@ -37,7 +37,8 @@ export default {
     start() {
       this.interval = setInterval(() => {
         axios.get(`${serverUrl}xhr`).then(({ data }) => {
-          this.xhr = data.xhr;
+          this.xhr = data.ratio;
+          this.task = data.task;
         });
       }, 400);
     },
@@ -102,7 +103,7 @@ export default {
   overflow: hidden;
 }
 .meter > span {
-  /* animation: move 2s linear infinite; */
+  animation: move 2s linear infinite;
 }
 @keyframes move {
   0% {

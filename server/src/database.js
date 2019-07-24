@@ -1,6 +1,11 @@
 const fs = require("fs");
 const path = require("path");
-import { extractMusicTags, getHash, isFileSupported } from "./utils";
+import {
+  extractMusicTags,
+  getHash,
+  isFileSupported,
+  getFilenameFromPath
+} from "./utils";
 import Query from "./query";
 const MAX_FILES_PER_FOLDER = 65500;
 
@@ -20,7 +25,10 @@ class Database {
         dataFolderIndex: 0,
         dataFileIndex: 0,
         audioFilesToCopy: [],
-        xhr: 0
+        xhr: {
+          ratio: 0,
+          task: ""
+        }
       };
       this.state.files = {
         allArtistsFile: this._getDataFilePath(),
@@ -39,8 +47,9 @@ class Database {
   }
   async add(files) {
     for (let i = 0; i < files.length; i++) {
-      this.state.xhr = i / files.length;
       const file = files[i];
+      this.state.xhr.ratio = i / files.length;
+      this.state.xhr.task = `adding file: ${getFilenameFromPath(file)}`;
       await new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve();
@@ -49,7 +58,8 @@ class Database {
       if (!isFileSupported(file)) continue;
       await this._add(file);
     }
-    this.state.xhr = 1;
+    this.state.xhr.ratio = 1;
+    this.state.xhr.task = "";
   }
   save() {
     this._mkdirRec(this.databasePath);

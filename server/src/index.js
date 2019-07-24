@@ -56,7 +56,7 @@ app.get("/state", (req, res) => {
 });
 
 app.get("/xhr", (req, res) => {
-  res.send({ xhr: database.state.xhr });
+  res.send(database.state.xhr);
 });
 
 app.post("/add", async (req, res) => {
@@ -81,7 +81,7 @@ app.post("/add", async (req, res) => {
   console.log("end added");
 });
 app.post("/query", async (req, res) => {
-  console.log(query);
+  console.log("query", query);
   res.send(query.select(req.body.query));
 });
 
