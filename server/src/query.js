@@ -1,4 +1,4 @@
-import { database } from "./utils";
+import { database } from "./database";
 
 export default class Query {
   constructor() {}

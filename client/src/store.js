@@ -8,7 +8,7 @@ Vue.use(Vuex);
 function upload(state) {
   const stateCopy = Object.assign({}, state);
   stateCopy.searchFilter = {};
-  axios.post(`${serverUrl}state`, { stateCopy });
+  axios.post(`${serverUrl}state`, { state: stateCopy });
 }
 
 export default new Vuex.Store({

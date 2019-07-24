@@ -61,15 +61,14 @@ export default {
       );
     },
     onDirClick(file) {
-      axios
-        .post(`${serverUrl}metadata`, {
-          file: {
-            path: this.path,
-            type: "folder"
-          }
-        })
-        .then(({ data }) => console.log(data));
-      return;
+      // axios
+      //   .post(`${serverUrl}metadata`, {
+      //     file: {
+      //       path: this.path,
+      //       type: "folder"
+      //     }
+      //   })
+      //   .then(({ data }) => console.log(data));
 
       if (file.type !== "folder") return;
       this.path = file.path;
@@ -105,6 +104,10 @@ export default {
   watch: {
     value: function(newValue, oldValue) {
       this.path = newValue;
+      this.getFolderContent();
+    },
+    visible: function(newValue, oldValue) {
+      if (!newValue) return;
       this.getFolderContent();
     }
   }

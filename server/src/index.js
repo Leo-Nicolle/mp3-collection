@@ -1,5 +1,7 @@
 import express from "express";
-import { isFileSupported, extractMusicTags, database } from "./utils";
+import { isFileSupported } from "./utils";
+import { database } from "./database";
+
 import Query from "./query";
 
 const path = require("path");
