@@ -2,8 +2,9 @@ import * as mm from "music-metadata";
 import bs from "binary-search";
 const fs = require("fs");
 const path = require("path");
+const mmh3 = require("murmurhash3");
 
-const MAX_FILES_PER_FOLDER = 65000;
+const MAX_FILES_PER_FOLDER = 65500;
 export const supportedFiles = ["mp3", , "mp4", "ogg", "wav", "flac"];
 export function isFileSupported(file) {
   const name = typeof file === "string" ? file : file.name;
@@ -66,6 +67,12 @@ export class Database {
         dataFileIndex: 0,
         audioFilesToCopy: []
       };
+      this.state.files = {
+        allArtistsFile: this._getDataFilePath(),
+        allAlbumsFile: this._getDataFilePath(),
+        allGenreFile: this._getDataFilePath(),
+        allTracksFile: this._getDataFilePath()
+      };
     }
     if (fs.existsSync(this.databasePath) && false) {
       this.data = JSON.parse(fs.readFileSync(this.databasePath));
@@ -115,26 +122,31 @@ export class Database {
   _createDataFiles() {
     let allArtistsFile = "";
     const separator = String.fromCharCode(1);
-    const allArtistsFileName = this._getDataFilePath();
+    const allArtistsFileName = this.state.files.allArtistsFile;
     const dataFiles = [];
 
     this.data.artists.forEach(artist => {
-      const artistFilename = this._getDataFilePath();
-      allArtistsFile += `${artist.name}${separator}${artistFilename}\n`;
+      allArtistsFile += `${artist.name}${separator}${artist.file}\n`;
       let artistFile = "";
+      let allTracksFile = "";
       artist.albums.forEach(album => {
-        const albumFilename = this._getDataFilePath();
-        artistFile += `${album.name}${separator}${albumFilename}\n`;
+        artistFile += `All tracks${separator}${artist.allTracksFile}\n`;
+        artistFile += `${album.name}${separator}${album.file}\n`;
         let albumFile = "";
         album.tracks.forEach(track => {
-          albumFile += `${track.name}${separator}${track.files.target}\n`;
+          const trackData = `${track.name}${separator}${track.files.target}\n`;
+          albumFile += trackData;
+          allTracksFile += trackData;
         });
-        dataFiles.push({ content: albumFile, name: albumFilename });
+        dataFiles.push({ content: albumFile, name: album.file });
       });
-      dataFiles.push({ content: artistFile, name: artistFilename });
+      dataFiles.push({ content: artistFile, name: artist.file });
+      dataFiles.push({
+        content: allTracksFile.sort((a, b) => a - b),
+        name: artist.allTracksFile
+      });
     });
     dataFiles.push({ content: allArtistsFile, name: allArtistsFileName });
-
     return dataFiles;
   }
   _getAudioFilePath(sourceFile) {
@@ -162,22 +174,21 @@ export class Database {
 
   async _add(file) {
     const metadata = await extractMusicTags(file);
-    const target = this._getAudioFilePath(file);
-    metadata.files = {
-      source: file,
-      target,
-      state: "toSave"
-    };
-    this._addToArtists(metadata);
-    this.state.audioFilesToCopy.push(metadata.files);
+    this._addToArtists({ metadata, file });
   }
 
-  _addToArtists(metadata) {
+  _checkIfExists(file) {
+    // murmur32(key [,seed], callback);
+  }
+
+  _addToArtists({ metadata, file }) {
     const common = metadata.common;
     let artist = this.data.artists.find(({ name }) => name === common.artist);
     if (!artist) {
       this.data.artists.push({
         name: common.artist,
+        file: this._getDataFilePath(),
+        allTracksFile: this._getDataFilePath(),
         albums: []
       });
       artist = this.data.artists[this.data.artists.length - 1];
@@ -187,11 +198,21 @@ export class Database {
     if (!album) {
       artist.albums.push({
         name: common.album,
+        file: this._getDataFilePath(),
         tracks: []
       });
       album = artist.albums[artist.albums.length - 1];
     }
-    album.tracks.push({ name: common.title, files: metadata.files });
+    const trackData = {
+      name: common.title,
+      state: "toSave",
+      files: {
+        source: file,
+        target
+      }
+    };
+    album.tracks.push(trackData);
+    this.state.audioFilesToCopy.push(trackData);
   }
   _mkdirRec(filePath) {
     //get the folder names, filter the file names
