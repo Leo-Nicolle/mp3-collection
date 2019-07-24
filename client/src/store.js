@@ -33,12 +33,11 @@ export default new Vuex.Store({
       });
     },
     setQuery(state, query) {
-      state.query = query;
+      state.query = { ...query };
       upload(state);
     },
     setSearchFilter(state, filter) {
-      state.searchFilter = filter;
-      state.filter = Object.assign({}, state.filterFilter, state.searchFilter);
+      state.searchFilter = { ...filter };
       upload(state);
     }
   },

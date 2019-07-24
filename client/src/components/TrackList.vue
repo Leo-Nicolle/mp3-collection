@@ -68,11 +68,10 @@ export default {
   },
   methods: {
     onClick(row, type, index) {
-      const query = {};
+      const query = Object.assign({}, this.query);
       query[type] = escapeStringRegexp(row[index]);
       this.$store.commit("setQuery", query);
     },
-    filterRows() {},
     requestQuery() {
       axios
         .post(`${serverUrl}query`, {
@@ -80,7 +79,6 @@ export default {
         })
         .then(({ data }) => {
           this.rows = data;
-          this.filterRows();
         });
     }
   },
