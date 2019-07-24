@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-
+import { extractMusicTags, getHash, isFileSupported } from "./utils";
+import Query from "./query";
 const MAX_FILES_PER_FOLDER = 65500;
 
 function isNotValidFied(field) {
@@ -43,7 +44,7 @@ class Database {
     this.databasePath = "data/database.json";
     this.audioFolderRoot = "audio";
     this.dataFolderRoot = "data/files";
-
+    this.query = new Query(this);
     if (fs.existsSync(this.statePath)) {
       this.state = JSON.parse(fs.readFileSync(this.statePath));
     } else {
@@ -89,7 +90,8 @@ class Database {
     this.save();
   }
   copyAudioFiles() {
-    this.state.audioFilesToCopy.forEach(({ source, target }, i) => {
+    this.state.audioFilesToCopy.forEach(({ files }, i) => {
+      const { source, target } = files;
       const filePath = path.join(this.audioFolderRoot, target);
       this._mkdirRec(filePath);
       fs.copyFileSync(source, filePath);
@@ -115,7 +117,7 @@ class Database {
     this.data.artists.forEach(artist => {
       allArtistsFile += `${artist.name}${separator}${artist.file}\n`;
       let artistFile = "";
-      let allTracksFile = "";
+      let allTracksFile = [];
       artist.albums.forEach(album => {
         artistFile += `All tracks${separator}${artist.allTracksFile}\n`;
         artistFile += `${album.name}${separator}${album.file}\n`;
@@ -123,13 +125,13 @@ class Database {
         album.tracks.forEach(track => {
           const trackData = `${track.name}${separator}${track.files.target}\n`;
           albumFile += trackData;
-          allTracksFile += trackData;
+          allTracksFile.push(trackData);
         });
         dataFiles.push({ content: albumFile, name: album.file });
       });
       dataFiles.push({ content: artistFile, name: artist.file });
       dataFiles.push({
-        content: allTracksFile.sort((a, b) => a - b),
+        content: allTracksFile.sort((a, b) => a - b).join(""),
         name: artist.allTracksFile
       });
     });
@@ -160,15 +162,16 @@ class Database {
   }
 
   async _add(file) {
+    const hash = await getHash(file);
+    if (this.query.exists(hash)) {
+      return;
+    }
+    const target = this._getAudioFilePath(file);
     const metadata = await extractMusicTags(file);
-    this._addToArtists({ metadata, file });
+    this._addToArtists({ metadata, file, hash, target });
   }
 
-  _checkIfExists(file) {
-    // mmh3.murmur32(file [,seed], callback);
-  }
-
-  _addToArtists({ metadata, file }) {
+  _addToArtists({ metadata, file, hash, target }) {
     const common = metadata.common;
     let artist = this.data.artists.find(({ name }) => name === common.artist);
     if (!artist) {
@@ -193,6 +196,7 @@ class Database {
     const trackData = {
       name: common.title,
       state: "toSave",
+      hash,
       files: {
         source: file,
         target
@@ -216,3 +220,4 @@ class Database {
   }
 }
 export const database = new Database();
+export const query = database.query;

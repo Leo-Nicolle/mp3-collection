@@ -1,8 +1,6 @@
 import express from "express";
 import { isFileSupported } from "./utils";
-import { database } from "./database";
-
-import Query from "./query";
+import { database, query } from "./database";
 
 const path = require("path");
 const cors = require("cors");
@@ -57,7 +55,7 @@ app.get("/state", (req, res) => {
   res.send(state);
 });
 
-app.post("/metadata", async (req, res) => {
+app.post("/add", async (req, res) => {
   const file = req.body.file;
   const filePath = path.resolve(file.path);
   if (!fs.existsSync(filePath)) {
@@ -69,14 +67,18 @@ app.post("/metadata", async (req, res) => {
     return;
   }
 
-  const files = fs.readdirSync(filePath).map(f => filePath + "/" + f);
-  const promises = files.filter(f => isFileSupported(f));
+  const files = fs
+    .readdirSync(filePath)
+    .map(f => filePath + "/" + f)
+    .filter(f => isFileSupported(f));
   await database.add(files);
   database.export();
   res.send(database.data);
+  console.log("end added");
 });
 app.post("/query", async (req, res) => {
-  res.send(Query.select(req.body.query));
+  console.log(query);
+  res.send(query.select(req.body.query));
 });
 
 app.listen(port, () => {

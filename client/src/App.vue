@@ -11,8 +11,10 @@ import { serverUrl } from "./js/utils";
 export default {
   name: "App",
   mounted() {
-    axios.get(`${serverUrl}state`).then(({ data }) => {
-      this.$store.commit("setState", data);
+    this.$nextTick(() => {
+      axios.get(`${serverUrl}state`).then(({ data }) => {
+        this.$store.commit("setState", data);
+      });
     });
   }
 };

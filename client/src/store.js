@@ -5,7 +5,9 @@ import { serverUrl } from "./js/utils";
 
 Vue.use(Vuex);
 
+let initialized = false;
 function upload(state) {
+  if (!initialized) return;
   const stateCopy = Object.assign({}, state);
   stateCopy.searchFilter = {};
   axios.post(`${serverUrl}state`, { state: stateCopy });
@@ -31,6 +33,7 @@ export default new Vuex.Store({
       Object.entries(newState).forEach(([key, value]) => {
         state[key] = value;
       });
+      initialized = true;
     },
     setQuery(state, query) {
       state.query = { ...query };

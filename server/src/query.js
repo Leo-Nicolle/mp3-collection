@@ -1,16 +1,20 @@
-import { database } from "./database";
-
 export default class Query {
-  constructor() {}
-
-  static select({
-    artist = ".*",
-    album = ".*",
-    genre = ".*",
-    track = ".*"
-  } = {}) {
+  constructor(database) {
+    this.database = database;
+  }
+  exists(queryHash) {
+    const res = this.database.data.artists.filter(({ albums }) =>
+      albums.filter(({ tracks }) =>
+        tracks.filter(({ hash }) => hash === queryHash)
+      )
+    );
+    return this.database.data.artists.some(({ albums }) =>
+      albums.some(({ tracks }) => tracks.some(({ hash }) => hash === queryHash))
+    );
+  }
+  select({ artist = ".*", album = ".*", genre = ".*", track = ".*" } = {}) {
     const rows = [];
-    database.data.artists
+    this.database.data.artists
       .filter(({ name }) => name.match(new RegExp(artist)))
       .map(artist => {
         return artist.albums

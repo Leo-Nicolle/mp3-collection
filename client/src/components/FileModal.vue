@@ -61,15 +61,15 @@ export default {
       );
     },
     onDirClick(file) {
-      // axios
-      //   .post(`${serverUrl}metadata`, {
-      //     file: {
-      //       path: this.path,
-      //       type: "folder"
-      //     }
-      //   })
-      //   .then(({ data }) => console.log(data));
-
+      axios
+        .post(`${serverUrl}add`, {
+          file: {
+            path: this.path,
+            type: "folder"
+          }
+        })
+        .then(({ data }) => console.log(data));
+      return;
       if (file.type !== "folder") return;
       this.path = file.path;
       this.getFolderContent();
@@ -113,8 +113,6 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .modal {
   position: absolute;
@@ -152,7 +150,6 @@ export default {
 .modal-body {
   max-height: 400px;
   overflow-y: auto;
-  /* margin: 0.25em; */
 }
 .modal-title {
   display: flex;
@@ -183,30 +180,6 @@ export default {
   margin-left: 5px;
   cursor: pointer;
 }
-/* ul {
-  color: #fff;
-  padding-left: 0;
-  list-style: none;
-  margin-bottom: 0;
-} */
-/* li {
-  padding: 1em;
-  margin-bottom: 0.125em;
-  cursor: pointer;
-}
-li:first-child {
-  margin-top: 0.25em;
-}
-li:hover {
-  font-size: 1.1em;
-  padding: 0.85em;
-}
-li:nth-child(odd) {
-  background-color: #444;
-}
-li:nth-child(even) {
-  background-color: #333;
-} */
 li > i {
   margin-right: 5px;
 }
