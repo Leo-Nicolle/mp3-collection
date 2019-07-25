@@ -50,7 +50,7 @@ app.post("/update-metadata", async (req, res) => {
   const hash = req.body.hash;
   const updates = req.body.updates;
   query.update({ hash, updates });
-  res.send(audioFiles);
+  res.send(200);
 });
 
 app.post("/state", (req, res) => {

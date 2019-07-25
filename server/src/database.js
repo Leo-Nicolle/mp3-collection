@@ -70,6 +70,15 @@ class Database {
     fs.writeFileSync(this.statePath, JSON.stringify(this.state));
   }
   export() {
+    if (this.debounceExport) {
+      clearTimeout(this.debounceExport);
+    }
+    this.debounceExport = setTimeout(() => {
+      this._export();
+    }, 500);
+  }
+
+  _export() {
     this.save();
     const dataFilesToCopy = this._createDataFiles();
     this.copyDataFiles(dataFilesToCopy);
