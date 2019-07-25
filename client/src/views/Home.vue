@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Header />
-    <Content />
+    <Content :view="$route.name" />
   </div>
 </template>
 
@@ -19,7 +19,6 @@ export default {
     Header
   },
   mounted() {
-    console.log("ici");
     // axios.get("http://localhost:4000").then(({ data }) => console.log(data));
   }
 };

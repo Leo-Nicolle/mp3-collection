@@ -10,7 +10,12 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
+      name: "mp3",
+      component: Home
+    },
+    {
+      path: "/add",
+      name: "add",
       component: Home
     }
   ]

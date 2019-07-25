@@ -30,11 +30,13 @@ import escapeStringRegexp from "escape-string-regexp";
 export default {
   name: "TrackList",
   props: {
-    msg: String
+    rows: {
+      type: Array,
+      default: []
+    }
   },
   data() {
     return {
-      rows: [],
       indexToPropMap: ["artist", "album", "track"],
       propToIndexMap: { artist: 0, album: 1, track: 2 }
     };
@@ -71,30 +73,11 @@ export default {
       const query = Object.assign({}, this.query);
       query[type] = escapeStringRegexp(row[index]);
       this.$store.commit("setQuery", query);
-    },
-    requestQuery() {
-      axios
-        .post(`${serverUrl}query`, {
-          query: this.$store.state.query
-        })
-        .then(({ data }) => {
-          this.rows = data;
-        });
-    }
-  },
-  components: {},
-  mounted() {
-    this.requestQuery();
-  },
-  watch: {
-    query: function(newValue) {
-      this.requestQuery(newValue);
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 li {
   display: flex;

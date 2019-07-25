@@ -1,17 +1,22 @@
 <template>
   <div class="content">
-    <TrackList />
+    <Mp3List v-if="view === 'mp3'" />
   </div>
 </template>
 
 <script>
-import TrackList from "./TrackList";
+import Mp3List from "./Mp3List";
 
 export default {
   name: "Content",
-
+  props: {
+    view: {
+      type: String,
+      default: "mp3"
+    }
+  },
   components: {
-    TrackList
+    Mp3List
   }
 };
 </script>

@@ -75,7 +75,7 @@ export default {
 <style scoped>
 .header > .progress-bar-container {
   display: inline-flex;
-  align-items: end;
+  align-items: flex-end;
   width: 100%;
   font-size: 0.6em;
   font-weight: 100;
