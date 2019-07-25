@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?72d1d675f8dc31f61ed9723b63b74e01?#iefix") format("embedded-opentype"),
-url("./icons.woff2?72d1d675f8dc31f61ed9723b63b74e01") format("woff2"),
-url("./icons.woff?72d1d675f8dc31f61ed9723b63b74e01") format("woff"),
-url("./icons.ttf?72d1d675f8dc31f61ed9723b63b74e01") format("truetype"),
-url("./icons.svg?72d1d675f8dc31f61ed9723b63b74e01#icons") format("svg");
+    src: url("./icons.eot?5029e96ce1bf3db4d0fb582aff4ef26a?#iefix") format("embedded-opentype"),
+url("./icons.woff2?5029e96ce1bf3db4d0fb582aff4ef26a") format("woff2"),
+url("./icons.woff?5029e96ce1bf3db4d0fb582aff4ef26a") format("woff"),
+url("./icons.ttf?5029e96ce1bf3db4d0fb582aff4ef26a") format("truetype"),
+url("./icons.svg?5029e96ce1bf3db4d0fb582aff4ef26a#icons") format("svg");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -24,27 +24,33 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-audio-file:before {
     content: "\f102";
 }
-.icon-delete:before {
+.icon-checked:before {
     content: "\f103";
 }
-.icon-file:before {
+.icon-delete:before {
     content: "\f104";
 }
-.icon-folder:before {
+.icon-edit:before {
     content: "\f105";
 }
-.icon-mp3-player:before {
+.icon-file:before {
     content: "\f106";
 }
-.icon-music-note:before {
+.icon-folder:before {
     content: "\f107";
 }
-.icon-open-folder:before {
+.icon-mp3-player:before {
     content: "\f108";
 }
-.icon-refresh:before {
+.icon-music-note:before {
     content: "\f109";
 }
-.icon-search:before {
+.icon-open-folder:before {
     content: "\f10a";
+}
+.icon-refresh:before {
+    content: "\f10b";
+}
+.icon-search:before {
+    content: "\f10c";
 }

@@ -13,6 +13,23 @@ export function isFileSupported(file) {
   );
 }
 
+export function getAudioFiles(directory, { recursive = false } = {}) {
+  const files = fs.readdirSync(directory).filter(f => isFileSupported(f));
+  const paths = files.map(f => path.join(directory, f));
+  const promises = paths.map(file => extractMusicTags(file));
+
+  return Promise.all(promises).then(metadatas =>
+    metadatas.map((metadata, i) => ({
+      file: files[i],
+      path: paths[i],
+      metadata: metadata.common
+    }))
+  );
+}
+
+function metadataToArray({ common }) {
+  return [common.artist, common.album, common.title];
+}
 export async function extractMusicTags(file) {
   const metadata = await mm.parseFile(file, { native: true });
   fillBlanksMetadata({ ...metadata, file });
@@ -44,22 +61,11 @@ export function fillBlanksMetadata({ common, file }) {
     common.title = getFilenameFromPath(file, { removeExtension: true });
   }
   if (!common.artists) {
-    console.log("here");
     if (isNotValidFied(common.artist)) {
       common.artists = [unknown];
       common.artist = unknown;
-      console.log(
-        "unvalid:",
-        JSON.stringify(common.artists),
-        JSON.stringify(common.artist)
-      );
     } else {
       common.artists = [common.artist];
-      console.log(
-        "valid",
-        JSON.stringify(common.artists),
-        JSON.stringify(common.artist)
-      );
     }
   }
   if (!isNotValidFied(common.artists[0])) {

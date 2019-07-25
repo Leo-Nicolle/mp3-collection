@@ -1,11 +1,17 @@
 <template>
   <div class="track-list">
-    <TrackList :rows="rows" />
+    <EditTrack :rows="selectedRows" />
+    <TrackList
+      :rows="rows"
+      :checkboxes="true"
+      @select-change="onSelectChange"
+    />
   </div>
 </template>
 
 <script>
 import TrackList from "./TrackList";
+import EditTrack from "./EditTrack";
 
 import axios from "axios";
 import { serverUrl } from "../js/utils";
@@ -14,7 +20,8 @@ export default {
   name: "Mp3List",
   data() {
     return {
-      rows: []
+      rows: [],
+      selectedRows: []
     };
   },
   computed: {
@@ -29,6 +36,9 @@ export default {
         .then(({ data }) => {
           this.rows = data;
         });
+    },
+    onSelectChange(selectedRows) {
+      this.selectedRows = selectedRows;
     }
   },
   mounted() {
@@ -40,7 +50,8 @@ export default {
     }
   },
   components: {
-    TrackList
+    TrackList,
+    EditTrack
   }
 };
 </script>

@@ -1,5 +1,7 @@
 const fs = require("fs");
 const path = require("path");
+const rimraf = require("rimraf");
+
 import {
   extractMusicTags,
   getHash,
@@ -87,6 +89,7 @@ class Database {
     );
   }
   copyDataFiles(dataFiles) {
+    rimraf.sync(this.dataFolderRoot);
     dataFiles.forEach(({ name, content }) => {
       const filePath = path.join(this.dataFolderRoot, name);
       this._mkdirRec(filePath);

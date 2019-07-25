@@ -1,5 +1,5 @@
 import express from "express";
-import { isFileSupported } from "./utils";
+import { isFileSupported, getAudioFiles } from "./utils";
 import { database, query } from "./database";
 
 const path = require("path");
@@ -28,17 +28,29 @@ app.post("/folder", (req, res) => {
     [
       {
         name: "..",
-        path: path.resolve(req.body.path) + "/..",
+        path: path.resolve(path.join(req.body.path, "..")),
         type: "folder"
       }
     ].concat(
       files.map(f => ({
         name: f.name,
-        path: path.resolve(req.body.path) + "/" + f.name,
+        path: path.join(req.body.path, f.name),
         type: f.isDirectory() ? "folder" : isFileSupported(f) ? "audio" : "file"
       }))
     )
   );
+});
+
+app.post("/scanfiles", async (req, res) => {
+  const audioFiles = await getAudioFiles(req.body.path);
+  res.send(audioFiles);
+});
+
+app.post("/update-metadata", async (req, res) => {
+  const hash = req.body.hash;
+  const updates = req.body.updates;
+  query.update({ hash, updates });
+  res.send(audioFiles);
 });
 
 app.post("/state", (req, res) => {
@@ -81,7 +93,6 @@ app.post("/add", async (req, res) => {
   console.log("end added");
 });
 app.post("/query", async (req, res) => {
-  console.log("query", query);
   res.send(query.select(req.body.query));
 });
 

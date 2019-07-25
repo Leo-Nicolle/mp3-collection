@@ -12,11 +12,11 @@ import musicBrainz from "./js/MusicBrainz";
 export default {
   name: "App",
   mounted() {
-    musicBrainz
-      .search({ key: "artist", value: "Jacob Miller" })
-      .then(response => {
-        console.log(response);
-      });
+    // musicBrainz
+    //   .search({ key: "artist", value: "Jacob Miller" })
+    //   .then(response => {
+    //     console.log(response);
+    //   });
 
     this.$nextTick(() => {
       axios.get(`${serverUrl}state`).then(({ data }) => {

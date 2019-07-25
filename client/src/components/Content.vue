@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <Mp3List v-if="view === 'mp3'" />
+    <Mp3List />
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import Mp3List from "./Mp3List";
 
 export default {
   name: "Content",
+
   props: {
     view: {
       type: String,
