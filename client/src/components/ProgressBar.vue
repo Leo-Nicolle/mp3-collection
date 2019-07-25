@@ -39,6 +39,9 @@ export default {
         axios.get(`${serverUrl}xhr`).then(({ data }) => {
           this.xhr = data.ratio;
           this.task = data.task;
+          if (this.xhr === 1) {
+            this.stop();
+          }
         });
       }, 400);
     },

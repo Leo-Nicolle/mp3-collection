@@ -29,5 +29,6 @@ export default {
 }
 .content {
   margin: 12px;
+  max-height: calc(100vh - 111px);
 }
 </style>

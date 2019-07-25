@@ -1,19 +1,21 @@
 <template>
   <div class="edit-track" v-if="rows.length">
+    <h4>Edit:</h4>
+    <label>
+      title
+      <input type="text" v-model="title" />
+    </label>
+    <label>
+      album
+      <input type="text" v-model="album" />
+    </label>
+    <label>
+      artist
+      <input type="text" v-model="artist" />
+    </label>
     <div>
-      <!-- <label>
-        title
-        <input type="text" v-model="title" />
-      </label>
-      <label>
-        album
-        <input type="text" v-model="album" />
-      </label> -->
-      <label>
-        artist
-        <input type="text" v-model="artist" @change="onValidate('artist')" />
-      </label>
-      <i class=" icon-checked" @click="onValidate('artist')"></i>
+      <i class=" icon-checked" @click="onValidate()"></i>
+      <i class=" icon-cancel" @click="onCancel()"></i>
     </div>
   </div>
 </template>
@@ -51,7 +53,7 @@ export default {
             .reduce((artists, { artist }) => {
               const entry = artists.find(a => a.artist === artist);
 
-              if (entry) {
+              if (entry && entry.artist !== "unknown") {
                 entry.count++;
               } else {
                 artists.push({
@@ -61,31 +63,39 @@ export default {
               }
               return artists;
             }, [])
-            .sort((a, b) => a.count - b.count)[0].artist
+            .sort((a, b) => b.count - a.count)[0].artist
         : "";
     },
     onValueChange(key, value) {
       this.rows.forEach(row => {
         row[key] = value;
-        if (!row.dity) {
-          row.dirty = {};
-        }
-        row.dirty[key] = true;
+        row.dirty[key].newValue = value;
       });
     },
-    onValidate(key) {
+    onValidate() {
       this.rows
-        .filter(row => Object.values(row.dirty).some(v => v.dirty))
+        .filter(row => row.dirty && Object.values(row.dirty).length)
         .forEach(row => {
           const updates = {};
           Object.keys(row.dirty).forEach(key => {
-            updates[key] = row[key];
+            if (!row.dirty[key].newValue) return;
+            updates[key] = row.dirty[key].newValue;
           });
           axios.post(`${serverUrl}update-metadata`, {
-            path: row.path,
+            hash: row.hash,
             updates
           });
+          this.eventBus.$emit("start-progress");
         });
+    },
+    onCancel() {
+      this.rows.forEach(row => {
+        Object.entries(row.dirty).forEach(([key, values]) => {
+          if (!values.newValue) return;
+          row[key] = values.oldValue;
+        });
+        delete row.dirty;
+      });
     }
   },
   watch: {
@@ -96,10 +106,35 @@ export default {
       this.onValueChange("album", newValue);
     },
     rows: function() {
+      this.rows.forEach(
+        row =>
+          (row.dirty = {
+            artist: {
+              oldValue: row.artist
+            }
+          })
+      );
       this.artist = this.getArtist();
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.edit-track {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.edit-track h4 {
+  margin: 0;
+  flex: 0.1;
+}
+.edit-track label {
+  flex: 1;
+}
+.edit-track div i {
+  margin-right: 12px;
+}
+</style>

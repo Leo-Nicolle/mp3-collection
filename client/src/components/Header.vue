@@ -5,7 +5,7 @@
       @progress-stop="progressVisible = false"
     />
     <div>
-      <span class="mp3-button">
+      <span class="buttons-container">
         <i class="icon-mp3-player" @click="onMp3Click()"></i>
         <FileModal
           ref="mp3Modal"
@@ -25,12 +25,10 @@
     </div>
     <div class="filters">
       <h5 class="filters-title">Filters Active:</h5>
-      <div class="filters-container">
-        <p v-for="filter in filters" @click="onFilterClick(filter)">
-          <strong>{{ filter[0] }}</strong> {{ filter[1] }}
-          <i class="icon-delete"> </i>
-        </p>
-      </div>
+      <p v-for="filter in filters" @click="onFilterClick(filter)">
+        <strong>{{ filter[0] }}</strong> {{ filter[1] }}
+        <i class="icon-delete"> </i>
+      </p>
     </div>
   </div>
 </template>
@@ -92,14 +90,16 @@ export default {
     ProgressBar,
     SearchBar
   },
-  mounted() {}
+  mounted() {
+    this.eventBus.$on("start-progress", () => (this.progressVisible = true));
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .header {
-  margin: 1em 1em 1em 1em;
+  margin: 0 1em 0em 1em;
 }
 .header > div {
   display: flex;
@@ -122,19 +122,22 @@ i {
   margin-top: 0;
   margin-right: 16px;
 }
-.filters-container > p {
+.filters > p {
   cursor: pointer;
   padding-left: 25px;
   font-size: 0.8em;
   padding: 0.2em;
   margin: 0;
 }
-.filters-container > p:hover {
+.filters > p:hover {
   font-size: 0.85em;
   padding: 0.1em;
 }
 
-.filters-container > p > strong {
+.filters > p > strong {
   margin-right: 5px;
+}
+.buttons-container {
+  display: flex;
 }
 </style>
