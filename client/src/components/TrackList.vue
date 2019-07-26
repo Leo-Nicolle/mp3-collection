@@ -9,15 +9,12 @@
           v-if="checkboxes"
           @change="onCheckboxTitleChange($event)"
         />
-        <span class="title-title" v-if="$store.state.columnsVisible.title"
-          >title</span
+        <span
+          v-for="key in Object.keys(columnsVisible)"
+          v-if="columnsVisible[key]"
         >
-        <span class="album-title" v-if="$store.state.columnsVisible.album"
-          >Album</span
-        >
-        <span class="artist-title" v-if="$store.state.columnsVisible.artist"
-          >Artist</span
-        >
+          {{ key | capitalize }}
+        </span>
         <i class="icon-edit" v-if="checkboxes" style="z-index: -1" />
       </li>
     </ul>
@@ -31,23 +28,13 @@
           @change="onCheckboxChange($event)"
         />
         <span
-          class="title"
-          v-if="$store.state.columnsVisible.title"
-          @click="onClick(row, 'title')"
-          >{{ row.title }}</span
+          v-for="key in Object.keys(columnsVisible)"
+          v-if="columnsVisible[key]"
+          @click="onClick(row, key)"
+          :class="key"
         >
-        <span
-          class="album"
-          v-if="$store.state.columnsVisible.album"
-          @click="onClick(row, 'album')"
-          >{{ row.album }}</span
-        >
-        <span
-          class="artist"
-          v-if="$store.state.columnsVisible.artist"
-          @click="onClick(row, 'artist')"
-          >{{ row.artist }}</span
-        >
+          {{ row[key] }}
+        </span>
         <i class="icon-edit" v-if="checkboxes" />
       </li>
     </ul>
@@ -75,7 +62,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["query", "searchFilter"]),
+    ...mapState(["query", "searchFilter", "columnsVisible"]),
     filteredRows: function() {
       const searchFilter = this.searchFilter;
       if (!Object.keys(searchFilter).length) {

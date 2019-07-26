@@ -10,9 +10,9 @@ export default new Vuex.Store({
     mp3Path: ".",
     addPath: ".",
     columnsVisible: {
-      artist: true,
-      album: true,
       title: true,
+      album: true,
+      artist: true,
       date: true
     },
     query: {},
