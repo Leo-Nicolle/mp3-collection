@@ -33,7 +33,7 @@
           @click="onClick(row, key)"
           :class="key"
         >
-          {{ row[key] }}
+          {{ row[key] | formatKey(key) }}
         </span>
         <i class="icon-edit" v-if="checkboxes" />
       </li>
@@ -60,6 +60,15 @@ export default {
   },
   data() {
     return {};
+  },
+  filters: {
+    formatKey(value, key) {
+      console.log("date", key, value);
+      if (key === "added") {
+        return new Date(value).toLocaleDateString("en-EN");
+      }
+      return value;
+    }
   },
   computed: {
     ...mapState(["query", "searchFilter", "columnsVisible"]),

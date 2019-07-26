@@ -23,7 +23,13 @@ export default class Query {
   exists(queryHash) {
     return Boolean(this.find(queryHash));
   }
-  select({ artist = ".*", album = ".*", genre = ".*", track = ".*" } = {}) {
+  select({
+    artist = ".*",
+    album = ".*",
+    genre = ".*",
+    track = ".*",
+    added = { tolerance: new Date(0).setDate(1) }
+  } = {}) {
     const rows = [];
     this.database.data.artists
       .filter(({ name }) => name.match(new RegExp(artist)))
@@ -31,13 +37,18 @@ export default class Query {
         return artist.albums
           .filter(({ name }) => name.match(new RegExp(album)))
           .map(album => {
-            return album.tracks.filter(({ name, hash }) => {
-              if (!name.match(new RegExp(track))) return;
+            return album.tracks.filter(row => {
+              if (!row.name.match(new RegExp(track))) return;
+              if (
+                added.value &&
+                Math.abs(added - added.value) > added.tolerance
+              )
+                return;
               rows.push({
+                ...row,
                 artist: artist.name,
                 album: album.name,
-                title: name,
-                hash
+                title: row.name
               });
             });
           });
@@ -139,5 +150,8 @@ export default class Query {
 
   _updateTrack({ track, targetTrackName }) {
     track.name = targetTrackName;
+  }
+  _getDefaultTolerance() {
+    return new Date(0).setDate(1);
   }
 }

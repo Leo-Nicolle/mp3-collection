@@ -13,7 +13,7 @@ export default new Vuex.Store({
       title: true,
       album: true,
       artist: true,
-      date: true
+      added: true
     },
     query: {},
     searchFilter: {}

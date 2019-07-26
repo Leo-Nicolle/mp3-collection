@@ -194,6 +194,7 @@ class Database {
       name: common.title,
       state: "toSave",
       hash,
+      added: Date.now(),
       files: {
         source: file,
         target

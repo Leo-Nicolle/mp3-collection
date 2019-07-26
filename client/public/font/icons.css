@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?0efcb4fbd99516e20bc2e236dc7d3ff5?#iefix") format("embedded-opentype"),
-url("./icons.woff2?0efcb4fbd99516e20bc2e236dc7d3ff5") format("woff2"),
-url("./icons.woff?0efcb4fbd99516e20bc2e236dc7d3ff5") format("woff"),
-url("./icons.ttf?0efcb4fbd99516e20bc2e236dc7d3ff5") format("truetype"),
-url("./icons.svg?0efcb4fbd99516e20bc2e236dc7d3ff5#icons") format("svg");
+    src: url("./icons.eot?db14197ac84e51b08674d55ddede3339?#iefix") format("embedded-opentype"),
+url("./icons.woff2?db14197ac84e51b08674d55ddede3339") format("woff2"),
+url("./icons.woff?db14197ac84e51b08674d55ddede3339") format("woff"),
+url("./icons.ttf?db14197ac84e51b08674d55ddede3339") format("truetype"),
+url("./icons.svg?db14197ac84e51b08674d55ddede3339#icons") format("svg");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -59,4 +59,7 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 }
 .icon-settings:before {
     content: "\f10e";
+}
+.icon-sort:before {
+    content: "\f10f";
 }
