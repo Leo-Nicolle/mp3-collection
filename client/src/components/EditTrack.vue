@@ -48,23 +48,22 @@ export default {
           this.rows = data.map(({ metadata }) => metadata);
         });
     },
-    getArtist() {
+    getInitialvalue(key) {
       return this.rows.length
         ? this.rows
-            .reduce((artists, { artist }) => {
-              const entry = artists.find(a => a.artist === artist);
+            .reduce((keys, row) => {
+              const entry = keys.find(a => a.artist === row[key]);
 
-              if (entry && entry.artist !== "unknown") {
+              if (entry && entry[key] !== "unknown") {
                 entry.count++;
               } else {
-                artists.push({
-                  artist,
-                  count: 1
-                });
+                const entry = { count: 1 };
+                entry[key] = row[key];
+                keys.push(entry);
               }
-              return artists;
+              return keys;
             }, [])
-            .sort((a, b) => b.count - a.count)[0].artist
+            .sort((a, b) => b.count - a.count)[0][key]
         : "";
     },
     onValueChange(key, value) {
@@ -115,7 +114,8 @@ export default {
             }
           })
       );
-      this.artist = this.getArtist();
+      this.artist = this.getInitialvalue("artist");
+      this.album = this.getInitialvalue("album");
     }
   }
 };
