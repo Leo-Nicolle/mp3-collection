@@ -11,6 +11,15 @@ import musicBrainz from "./js/MusicBrainz";
 
 export default {
   name: "App",
+  methods: {
+    upload() {
+      const stateCopy = Object.assign({}, this.$store.state);
+      stateCopy.searchFilter = {};
+      axios.post(`${serverUrl}state`, { state: stateCopy });
+      console.log(`upload`);
+    }
+  },
+
   mounted() {
     // musicBrainz
     //   .search({ key: "artist", value: "Jacob Miller" })
@@ -19,9 +28,21 @@ export default {
     //   });
 
     this.$nextTick(() => {
-      axios.get(`${serverUrl}state`).then(({ data }) => {
-        this.$store.commit("setState", data);
-      });
+      axios
+        .get(`${serverUrl}state`)
+        .then(({ data }) => {
+          this.$store.commit("setState", data);
+        })
+        .finally(() => {
+          this.$store.subscribe((mutation, state) => {
+            console.log(mutation);
+            this.upload();
+          });
+          console.log(this.eventBus);
+          this.eventBus.$on("saveState", () => {
+            this.upload();
+          });
+        });
     });
   }
 };
@@ -29,5 +50,6 @@ export default {
 <style>
 #app {
   margin: 8px;
+  overflow: hidden;
 }
 </style>

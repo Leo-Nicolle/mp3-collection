@@ -20,6 +20,8 @@
           @validate="onAddValidate"
           :value="$store.state.addPath"
         />
+        <i class="icon-settings" @click="onSettingsClick()"></i>
+        <SettingsModal ref="settingsModal" />
       </span>
       <SearchBar />
     </div>
@@ -36,6 +38,7 @@
 <script>
 import axios from "axios";
 import FileModal from "./FileModal";
+import SettingsModal from "./SettingsModal";
 import SearchBar from "./SearchBar";
 import ProgressBar from "./ProgressBar";
 
@@ -71,6 +74,9 @@ export default {
     onAddClick(evt) {
       this.$refs.addModal.show();
     },
+    onSettingsClick() {
+      this.$refs.settingsModal.show();
+    },
     onMp3ModalValidate(path) {
       this.$store.commit("setMp3Path", path);
     },
@@ -88,6 +94,7 @@ export default {
   components: {
     FileModal,
     ProgressBar,
+    SettingsModal,
     SearchBar
   },
   mounted() {

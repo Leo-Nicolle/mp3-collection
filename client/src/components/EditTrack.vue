@@ -23,7 +23,6 @@
 <script>
 import axios from "axios";
 import { serverUrl } from "../js/utils";
-import { mapState } from "vuex";
 export default {
   name: "EditTrack",
   props: {
@@ -34,7 +33,9 @@ export default {
   },
   data() {
     return {
-      artist: ""
+      artist: "",
+      album: "",
+      title: ""
     };
   },
   methods: {

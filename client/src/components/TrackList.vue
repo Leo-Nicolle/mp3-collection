@@ -9,9 +9,15 @@
           v-if="checkboxes"
           @change="onCheckboxTitleChange($event)"
         />
-        <span class="title-title">title</span>
-        <span class="album-title">Album</span>
-        <span class="artist-title">Artist</span>
+        <span class="title-title" v-if="$store.state.columnsVisible.title"
+          >title</span
+        >
+        <span class="album-title" v-if="$store.state.columnsVisible.album"
+          >Album</span
+        >
+        <span class="artist-title" v-if="$store.state.columnsVisible.artist"
+          >Artist</span
+        >
         <i class="icon-edit" v-if="checkboxes" style="z-index: -1" />
       </li>
     </ul>
@@ -24,15 +30,24 @@
           v-model="row.selected"
           @change="onCheckboxChange($event)"
         />
-        <span class="title" @click="onClick(row, 'title')">{{
-          row.title
-        }}</span>
-        <span class="album" @click="onClick(row, 'album')">{{
-          row.album
-        }}</span>
-        <span class="artist" @click="onClick(row, 'artist')">{{
-          row.artist
-        }}</span>
+        <span
+          class="title"
+          v-if="$store.state.columnsVisible.title"
+          @click="onClick(row, 'title')"
+          >{{ row.title }}</span
+        >
+        <span
+          class="album"
+          v-if="$store.state.columnsVisible.album"
+          @click="onClick(row, 'album')"
+          >{{ row.album }}</span
+        >
+        <span
+          class="artist"
+          v-if="$store.state.columnsVisible.artist"
+          @click="onClick(row, 'artist')"
+          >{{ row.artist }}</span
+        >
         <i class="icon-edit" v-if="checkboxes" />
       </li>
     </ul>
