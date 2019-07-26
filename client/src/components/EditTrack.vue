@@ -67,9 +67,24 @@ export default {
         : "";
     },
     onValueChange(key, value) {
+      // checks if there is a replace  in the field
+      const replace = value.match(/r\((.*),(.*)\)/);
+      if (replace) {
+        try {
+          new RegExp(replace[1]);
+        } catch (e) {
+          return;
+        }
+      }
       this.rows.forEach(row => {
-        row[key] = value;
-        row.dirty[key].newValue = value;
+        const newValue = replace
+          ? row.dirty[key].oldValue
+              .slice()
+              .replace(new RegExp(replace[1]), replace[2])
+          : value;
+
+        row[key] = newValue;
+        row.dirty[key].newValue = newValue;
       });
     },
     onValidate() {
@@ -99,6 +114,9 @@ export default {
     }
   },
   watch: {
+    title: function(newValue) {
+      this.onValueChange("title", newValue);
+    },
     artist: function(newValue) {
       this.onValueChange("artist", newValue);
     },
@@ -111,6 +129,12 @@ export default {
           (row.dirty = {
             artist: {
               oldValue: row.artist
+            },
+            album: {
+              oldValue: row.album
+            },
+            title: {
+              oldValue: row.title
             }
           })
       );

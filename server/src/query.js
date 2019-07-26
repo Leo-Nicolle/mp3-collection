@@ -79,12 +79,13 @@ export default class Query {
     if (updates.album) {
       this._updateAlbum({
         track,
-        targetAlbum,
+        album: targetAlbum,
         artist: targetArtist,
         targetAlbumName: updates.album
       });
     }
     if (updates.title) {
+      console.log("update title", updates.title);
       this._updateTrack({ track, name: updates.title });
     }
     this.database.export();
@@ -127,6 +128,9 @@ export default class Query {
       file: this.database._getDataFilePath(),
       tracks: []
     };
+    if (targetAlbum.tracks.includes(track)) {
+      return;
+    }
     // place the track in the new album
     targetAlbum.tracks.push(track);
     // remove the track from it's old album
@@ -148,8 +152,8 @@ export default class Query {
     return targetAlbum;
   }
 
-  _updateTrack({ track, targetTrackName }) {
-    track.name = targetTrackName;
+  _updateTrack({ track, name }) {
+    track.name = name;
   }
   _getDefaultTolerance() {
     return new Date(0).setDate(1);
