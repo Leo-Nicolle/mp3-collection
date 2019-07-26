@@ -14,6 +14,15 @@
           v-if="columnsVisible[key]"
         >
           {{ key | capitalize }}
+          <i
+            class="icon-sort"
+            @click="onClickSortBy(key)"
+            :style="{
+              transform: `translateY(${
+                key === sortBy && order < 0 ? -0.2 : 0.3
+              }em) scaleY(${key === sortBy ? order : 1})`
+            }"
+          ></i>
         </span>
         <i class="icon-edit" v-if="checkboxes" style="z-index: -1" />
       </li>
@@ -59,13 +68,15 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      sortBy: "title",
+      order: -1
+    };
   },
   filters: {
     formatKey(value, key) {
-      console.log("date", key, value);
       if (key === "added") {
-        return new Date(value).toLocaleDateString("en-EN");
+        return new Date(value).toLocaleDateString();
       }
       return value;
     }
@@ -73,14 +84,15 @@ export default {
   computed: {
     ...mapState(["query", "searchFilter", "columnsVisible"]),
     filteredRows: function() {
-      const searchFilter = this.searchFilter;
-      if (!Object.keys(searchFilter).length) {
-        return this.rows;
+      if (!Object.keys(this.searchFilter).length) {
+        return this.rows.sort((a, b) =>
+          a[this.sortBy] < b[this.sortBy] ? this.order : -this.order
+        );
       }
       return this.rows
         .map(row => ({
           row,
-          points: Object.entries(searchFilter).reduce(
+          points: Object.entries(this.searchFilter).reduce(
             (points, [key, weightAndReg]) => {
               const weight = weightAndReg.weight;
               if (!weight) return points;
@@ -91,14 +103,25 @@ export default {
           )
         }))
         .filter(({ points }) => points)
-        .sort((a, b) => a.points - b.points)
+        .sort((a, b) => {
+          const diff = a.points - b.points;
+          return diff === 0
+            ? a.row[this.sortBy] < b.row[this.sortBy]
+              ? this.order
+              : -this.order
+            : a - b;
+        })
         .map(({ row }) => row);
     }
   },
   methods: {
     onClick(row, type) {
       const query = Object.assign({}, this.query);
-      query[type] = escapeStringRegexp(row[type]);
+      if (type === "added") {
+        query[type] = { value: row[type] };
+      } else {
+        query[type] = escapeStringRegexp(row[type]);
+      }
       this.$store.commit("setQuery", query);
     },
     onCheckboxTitleChange(event) {
@@ -108,6 +131,11 @@ export default {
     },
     onCheckboxChange() {
       this.$emit("select-change", this.filteredRows.filter(r => r.selected));
+    },
+    onClickSortBy(key) {
+      this.order *= -1;
+      this.sortBy = key;
+      this.$forceUpdate();
     }
   }
 };
@@ -122,6 +150,14 @@ export default {
 .row-title {
   background: #333;
 }
+.row-title span {
+  display: flex;
+  justify-content: space-between;
+}
+.row-title span i {
+  margin-right: 24px;
+  font-size: 0.7em;
+}
 li {
   display: flex;
   justify-content: space-between;
@@ -132,6 +168,11 @@ li > span {
 li > span:hover {
   text-decoration: underline;
 }
+
+.icon-sort {
+  text-decoration: none !important;
+}
+
 .checkbox {
   cursor: pointer;
   margin-right: 12px;

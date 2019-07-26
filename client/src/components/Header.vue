@@ -28,7 +28,8 @@
     <div class="filters">
       <h5 class="filters-title">Filters Active:</h5>
       <p v-for="filter in filters" @click="onFilterClick(filter)">
-        <strong>{{ filter[0] }}</strong> {{ filter[1] }}
+        <strong>{{ filter[0] }}</strong>
+        {{ filter[1] | formatFilter(filter[0]) }}
         <i class="icon-delete"> </i>
       </p>
     </div>
@@ -56,6 +57,14 @@ export default {
     ...mapState(["query"]),
     filters: function() {
       return Object.entries(this.query);
+    }
+  },
+  filters: {
+    formatFilter(value, key) {
+      if (key === "added") {
+        return new Date(value.value).toLocaleDateString();
+      }
+      return value;
     }
   },
   methods: {
