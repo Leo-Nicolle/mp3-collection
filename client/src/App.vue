@@ -21,11 +21,9 @@ export default {
   },
 
   mounted() {
-    // musicBrainz
-    //   .search({ key: "artist", value: "Jacob Miller" })
-    //   .then(response => {
-    //     console.log(response);
-    //   });
+    musicBrainz.findPossibleArtist("Jacob Miller").then(data => {
+      console.log(data);
+    });
 
     this.$nextTick(() => {
       axios
@@ -35,7 +33,6 @@ export default {
         })
         .finally(() => {
           this.$store.subscribe((mutation, state) => {
-            console.log(mutation);
             this.upload();
           });
           console.log(this.eventBus);

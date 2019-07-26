@@ -14,15 +14,19 @@
       <input type="text" v-model="artist" />
     </label>
     <div>
-      <i class=" icon-checked" @click="onValidate()"></i>
-      <i class=" icon-cancel" @click="onCancel()"></i>
+      <i class="icon-checked" @click="onValidate()"></i>
+      <i class="icon-cancel" @click="onCancel()"></i>
+      <i class="icon-cloud" @click="onCloud()"></i>
     </div>
+    <AutoTagModal ref="autoTagModal" :rows="rows" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { serverUrl } from "../js/utils";
+import AutoTagModal from "./AutoTagModal";
+
 export default {
   name: "EditTrack",
   props: {
@@ -96,7 +100,7 @@ export default {
             if (!row.dirty[key].newValue) return;
             updates[key] = row.dirty[key].newValue;
           });
-          axios.post(`${serverUrl}update-metadata`, {
+          axios.post(`${serverUrl}update-track-metadata`, {
             hash: row.hash,
             updates
           });
@@ -111,6 +115,9 @@ export default {
         });
         delete row.dirty;
       });
+    },
+    onCloud() {
+      this.$refs.autoTagModal.show();
     }
   },
   watch: {
@@ -141,6 +148,9 @@ export default {
       this.artist = this.getInitialvalue("artist");
       this.album = this.getInitialvalue("album");
     }
+  },
+  components: {
+    AutoTagModal
   }
 };
 </script>
@@ -154,6 +164,7 @@ export default {
 
 .edit-track h4 {
   margin: 0;
+  margin-right: 12px;
   flex: 0.1;
 }
 .edit-track label {

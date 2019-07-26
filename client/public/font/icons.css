@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?641fc9932d886fc39ed1e1ea989c9365?#iefix") format("embedded-opentype"),
-url("./icons.woff2?641fc9932d886fc39ed1e1ea989c9365") format("woff2"),
-url("./icons.woff?641fc9932d886fc39ed1e1ea989c9365") format("woff"),
-url("./icons.ttf?641fc9932d886fc39ed1e1ea989c9365") format("truetype"),
-url("./icons.svg?641fc9932d886fc39ed1e1ea989c9365#icons") format("svg");
+    src: url("./icons.eot?6272239b010d5798db8a4381bdd66d8b?#iefix") format("embedded-opentype"),
+url("./icons.woff2?6272239b010d5798db8a4381bdd66d8b") format("woff2"),
+url("./icons.woff?6272239b010d5798db8a4381bdd66d8b") format("woff"),
+url("./icons.ttf?6272239b010d5798db8a4381bdd66d8b") format("truetype"),
+url("./icons.svg?6272239b010d5798db8a4381bdd66d8b#icons") format("svg");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -30,36 +30,39 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-checked:before {
     content: "\f104";
 }
-.icon-delete:before {
+.icon-cloud:before {
     content: "\f105";
 }
-.icon-edit:before {
+.icon-delete:before {
     content: "\f106";
 }
-.icon-file:before {
+.icon-edit:before {
     content: "\f107";
 }
-.icon-folder:before {
+.icon-file:before {
     content: "\f108";
 }
-.icon-mp3-player:before {
+.icon-folder:before {
     content: "\f109";
 }
-.icon-music-note:before {
+.icon-mp3-player:before {
     content: "\f10a";
 }
-.icon-open-folder:before {
+.icon-music-note:before {
     content: "\f10b";
 }
-.icon-refresh:before {
+.icon-open-folder:before {
     content: "\f10c";
 }
-.icon-search:before {
+.icon-refresh:before {
     content: "\f10d";
 }
-.icon-settings:before {
+.icon-search:before {
     content: "\f10e";
 }
-.icon-sort:before {
+.icon-settings:before {
     content: "\f10f";
+}
+.icon-sort:before {
+    content: "\f110";
 }

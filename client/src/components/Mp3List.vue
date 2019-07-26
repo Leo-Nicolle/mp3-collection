@@ -16,6 +16,7 @@ import EditTrack from "./EditTrack";
 import axios from "axios";
 import { serverUrl } from "../js/utils";
 import { mapState } from "vuex";
+
 export default {
   name: "Mp3List",
   data() {
@@ -64,6 +65,7 @@ li {
 }
 li > span {
   flex: 1;
+  margin-right: 6px;
 }
 li > span:hover {
   text-decoration: underline;

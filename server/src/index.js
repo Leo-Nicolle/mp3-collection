@@ -46,10 +46,17 @@ app.post("/scanfiles", async (req, res) => {
   res.send(audioFiles);
 });
 
-app.post("/update-metadata", async (req, res) => {
+app.post("/update-track-metadata", async (req, res) => {
   const hash = req.body.hash;
   const updates = req.body.updates;
-  query.update({ hash, updates });
+  query.updateTrack({ hash, updates });
+  res.send(200);
+});
+
+app.post("/update-artist-metadata", async (req, res) => {
+  const name = req.body.name;
+  const updates = req.body.updates;
+  query.updateArtist({ name, updates });
   res.send(200);
 });
 

@@ -55,7 +55,18 @@ export default class Query {
       });
     return rows;
   }
-  update({ hash, updates }) {
+
+  updateArtist({ name, updates }) {
+    if (!Object.keys(updates).length) return;
+
+    const artist = this.database.data.artists.find(a => a.name === name);
+    Object.entries(updates).forEach(([key, value]) => {
+      artist[key] = value;
+    });
+    this.database.export();
+  }
+
+  updateTrack({ hash, updates }) {
     if (!Object.keys(updates).length) return;
     this.updateQueue.push(hash);
     this.database.state.xhr.ratio = 0.9;
@@ -69,7 +80,7 @@ export default class Query {
     let targetArtist = updates.artist;
 
     if (updates.artist) {
-      ({ targetArtist, targetAlbum } = this._updateArtist({
+      ({ targetArtist, targetAlbum } = this._updateTrackArtist({
         track,
         album,
         artist,
@@ -77,7 +88,7 @@ export default class Query {
       }));
     }
     if (updates.album) {
-      this._updateAlbum({
+      this._updateTrackAlbum({
         track,
         album: targetAlbum,
         artist: targetArtist,
@@ -93,7 +104,7 @@ export default class Query {
     this.database.state.xhr.ratio = this.updateQueue.length ? 0.9 : 1;
   }
 
-  _updateArtist({ track, album, artist, targetArtistName }) {
+  _updateTrackArtist({ track, album, artist, targetArtistName }) {
     const artistExists = this.database.data.artists.find(
       ({ name }) => name === targetArtistName
     );
@@ -106,7 +117,7 @@ export default class Query {
     if (!artistExists) {
       this.database.data.artists.push(targetArtist);
     }
-    const targetAlbum = this._updateAlbum({
+    const targetAlbum = this._updateTrackAlbum({
       track,
       album,
       artist,
@@ -116,7 +127,7 @@ export default class Query {
     return { targetArtist, targetAlbum };
   }
 
-  _updateAlbum({ track, album, artist, targetArtist, targetAlbumName }) {
+  _updateTrackAlbum({ track, album, artist, targetArtist, targetAlbumName }) {
     if (!targetArtist) {
       targetArtist = artist;
     }
