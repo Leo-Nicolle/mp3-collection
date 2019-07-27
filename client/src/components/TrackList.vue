@@ -119,8 +119,10 @@ export default {
       const query = Object.assign({}, this.query);
       if (type === "added") {
         query[type] = { value: row[type] };
+      } else if (type === "title") {
+        query["track"] = { title: row[type] };
       } else {
-        query[type] = escapeStringRegexp(row[type]);
+        query[type] = { name: row[type] };
       }
       this.$store.commit("setQuery", query);
     },

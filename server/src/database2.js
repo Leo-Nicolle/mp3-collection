@@ -36,10 +36,53 @@ class Database2 {
       state.xhr.ratio = i / files.length;
       state.xhr.task = `adding file: ${getFilenameFromPath(file)}`;
       if (!isFileSupported(file)) continue;
+      console.log("add", file);
       await this._addFile(file);
     }
     state.xhr.ratio = 1;
     state.xhr.task = "";
+  }
+
+  select(query = {}) {
+    query = Object.assign({ artist: {}, album: {}, track: {} }, query);
+    const rows = [];
+    console.log(
+      "dsada",
+      query,
+      db
+        .get("tracks")
+        .filter({
+          albumId: "13f7e17d-7d2b-4494-b676-1f3ab1a59834",
+          ...query.track
+        })
+        // .filter(query.track)
+        .value()
+    );
+    db.get("artists")
+      .filter(query.artist)
+      .value()
+      .forEach(artist =>
+        db
+          .get("albums")
+          .filter({ artistId: artist.id, ...query.album })
+          .value()
+          .forEach(album =>
+            rows.push(
+              ...db
+                .get("tracks")
+                .filter({ albumId: album.id, ...query.track })
+                .value()
+                .map(track => ({
+                  artist: artist.name,
+                  artistId: artist.id,
+                  album: album.name,
+                  albumId: album.id,
+                  ...track
+                }))
+            )
+          )
+      );
+    return rows;
   }
 
   async _addFile(file) {
@@ -93,7 +136,7 @@ class Database2 {
       .get("tracks")
       .push({
         id: uuid(),
-        name: common.title,
+        title: common.title,
         albumId,
         hash,
         added: Date.now(),

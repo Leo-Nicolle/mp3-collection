@@ -1,12 +1,12 @@
 import express from "express";
 import { isFileSupported, getAudioFiles } from "./utils";
-import { database, query } from "./database";
+// import { database, query } from "./database";
 import io from "./socket";
 import database2 from "./database2";
-
-database2._addFile(
-  "/home/leo/Music/Jacob Miller Inner Circle Augustus pablo/Jacob Miller - With The Inner Circle Band & Augustus Pablo - 02 - Forward Jah Jah children.mp3"
-);
+//
+// database2._addFile(
+//   "/home/leo/Music/Jacob Miller Inner Circle Augustus pablo/Jacob Miller - With The Inner Circle Band & Augustus Pablo - 02 - Forward Jah Jah children.mp3"
+// );
 
 const path = require("path");
 const cors = require("cors");
@@ -55,21 +55,21 @@ app.post("/scanfiles", async (req, res) => {
 app.post("/update-track-metadata", async (req, res) => {
   const hash = req.body.hash;
   const updates = req.body.updates;
-  query.updateTrack({ hash, updates });
+  // query.updateTrack({ hash, updates });
   res.send(200);
 });
 
 app.post("/update-artist-metadata", async (req, res) => {
   const name = req.body.name;
   const updates = req.body.updates;
-  query.updateArtist({ name, updates });
+  // query.updateArtist({ name, updates });
   res.send(200);
 });
 
 app.post("/update-album-metadata", async (req, res) => {
   const name = req.body.name;
   const updates = req.body.updates;
-  query.updateAlbum({ name, updates });
+  // query.updateAlbum({ name, updates });
   res.send(200);
 });
 
@@ -88,12 +88,15 @@ app.get("/state", (req, res) => {
 });
 
 app.get("/xhr", (req, res) => {
-  res.send(database.state.xhr);
+  res.send({});
+
+  // res.send(database.state.xhr);
 });
 
 app.post("/add", async (req, res) => {
   const file = req.body.file;
   const filePath = path.resolve(file.path);
+  console.log("added", filePath);
   if (!fs.existsSync(filePath)) {
     res.send(500);
     return;
@@ -107,13 +110,11 @@ app.post("/add", async (req, res) => {
     .readdirSync(filePath)
     .map(f => filePath + "/" + f)
     .filter(f => isFileSupported(f));
-  await database.add(files);
-  database.export();
-  res.send(database.data);
-  console.log("end added");
+  await database2.addFiles(files);
+  res.send(200);
 });
 app.post("/query", async (req, res) => {
-  res.send(query.select(req.body.query));
+  res.send(database2.select(req.body.query));
 });
 
 app.listen(port, () => {

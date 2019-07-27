@@ -30,6 +30,7 @@ export default {
   },
   methods: {
     requestQuery() {
+      console.log("query", this.$store.state.query);
       axios
         .post(`${serverUrl}query`, {
           query: this.$store.state.query

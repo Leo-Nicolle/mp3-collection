@@ -91,12 +91,20 @@ export default {
     },
     onAddValidate(path) {
       this.$store.commit("setAddPath", path);
-      axios.post(`${serverUrl}add`, {
-        file: {
-          path,
-          type: "folder"
-        }
-      });
+      axios
+        .post(`${serverUrl}add`, {
+          file: {
+            path,
+            type: "folder"
+          }
+        })
+        .then(response => {
+          console.log("add response", response);
+        })
+        .catch(error => {
+          console.error("add error", error);
+        });
+
       this.progressVisible = true;
     }
   },
