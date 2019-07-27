@@ -87,7 +87,16 @@ export default {
     shift() {
       if (this.artistsToTag.length) {
         const artistName = this.artistsToTag.shift();
-        this.getValueForArtistName({ artistName });
+        this.getValueForArtistName({ artistName }).then(() => {
+          this.$refs.modal.show();
+          this.state = "artist";
+        });
+      } else if (this.albumsToTag.length) {
+        const albumName = this.albumsToTag.shift();
+        this.getValueForAlbumName({ albumName }).then(() => {
+          this.$refs.modal.show();
+          this.state = "album";
+        });
       }
     },
     onCancel() {
@@ -101,7 +110,7 @@ export default {
       if (!originalName) {
         originalName = artistName;
       }
-      musicBrainz
+      return musicBrainz
         .findPossibleArtist(artistName, { limit: 20 })
         .then(options => {
           this.value = {
@@ -109,8 +118,20 @@ export default {
             name: artistName.slice(),
             originalName
           };
-          this.$refs.modal.show();
-          this.state = "artist";
+        });
+    },
+    getValueForAlbumName({ albumName, originalName = false } = {}) {
+      if (!originalName) {
+        originalName = albumName;
+      }
+      return musicBrainz
+        .findPossibleAlbums(albumName, { limit: 20 })
+        .then(options => {
+          this.value = {
+            options: options.map(o => ({ ...o, selected: false })),
+            name: albumName.slice(),
+            originalName
+          };
         });
     },
     onInputChange() {

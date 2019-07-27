@@ -92,3 +92,17 @@ export function fillBlanksMetadata({ common, file }) {
     common.year = 5000;
   }
 }
+
+export function mkdirRec(filePath) {
+  //get the folder names, filter the file names
+  const folders = filePath
+    .split(path.sep)
+    .filter(element => !element.match(/.*\.\w\w\w\w?$/i));
+
+  let totalPath = "";
+  folders.forEach(folder => {
+    totalPath = path.join(totalPath, folder);
+    if (fs.existsSync(totalPath)) return;
+    fs.mkdirSync(totalPath);
+  });
+}

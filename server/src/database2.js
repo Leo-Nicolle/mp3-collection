@@ -3,12 +3,15 @@ import {
   extractMusicTags,
   getHash,
   isFileSupported,
-  getFilenameFromPath
+  getFilenameFromPath,
+  mkdirRec
 } from "./utils";
 
 const uuid = require("uuid/v4");
 const low = require("lowdb");
 const path = require("path");
+const fs = require("fs");
+const rimraf = require("rimraf");
 
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
@@ -16,8 +19,15 @@ const db = low(adapter);
 const MAX_FILES_PER_FOLDER = 65000;
 class Database2 {
   constructor() {
-    db.defaults({ artists: [], albums: {}, tracks: {} }).write();
+    db.defaults({
+      artists: [],
+      albums: [],
+      tracks: []
+    }).write();
     this.debounceExport = 0;
+    this.dataFolderRoot = "data/files";
+    this.allArtistsFile = this._getDataFilePath();
+    this.subFoldersDepth = 3;
   }
 
   async addFiles(files) {
@@ -40,17 +50,16 @@ class Database2 {
         .find({ hash })
         .value()
     ) {
-      console.log("found");
       return;
     }
     const target = this._getAudioFilePath(file);
     const { common } = await extractMusicTags(file);
 
-    const artistId =
-      !db
+    const artist =
+      db
         .get("artists")
         .find({ name: common.artist })
-        .value().id ||
+        .value() ||
       db
         .get("artists")
         .push({
@@ -60,13 +69,14 @@ class Database2 {
           allTracksFile: this._getDataFilePath(),
           added: Date.now()
         })
-        .write().id;
+        .write();
+    const artistId = artist.length ? artist[0].id : artist.id;
 
-    const albumId =
-      !db
+    const album =
+      db
         .get("albums")
         .find({ name: common.album })
-        .value().id ||
+        .value() ||
       db
         .get("albums")
         .push({
@@ -76,13 +86,15 @@ class Database2 {
           file: this._getDataFilePath(),
           added: Date.now()
         })
-        .write().id;
+        .write();
+    const albumId = album.length ? album[0].id : album.id;
 
     const trackId = db
       .get("tracks")
       .push({
         id: uuid(),
         name: common.title,
+        albumId,
         hash,
         added: Date.now(),
         files: {
@@ -92,9 +104,17 @@ class Database2 {
         added: Date.now()
       })
       .write().id;
-    // this._createDataFiles();
+    const dataFilesToCopy = this._createDataFiles();
+    this.copyDataFiles(dataFilesToCopy);
   }
-
+  copyDataFiles(dataFiles) {
+    rimraf.sync(this.dataFolderRoot);
+    dataFiles.forEach(({ name, content }) => {
+      const filePath = path.join(this.dataFolderRoot, name);
+      mkdirRec(filePath);
+      fs.writeFileSync(filePath, content);
+    });
+  }
   export() {
     if (this.debounceExport) {
       clearTimeout(this.debounceExport);
@@ -116,35 +136,39 @@ class Database2 {
   _createDataFiles() {
     let allArtistsFile = "";
     const separator = String.fromCharCode(1);
-    const allArtistsFileName = state.files.allArtistsFile;
+    const allArtistsFileName = this.allArtistsFile;
     const dataFiles = [];
-
-    db.get("artits")
+    db.get("artists")
       .value()
-      .map(row => console.log(row));
-    return;
-
-    this.data.artists.forEach(artist => {
-      allArtistsFile += `${artist.name}${separator}${artist.file}\n`;
-      let artistFile = "";
-      let allTracksFile = [];
-      artist.albums.forEach(album => {
-        artistFile += `All tracks${separator}${artist.allTracksFile}\n`;
-        artistFile += `${album.name}${separator}${album.file}\n`;
-        let albumFile = "";
-        album.tracks.forEach(track => {
-          const trackData = `${track.name}${separator}${track.files.target}\n`;
-          albumFile += trackData;
-          allTracksFile.push(trackData);
+      .forEach(artist => {
+        allArtistsFile += `${artist.name}${separator}${artist.file}\n`;
+        let artistFile = "";
+        let allTracksFile = [];
+        db.get("albums")
+          .filter({ artistId: artist.id })
+          .value()
+          .forEach(album => {
+            artistFile += `All tracks${separator}${artist.allTracksFile}\n`;
+            artistFile += `${album.name}${separator}${album.file}\n`;
+            let albumFile = "";
+            db.get("tracks")
+              .filter({ albumId: album.id })
+              .value()
+              .forEach(track => {
+                const trackData = `${track.name}${separator}${
+                  track.files.target
+                }\n`;
+                albumFile += trackData;
+                allTracksFile.push(trackData);
+              });
+            dataFiles.push({ content: albumFile, name: album.file });
+          });
+        dataFiles.push({ content: artistFile, name: artist.file });
+        dataFiles.push({
+          content: allTracksFile.sort((a, b) => a - b).join(""),
+          name: artist.allTracksFile
         });
-        dataFiles.push({ content: albumFile, name: album.file });
       });
-      dataFiles.push({ content: artistFile, name: artist.file });
-      dataFiles.push({
-        content: allTracksFile.sort((a, b) => a - b).join(""),
-        name: artist.allTracksFile
-      });
-    });
     dataFiles.push({ content: allArtistsFile, name: allArtistsFileName });
     return dataFiles;
   }
@@ -161,13 +185,20 @@ class Database2 {
   }
 
   _getDataFilePath() {
-    if (state.dataFileIndex === MAX_FILES_PER_FOLDER) {
-      state.dataFileIndex = 0;
-      state.dataFolderIndex++;
-    }
-    const name = this._getFileName(state.dataFileIndex, ".txt");
-    state.dataFileIndex++;
-    return path.join(this._getFileName(state.dataFolderIndex), name);
+    let n = state.dataFileIndex;
+    return (
+      new Array(this.subFoldersDepth)
+        .fill(0)
+        .map(() => {
+          const res = n % MAX_FILES_PER_FOLDER;
+          n /= Math.floor(MAX_FILES_PER_FOLDER);
+          return res;
+        })
+        .reduce(
+          (fileName, number) => path.join(fileName, this._getFileName(number)),
+          ""
+        ) + ".txt"
+    );
   }
 
   _getFileName(number, ext = "") {

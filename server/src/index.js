@@ -2,6 +2,11 @@ import express from "express";
 import { isFileSupported, getAudioFiles } from "./utils";
 import { database, query } from "./database";
 import io from "./socket";
+import database2 from "./database2";
+
+database2._addFile(
+  "/home/leo/Music/Jacob Miller Inner Circle Augustus pablo/Jacob Miller - With The Inner Circle Band & Augustus Pablo - 02 - Forward Jah Jah children.mp3"
+);
 
 const path = require("path");
 const cors = require("cors");
@@ -58,6 +63,13 @@ app.post("/update-artist-metadata", async (req, res) => {
   const name = req.body.name;
   const updates = req.body.updates;
   query.updateArtist({ name, updates });
+  res.send(200);
+});
+
+app.post("/update-album-metadata", async (req, res) => {
+  const name = req.body.name;
+  const updates = req.body.updates;
+  query.updateAlbum({ name, updates });
   res.send(200);
 });
 

@@ -103,8 +103,34 @@ export default class Query {
     this.database.export();
   }
 
+  updateAlbum({ artistName, name, updates }) {
+    if (!Object.keys(updates).length) return;
+    const artist = this.database.data.artists.find(a => a.name === artistName);
+    const album = artist.albums.find(a => a.name === name);
+
+    let albumExists =
+      updates.name && artist.albums.find(a => a.name === updates.name);
+    const targetAlbum = albumExists || album;
+
+    Object.entries(updates).forEach(([key, value]) => {
+      targetAlbum[key] = value;
+    });
+
+    if (albumExists && album !== targetAlbum) {
+      // add the new tracks to the target album
+      const newTracks = album.tracks.filter(
+        track => !targetAlbum.tracks.some(({ hash }) => hash === track.hash)
+      );
+      targetAlbum.tracks.push(...newTracks);
+      //remove the album from the database
+      artist.albums = artist.albums.filter(a => a !== album);
+    }
+    this.database.export();
+  }
+
   updateTrack({ hash, updates }) {
     if (!Object.keys(updates).length) return;
+    console.log("update track ", hash, JSON.stringify(updates));
     this.updateQueue.push(hash);
     this.database.state.xhr.ratio = 0.9;
     this.database.state.xhr.task = "updating files";
@@ -161,6 +187,11 @@ export default class Query {
       targetArtist,
       targetAlbumName: album.name
     });
+    if (targetArtistName !== artist.name) {
+      this.database.data.artists = this.database.artists.filter(
+        a => a !== artist
+      );
+    }
     return { targetArtist, targetAlbum };
   }
 
@@ -182,6 +213,7 @@ export default class Query {
     // place the track in the new album
     targetAlbum.tracks.push(track);
     // remove the track from it's old album
+    console.log("ici", album.tracks, artist.albums);
     album.tracks = album.tracks.filter(t => t !== track);
     //remove the album if empty:
     if (!album.tracks.length) {

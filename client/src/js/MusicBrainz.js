@@ -6,7 +6,7 @@ class MusicBrainz {
     this.limit = 100;
   }
 
-  autotagAlbum({ rows, albumName, artistName }) {
+  autotagAlbum({ albumName, artistName }) {
     this.findPossibleAlbums(albumName)
       .then(releases => {
         const release = releases[0].releases[0];
@@ -58,12 +58,13 @@ class MusicBrainz {
         .map(({ artist }) => artist);
     });
   }
-  findPossibleAlbums(albumName) {
+  findPossibleAlbums(albumName, { limit = 5 } = {}) {
     return this.search({
       type: "release-group",
       query: {
         release: albumName
-      }
+      },
+      limit
     }).then(({ data }) => {
       const releases = data["release-groups"];
       return releases
