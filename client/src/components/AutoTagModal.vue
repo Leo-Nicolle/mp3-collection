@@ -2,19 +2,24 @@
   <div>
     <Modal ref="modal" @validate="onValidate" @cancel="onCancel">
       <div slot="modal-title" class="modal-title">
-        <p><strong>Auto Tags</strong></p>
+        <label v-if="value">
+          <strong>Auto Tag </strong>
+          <input type="text" v-model="value.name" @change="onInputChange" />
+        </label>
       </div>
 
       <div slot="modal-body" class="modal-body">
-        <div v-if="artistToTag">
+        <div v-if="value">
           <ul>
             <li class="row">
-              <span v-for="colmun in columns">{{ colmun | capitalize }}</span>
+              <span v-for="colmun in columns[state]">{{
+                colmun | capitalize
+              }}</span>
               <span>{{ "select" | capitalize }}</span>
             </li>
-            <li v-for="option in artistToTag.options">
+            <li v-for="option in value.options">
               <label class="row">
-                <span v-for="colmun in columns">{{
+                <span v-for="colmun in columns[state]">{{
                   option[colmun] | format
                 }}</span>
                 <input
@@ -48,25 +53,31 @@ export default {
   },
   data() {
     return {
-      visible: false,
+      value: null,
+      state: "",
       artistsToTag: [],
       albumsToTag: [],
       tracksToTag: [],
       selected: null,
-      columns: ["name", "country", "type", "disambiguation"]
+      columns: {
+        artist: ["name", "country", "type", "disambiguation"],
+        album: ["name"],
+        track: ["name"]
+      }
     };
   },
   methods: {
     onValidate() {
-      if (this.artistToTag && this.selected) {
+      if (this.value && this.selected) {
         const selected = this.selected;
         const updates = {
           name: selected.name,
           "sort-name": selected["sort-name"],
           id: selected.id
         };
-        axios.post(`${serverUrl}update-artist-metadata`, {
-          name: this.artistToTag.name,
+        axios.post(`${serverUrl}update-${this.state}-metadata`, {
+          name: this.value.originalName,
+          hash: this.value.hash,
           updates
         });
       }
@@ -74,27 +85,39 @@ export default {
       // this.$emit("validate", this.path);
     },
     shift() {
-      if (this.artistToTag.length) {
-        this.artistToTag = this.artistsToTag.shift();
-        this.show();
+      if (this.artistsToTag.length) {
+        const artistName = this.artistsToTag.shift();
+        this.getValueForArtistName({ artistName });
       }
     },
     onCancel() {
       this.$emit("cancel");
     },
     show() {
-      const names = [...new Set(this.rows.map(({ artist }) => artist))];
-      Promise.all(
-        names.map(artistName => musicBrainz.findPossibleArtist(artistName))
-      )
-        .then(optionsPerName => {
-          this.artistsToTag = optionsPerName.map((options, i) => ({
+      this.artistsToTag = [...new Set(this.rows.map(({ artist }) => artist))];
+      this.shift();
+    },
+    getValueForArtistName({ artistName, originalName = false } = {}) {
+      if (!originalName) {
+        originalName = artistName;
+      }
+      musicBrainz
+        .findPossibleArtist(artistName, { limit: 20 })
+        .then(options => {
+          this.value = {
             options: options.map(o => ({ ...o, selected: false })),
-            name: names[i]
-          }));
+            name: artistName.slice(),
+            originalName
+          };
           this.$refs.modal.show();
-        })
-        .catch(e => console.error(e));
+          this.state = "artist";
+        });
+    },
+    onInputChange() {
+      this.getValueForArtistName({
+        artistName: this.value.name,
+        originalName: this.value.originalName
+      });
     }
   },
   filters: {
@@ -102,17 +125,15 @@ export default {
       return elt || "unknown";
     }
   },
-  components: { Modal },
-  computed: {
-    artistToTag: function() {
-      return this.artistsToTag[0];
-    }
-  },
-  mounted() {}
+  components: { Modal }
 };
 </script>
-}
+
 <style scoped>
+.modal-body ul {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
 .row {
   display: flex;
   flex-direction: row;

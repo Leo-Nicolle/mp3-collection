@@ -1,6 +1,7 @@
 import express from "express";
 import { isFileSupported, getAudioFiles } from "./utils";
 import { database, query } from "./database";
+import io from "./socket";
 
 const path = require("path");
 const cors = require("cors");

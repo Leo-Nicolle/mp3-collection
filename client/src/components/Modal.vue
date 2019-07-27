@@ -29,12 +29,12 @@ export default {
   },
   methods: {
     onValidate() {
-      this.$emit("validate", this.path);
       this.hide();
+      this.$emit("validate", this.path);
     },
     onCancel() {
-      this.$emit("cancel");
       this.hide();
+      this.$emit("cancel");
     },
     hide() {
       this.visible = false;

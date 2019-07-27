@@ -44,6 +44,9 @@ export default {
   },
   mounted() {
     this.requestQuery();
+    this.serverSocket.on("update", () => {
+      this.requestQuery();
+    });
   },
   watch: {
     query: function(newValue) {

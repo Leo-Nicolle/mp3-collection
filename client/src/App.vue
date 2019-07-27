@@ -7,7 +7,6 @@
 <script>
 import axios from "axios";
 import { serverUrl } from "./js/utils";
-import musicBrainz from "./js/MusicBrainz";
 
 export default {
   name: "App",
@@ -21,10 +20,6 @@ export default {
   },
 
   mounted() {
-    musicBrainz.findPossibleArtist("Jacob Miller").then(data => {
-      console.log(data);
-    });
-
     this.$nextTick(() => {
       axios
         .get(`${serverUrl}state`)

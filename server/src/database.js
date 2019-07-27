@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const rimraf = require("rimraf");
+import socket from "./socket";
 
 import {
   extractMusicTags,
@@ -84,6 +85,7 @@ class Database {
     this.copyDataFiles(dataFilesToCopy);
     this.copyAudioFiles();
     this.save();
+    socket.emit("update");
   }
   copyAudioFiles() {
     this.state.audioFilesToCopy.forEach(({ files }, i) => {

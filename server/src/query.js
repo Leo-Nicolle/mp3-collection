@@ -57,12 +57,49 @@ export default class Query {
   }
 
   updateArtist({ name, updates }) {
+    console.log("updateArtist", name, updates);
     if (!Object.keys(updates).length) return;
-
     const artist = this.database.data.artists.find(a => a.name === name);
+
+    let artistExists =
+      updates.name &&
+      this.database.data.artists.find(a => a.name === updates.name);
+    const targetArtist = artistExists || artist;
+
     Object.entries(updates).forEach(([key, value]) => {
-      artist[key] = value;
+      targetArtist[key] = value;
     });
+
+    if (artistExists && artist !== targetArtist) {
+      // add the albums to the target artist
+      const { existing, nonExisting } = artist.albums.reduce(
+        (albums, album) => {
+          const targetAlbum = targetArtist.albums.find(
+            ({ name }) => name === album.name
+          );
+          if (targetAlbum) {
+            albums.existing.push({
+              targetAlbum,
+              album
+            });
+          } else {
+            albums.nonExisting.push(album);
+          }
+          return albums;
+        },
+        { existing: [], nonExisting: [] }
+      );
+      // merge what exists and add what does not
+      existing.forEach(({ targetAlbum, album }) => {
+        album.tracks.forEach(track => targetAlbum.tracks.push(track));
+      });
+      targetArtist.albums.push(...nonExisting);
+
+      //remove the artist from the database
+      this.database.data.artists = this.database.data.artists.filter(
+        a => a !== artist
+      );
+    }
     this.database.export();
   }
 
