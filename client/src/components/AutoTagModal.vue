@@ -3,7 +3,7 @@
     <Modal ref="modal" @validate="onValidate" @cancel="onCancel">
       <div slot="modal-title" class="modal-title">
         <label v-if="value">
-          <strong>Auto Tag </strong>
+          <strong>Auto Tag {{ state | capitalize }}</strong>
           <input type="text" v-model="value.name" @change="onInputChange" />
         </label>
       </div>
@@ -71,14 +71,16 @@ export default {
       if (this.value && this.selected) {
         const selected = this.selected;
         const updates = {
-          name: selected.name,
-          "sort-name": selected["sort-name"],
-          id: selected.id
+          id: selected.id,
+          type: this.state,
+          newValues: {
+            "sort-name": selected["sort-name"],
+            name: selected.name,
+            mid: selected.id
+          }
         };
-        axios.post(`${serverUrl}update-${this.state}-metadata`, {
-          name: this.value.originalName,
-          hash: this.value.hash,
-          updates
+        axios.post(`${serverUrl}update-metadata`, {
+          query: updates
         });
       }
       this.shift();
@@ -151,6 +153,9 @@ export default {
 </script>
 
 <style scoped>
+label strong {
+  margin-right: 12px;
+}
 .modal-body ul {
   max-height: 80vh;
   overflow-y: scroll;

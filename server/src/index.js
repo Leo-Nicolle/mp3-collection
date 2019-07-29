@@ -66,10 +66,8 @@ app.post("/update-artist-metadata", async (req, res) => {
   res.send(200);
 });
 
-app.post("/update-album-metadata", async (req, res) => {
-  const name = req.body.name;
-  const updates = req.body.updates;
-  // query.updateAlbum({ name, updates });
+app.post("/update-metadata", async (req, res) => {
+  database2.update(req.body.query);
   res.send(200);
 });
 

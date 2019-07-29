@@ -63,6 +63,10 @@ export default {
     formatFilter(value, key) {
       if (key === "added") {
         return new Date(value.value).toLocaleDateString();
+      } else if (key === "track") {
+        return value.title;
+      } else {
+        return value.name;
       }
       return value;
     }

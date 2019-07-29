@@ -38,7 +38,7 @@ export default {
       this.interval = setInterval(() => {
         axios.get(`${serverUrl}xhr`).then(({ data }) => {
           this.xhr = data.ratio;
-          this.task = data.task;
+          this.task = data.name;
           if (this.xhr === 1) {
             this.stop();
           }

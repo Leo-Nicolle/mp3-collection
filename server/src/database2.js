@@ -14,7 +14,7 @@ const fs = require("fs");
 const rimraf = require("rimraf");
 
 const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync("db.json");
+const adapter = new FileSync("data/db.json");
 const db = low(adapter);
 const MAX_FILES_PER_FOLDER = 65000;
 class Database2 {
@@ -26,38 +26,25 @@ class Database2 {
     }).write();
     this.debounceExport = 0;
     this.dataFolderRoot = "data/files";
+    this.audioFolderRoot = "audio";
     this.allArtistsFile = this._getDataFilePath();
     this.subFoldersDepth = 3;
   }
 
   async addFiles(files) {
+    state.reinitTasks({ name: "adding files", tasks: files.length });
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      state.xhr.ratio = i / files.length;
-      state.xhr.task = `adding file: ${getFilenameFromPath(file)}`;
       if (!isFileSupported(file)) continue;
-      console.log("add", file);
       await this._addFile(file);
     }
-    state.xhr.ratio = 1;
-    state.xhr.task = "";
+    const dataFilesToCopy = this._createDataFiles();
+    this.copyDataFiles(dataFilesToCopy);
   }
 
   select(query = {}) {
     query = Object.assign({ artist: {}, album: {}, track: {} }, query);
     const rows = [];
-    console.log(
-      "dsada",
-      query,
-      db
-        .get("tracks")
-        .filter({
-          albumId: "13f7e17d-7d2b-4494-b676-1f3ab1a59834",
-          ...query.track
-        })
-        // .filter(query.track)
-        .value()
-    );
     db.get("artists")
       .filter(query.artist)
       .value()
@@ -85,6 +72,14 @@ class Database2 {
     return rows;
   }
 
+  update(query) {
+    const select = {};
+    select[query.type] = { id: query.id };
+    const rows = this.select(query);
+    rows.forEach(row => {});
+    return rows;
+  }
+
   async _addFile(file) {
     const hash = await getHash(file);
     if (
@@ -95,7 +90,6 @@ class Database2 {
     ) {
       return;
     }
-    const target = this._getAudioFilePath(file);
     const { common } = await extractMusicTags(file);
 
     const artist =
@@ -132,23 +126,29 @@ class Database2 {
         .write();
     const albumId = album.length ? album[0].id : album.id;
 
+    const files = {
+      source: file,
+      target: this._getAudioFilePath(file)
+    };
     const trackId = db
       .get("tracks")
       .push({
         id: uuid(),
         title: common.title,
         albumId,
+        artistId,
         hash,
         added: Date.now(),
-        files: {
-          source: file,
-          target: this._getAudioFilePath(file)
-        },
+        files,
         added: Date.now()
       })
       .write().id;
-    const dataFilesToCopy = this._createDataFiles();
-    this.copyDataFiles(dataFilesToCopy);
+    console.log("joining", this.audioFolderRoot, files.target);
+    const filePath = path.join(this.audioFolderRoot, files.target);
+    mkdirRec(filePath);
+    fs.copyFile(files.source, filePath, error => {
+      state.incrementTask();
+    });
   }
   copyDataFiles(dataFiles) {
     rimraf.sync(this.dataFolderRoot);
@@ -216,36 +216,32 @@ class Database2 {
     return dataFiles;
   }
 
-  _getAudioFilePath(sourceFile) {
-    if (state.audioFileIndex === MAX_FILES_PER_FOLDER) {
-      state.audioFileIndex = 0;
-      state.audioFolderIndex++;
-    }
-    const ext = sourceFile.slice(sourceFile.length - 4);
-    const name = this._getFileName(state.audioFileIndex, ext);
-    state.audioFileIndex++;
-    return path.join(this._getFileName(state.audioFolderIndex), name);
-  }
-
   _getDataFilePath() {
-    let n = state.dataFileIndex;
+    const filePath = this._getFilePath(state.dataFileIndex, ".txt");
+    state.dataFileIndex++;
+    return filePath;
+  }
+  _getAudioFilePath(sourceFile) {
+    const ext = sourceFile.slice(sourceFile.length - 4);
+    const filePath = this._getFilePath(state.audioFileIndex, ext);
+    state.audioFileIndex++;
+    return filePath;
+  }
+  _getFilePath(n, ext) {
     return (
       new Array(this.subFoldersDepth)
         .fill(0)
         .map(() => {
           const res = n % MAX_FILES_PER_FOLDER;
-          n /= Math.floor(MAX_FILES_PER_FOLDER);
+          n = Math.floor(n / MAX_FILES_PER_FOLDER);
           return res;
         })
-        .reduce(
-          (fileName, number) => path.join(fileName, this._getFileName(number)),
-          ""
-        ) + ".txt"
+        .reverse()
+        .reduce((fileName, number) => {
+          const name = ("00000000" + number).substr(-8);
+          return fileName.length ? path.join(fileName, name) : name;
+        }, "") + ext
     );
-  }
-
-  _getFileName(number, ext = "") {
-    return ("00000000" + number).substr(-8) + ext;
   }
 }
 
