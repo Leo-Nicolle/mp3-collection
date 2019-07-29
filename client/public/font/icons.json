@@ -14,5 +14,6 @@
     "refresh": "\\f10d",
     "search": "\\f10e",
     "settings": "\\f10f",
-    "sort": "\\f110"
+    "sort": "\\f110",
+    "sync": "\\f111"
 }

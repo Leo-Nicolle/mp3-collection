@@ -1,31 +1,64 @@
 const fs = require("fs");
 const statePath = "data/database-state-2.json";
-let state = {};
-if (fs.existsSync(statePath)) {
-  state = JSON.parse(fs.readFileSync(statePath));
-} else {
-  state = {
-    audioFolderIndex: 0,
-    audioFileIndex: 0,
-    dataFolderIndex: 0,
-    dataFileIndex: 0,
-    audioFilesToCopy: [],
-    xhr: {
+
+function capitalize(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+class State {
+  constructor() {
+    this.debounceSave = 0;
+    this.data = {};
+    this.data.audioFileIndex = 0;
+    this.data.dataFileIndex = 0;
+    this.data.allArtistsFile = false;
+    this.data.audioFilesToCopy = [];
+    this.data.xhr = {
       ratio: 0,
       tasks: 0,
-      taskIndex: 0,
-      name: ""
+      taskIndex: 0
+    };
+    if (fs.existsSync(statePath)) {
+      this.data = JSON.parse(fs.readFileSync(statePath));
     }
-  };
+
+    Object.keys(this.data).forEach(key => {
+      console.log(key);
+      Object.defineProperty(this, key, {
+        get: function() {
+          return this.data[key];
+        },
+        set: function(newValue, { save = true } = {}) {
+          this.data[key] = newValue;
+          if (save) {
+            this.save();
+          }
+        }
+      });
+    });
+  }
+
+  save() {
+    if (this.debounceSave) {
+      clearTimeout(this.debounceSave);
+    }
+    this.debounceSave = setTimeout(() => {
+      fs.writeFile(statePath, JSON.stringify(this.data), () => {});
+    }, 400);
+  }
+
+  incrementAudioFileIndex() {}
+  incrementTask() {
+    this.xhr.taskIndex = this.xhr.taskIndex + 1;
+    this.xhr.ratio = this.xhr.taskIndex / this.xhr.tasks;
+  }
+  reinitTasks({ name, tasks }) {
+    this.xhr.taskIndex = 0;
+    this.xhr.ratio = 0;
+    this.xhr.name = name;
+    this.xhr.tasks = tasks;
+  }
 }
-state.incrementTask = function() {
-  state.xhr.taskIndex++;
-  state.xhr.ratio = state.taskIndex / state.tasks;
-};
-state.reinitTasks = function({ name, tasks }) {
-  state.xhr.taskIndex = 0;
-  state.xhr.ratio = 0;
-  state.xhr.name = name;
-  state.xhr.tasks = tasks;
-};
+
+const state = new State();
 export default state;

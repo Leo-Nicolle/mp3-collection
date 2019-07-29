@@ -27,7 +27,9 @@ class Database2 {
     this.debounceExport = 0;
     this.dataFolderRoot = "data/files";
     this.audioFolderRoot = "audio";
-    this.allArtistsFile = this._getDataFilePath();
+    if (!state.allArtistsFile) {
+      state.allArtistsFile = this._getDataFilePath();
+    }
     this.subFoldersDepth = 3;
   }
 
@@ -38,8 +40,7 @@ class Database2 {
       if (!isFileSupported(file)) continue;
       await this._addFile(file);
     }
-    const dataFilesToCopy = this._createDataFiles();
-    this.copyDataFiles(dataFilesToCopy);
+    this.syncDataFiles();
   }
 
   select(query = {}) {
@@ -91,14 +92,13 @@ class Database2 {
       return;
     }
     const { common } = await extractMusicTags(file);
-
-    const artist =
-      db
-        .get("artists")
-        .find({ name: common.artist })
-        .value() ||
-      db
-        .get("artists")
+    console.log("artist", common.artist);
+    let artist = db
+      .get("artists")
+      .find({ name: common.artist })
+      .value();
+    if (!artist) {
+      db.get("artists")
         .push({
           id: uuid(),
           name: common.artist,
@@ -107,15 +107,19 @@ class Database2 {
           added: Date.now()
         })
         .write();
-    const artistId = artist.length ? artist[0].id : artist.id;
+      artist = db
+        .get("artists")
+        .find({ name: common.artist })
+        .value();
+    }
+    const artistId = artist.id;
 
-    const album =
-      db
-        .get("albums")
-        .find({ name: common.album })
-        .value() ||
-      db
-        .get("albums")
+    let album = db
+      .get("albums")
+      .find({ name: common.album, artistId })
+      .value();
+    if (!album) {
+      db.get("albums")
         .push({
           id: uuid(),
           artistId,
@@ -124,7 +128,12 @@ class Database2 {
           added: Date.now()
         })
         .write();
-    const albumId = album.length ? album[0].id : album.id;
+      album = db
+        .get("albums")
+        .find({ name: common.album, artistId })
+        .value();
+    }
+    const albumId = album.id;
 
     const files = {
       source: file,
@@ -143,14 +152,18 @@ class Database2 {
         added: Date.now()
       })
       .write().id;
-    console.log("joining", this.audioFolderRoot, files.target);
     const filePath = path.join(this.audioFolderRoot, files.target);
     mkdirRec(filePath);
     fs.copyFile(files.source, filePath, error => {
       state.incrementTask();
     });
   }
-  copyDataFiles(dataFiles) {
+
+  syncDataFiles() {
+    const dataFilesToCopy = this._createDataFiles();
+    this._copyDataFiles(dataFilesToCopy);
+  }
+  _copyDataFiles(dataFiles) {
     rimraf.sync(this.dataFolderRoot);
     dataFiles.forEach(({ name, content }) => {
       const filePath = path.join(this.dataFolderRoot, name);
@@ -169,8 +182,7 @@ class Database2 {
 
   _export() {
     this.save();
-    const dataFilesToCopy = this._createDataFiles();
-    this.copyDataFiles(dataFilesToCopy);
+    this.syncDataFiles();
     this.copyAudioFiles();
     this.save();
     socket.emit("update");
@@ -179,7 +191,7 @@ class Database2 {
   _createDataFiles() {
     let allArtistsFile = "";
     const separator = String.fromCharCode(1);
-    const allArtistsFileName = this.allArtistsFile;
+    const allArtistsFileName = state.allArtistsFile;
     const dataFiles = [];
     db.get("artists")
       .value()
@@ -213,6 +225,7 @@ class Database2 {
         });
       });
     dataFiles.push({ content: allArtistsFile, name: allArtistsFileName });
+    console.log("datafiles", JSON.stringify(dataFiles));
     return dataFiles;
   }
 

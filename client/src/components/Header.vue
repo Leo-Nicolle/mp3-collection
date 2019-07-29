@@ -22,6 +22,7 @@
         />
         <i class="icon-settings" @click="onSettingsClick()"></i>
         <SettingsModal ref="settingsModal" />
+        <i class="icon-sync" @click="onSyncClick()"></i>
       </span>
       <SearchBar />
     </div>
@@ -89,6 +90,9 @@ export default {
     },
     onSettingsClick() {
       this.$refs.settingsModal.show();
+    },
+    onSyncClick() {
+      axios.post(`${serverUrl}update-data-files`);
     },
     onMp3ModalValidate(path) {
       this.$store.commit("setMp3Path", path);

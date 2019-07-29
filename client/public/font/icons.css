@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?6272239b010d5798db8a4381bdd66d8b?#iefix") format("embedded-opentype"),
-url("./icons.woff2?6272239b010d5798db8a4381bdd66d8b") format("woff2"),
-url("./icons.woff?6272239b010d5798db8a4381bdd66d8b") format("woff"),
-url("./icons.ttf?6272239b010d5798db8a4381bdd66d8b") format("truetype"),
-url("./icons.svg?6272239b010d5798db8a4381bdd66d8b#icons") format("svg");
+    src: url("./icons.eot?3b3ed6b454133d7774cefce674b4b0ea?#iefix") format("embedded-opentype"),
+url("./icons.woff2?3b3ed6b454133d7774cefce674b4b0ea") format("woff2"),
+url("./icons.woff?3b3ed6b454133d7774cefce674b4b0ea") format("woff"),
+url("./icons.ttf?3b3ed6b454133d7774cefce674b4b0ea") format("truetype"),
+url("./icons.svg?3b3ed6b454133d7774cefce674b4b0ea#icons") format("svg");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -65,4 +65,7 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 }
 .icon-sort:before {
     content: "\f110";
+}
+.icon-sync:before {
+    content: "\f111";
 }
