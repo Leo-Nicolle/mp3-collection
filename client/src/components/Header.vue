@@ -51,7 +51,7 @@ export default {
   name: "Header",
   data() {
     return {
-      progressVisible: true
+      progressVisible: false
     };
   },
   computed: {

@@ -166,6 +166,10 @@ li {
 }
 li > span {
   flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 4px;
 }
 li > span:hover {
   text-decoration: underline;

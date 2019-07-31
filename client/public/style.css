@@ -39,6 +39,10 @@ li {
 li:hover {
   font-size: 1em;
 }
+li:hover + li {
+  padding: 0.3em;
+}
+
 li:first-child {
   margin-top: 0.25em;
 }

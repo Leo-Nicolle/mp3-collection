@@ -66,6 +66,7 @@ export default {
 li {
   display: flex;
   justify-content: space-between;
+  text-overflow: ellipsis;
 }
 li > span {
   flex: 1;
