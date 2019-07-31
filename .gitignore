@@ -8,3 +8,5 @@ server/node_modules
 server/dist
 server/data
 server/audio
+
+openpod/

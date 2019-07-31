@@ -12,6 +12,9 @@ const low = require("lowdb");
 const path = require("path");
 const fs = require("fs");
 const rimraf = require("rimraf");
+if (!fs.existsSync("data")) {
+  fs.mkdirSync("data");
+}
 
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("data/db.json");
@@ -196,23 +199,28 @@ class Database2 {
     db.get("artists")
       .value()
       .forEach(artist => {
-        allArtistsFile += `${artist.name}${separator}${artist.file}\n`;
+        allArtistsFile += this._formatString127(artist.name, artist.file);
         let artistFile = "";
         let allTracksFile = [];
         db.get("albums")
           .filter({ artistId: artist.id })
           .value()
           .forEach(album => {
-            artistFile += `All tracks${separator}${artist.allTracksFile}\n`;
-            artistFile += `${album.name}${separator}${album.file}\n`;
+            artistFile += this._formatString127(
+              `All tracks`,
+              artist.allTracksFile
+            );
+            artistFile += this._formatString127(album.name, album.file);
             let albumFile = "";
             db.get("tracks")
               .filter({ albumId: album.id })
               .value()
               .forEach(track => {
-                const trackData = `${track.name}${separator}${
+                const trackData = this._formatString127(
+                  track.title,
                   track.files.target
-                }\n`;
+                );
+
                 albumFile += trackData;
                 allTracksFile.push(trackData);
               });
@@ -225,7 +233,6 @@ class Database2 {
         });
       });
     dataFiles.push({ content: allArtistsFile, name: allArtistsFileName });
-    console.log("datafiles", JSON.stringify(dataFiles));
     return dataFiles;
   }
 
@@ -255,6 +262,15 @@ class Database2 {
           return fileName.length ? path.join(fileName, name) : name;
         }, "") + ext
     );
+  }
+  _formatString127(info, file) {
+    const separator = String.fromCharCode(1);
+    const infoMaxLength = 128 - file.length;
+    const trimed =
+      info.length > infoMaxLength ? info.slice(0, infoMaxLength) : info;
+
+    const sum = `${trimed}${separator}${file}${separator}`;
+    return sum + "_".repeat(127 - sum.length) + "\n";
   }
 }
 

@@ -7,21 +7,13 @@ const path = require("path");
 const cors = require("cors");
 const fs = require("fs");
 const bodyParser = require("body-parser");
+const open = require("open");
 
 const app = express();
 const port = 4000;
 
-if (!fs.existsSync("data")) {
-  fs.mkdirSync("data");
-}
-
 app.use(cors());
 app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-  console.log("request");
-  res.send("Hello World");
-});
 
 app.post("/folder", (req, res) => {
   const files = fs.readdirSync(req.body.path, { withFileTypes: true });
@@ -115,7 +107,14 @@ app.post("/query", async (req, res) => {
   res.send(database2.select(req.body.query));
 });
 
+if (fs.existsSync("static")) {
+  console.log("use static");
+  app.use(express.static("static"));
+}
+
 app.listen(port, () => {
   console.log("Listening");
 });
 port, () => console.log(`Example app listening on port ${port}!`);
+
+// open("http://localhost:4000");

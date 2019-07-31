@@ -24,6 +24,7 @@ export default {
       axios
         .get(`${serverUrl}state`)
         .then(({ data }) => {
+          if (!data) return;
           this.$store.commit("setState", data);
         })
         .finally(() => {
