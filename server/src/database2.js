@@ -26,6 +26,7 @@ class Database2 {
       artists: [],
       albums: [],
       tracks: []
+      // audioPaths: []
     }).write();
     this.debounceExport = 0;
     this.dataFolderRoot = "data/files";
@@ -35,6 +36,37 @@ class Database2 {
     }
     this.subFoldersDepth = 3;
   }
+  //
+  // addAudioPath(path) {
+  //   return db
+  //     .get("audioPaths")
+  //     .push({
+  //       path
+  //     })
+  //     .write();
+  // }
+  //
+  // getAudioPaths() {
+  //   return db.get("audioPaths").value();
+  // }
+  //
+  // async addFolder(folderPath) {
+  //   const file = req.body.file;
+  //   folderPath = path.resolve(folderPath);
+  //   if (!fs.existsSync(filePath)) {
+  //     res.send(500);
+  //     return;
+  //   }
+  //   if (file.type !== "folder") {
+  //     return;
+  //   }
+  //   const files = fs
+  //     .readdirSync(filePath)
+  //     .map(f => filePath + "/" + f)
+  //     .filter(f => isFileSupported(f));
+  //   await this.addFiles(files);
+  //   res.send(200);
+  // }
 
   async addFiles(files) {
     state.reinitTasks({ name: "adding files", tasks: files.length });

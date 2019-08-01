@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?3b3ed6b454133d7774cefce674b4b0ea?#iefix") format("embedded-opentype"),
-url("./icons.woff2?3b3ed6b454133d7774cefce674b4b0ea") format("woff2"),
-url("./icons.woff?3b3ed6b454133d7774cefce674b4b0ea") format("woff"),
-url("./icons.ttf?3b3ed6b454133d7774cefce674b4b0ea") format("truetype"),
-url("./icons.svg?3b3ed6b454133d7774cefce674b4b0ea#icons") format("svg");
+    src: url("./icons.eot?e036defbe55ab7d456b61ddd80f11e56?#iefix") format("embedded-opentype"),
+url("./icons.woff2?e036defbe55ab7d456b61ddd80f11e56") format("woff2"),
+url("./icons.woff?e036defbe55ab7d456b61ddd80f11e56") format("woff"),
+url("./icons.ttf?e036defbe55ab7d456b61ddd80f11e56") format("truetype"),
+url("./icons.svg?e036defbe55ab7d456b61ddd80f11e56#icons") format("svg");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -39,33 +39,36 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-edit:before {
     content: "\f107";
 }
-.icon-file:before {
+.icon-error:before {
     content: "\f108";
 }
-.icon-folder:before {
+.icon-file:before {
     content: "\f109";
 }
-.icon-mp3-player:before {
+.icon-folder:before {
     content: "\f10a";
 }
-.icon-music-note:before {
+.icon-mp3-player:before {
     content: "\f10b";
 }
-.icon-open-folder:before {
+.icon-music-note:before {
     content: "\f10c";
 }
-.icon-refresh:before {
+.icon-open-folder:before {
     content: "\f10d";
 }
-.icon-search:before {
+.icon-refresh:before {
     content: "\f10e";
 }
-.icon-settings:before {
+.icon-search:before {
     content: "\f10f";
 }
-.icon-sort:before {
+.icon-settings:before {
     content: "\f110";
 }
-.icon-sync:before {
+.icon-sort:before {
     content: "\f111";
+}
+.icon-sync:before {
+    content: "\f112";
 }

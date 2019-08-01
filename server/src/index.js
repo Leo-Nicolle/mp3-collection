@@ -83,10 +83,20 @@ app.get("/xhr", (req, res) => {
   // res.send(database.state.xhr);
 });
 
+// app.get("/audio-paths", (req, res) => {
+//   res.send(database2.getAudioPaths());
+// });
+//
+// app.post("/add-audio-paths", (req, res) => {
+//   const path = req.body.path;
+//   database2.addAudioPath(path);
+//   database2.addFolder(path);
+//   res.send(200);
+// });
+
 app.post("/add", async (req, res) => {
   const file = req.body.file;
   const filePath = path.resolve(file.path);
-  console.log("added", filePath);
   if (!fs.existsSync(filePath)) {
     res.send(500);
     return;
@@ -103,12 +113,12 @@ app.post("/add", async (req, res) => {
   await database2.addFiles(files);
   res.send(200);
 });
+
 app.post("/query", async (req, res) => {
   res.send(database2.select(req.body.query));
 });
 
 if (fs.existsSync("static")) {
-  console.log("use static");
   app.use(express.static("static"));
 }
 

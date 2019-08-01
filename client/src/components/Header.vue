@@ -6,6 +6,8 @@
     />
     <div>
       <span class="buttons-container">
+        <i class="icon-folder" @click="onFolderClick()"></i>
+        <FoldersModal ref="folderModal" @validate="onFolderModalValidate" />
         <i class="icon-mp3-player" @click="onMp3Click()"></i>
         <FileModal
           ref="mp3Modal"
@@ -40,6 +42,8 @@
 <script>
 import axios from "axios";
 import FileModal from "./FileModal";
+import FoldersModal from "./FoldersModal";
+
 import SettingsModal from "./SettingsModal";
 import SearchBar from "./SearchBar";
 import ProgressBar from "./ProgressBar";
@@ -73,6 +77,10 @@ export default {
     }
   },
   methods: {
+    onFolderClick() {
+      this.$refs.folderModal.show();
+    },
+    onFolderModalValidate() {},
     onFilterClick(filter) {
       const query = Object.entries(this.query).reduce((query, [key, value]) => {
         if (key !== filter[0]) {
@@ -120,6 +128,7 @@ export default {
     FileModal,
     ProgressBar,
     SettingsModal,
+    FoldersModal,
     SearchBar
   },
   mounted() {

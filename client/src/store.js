@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     mp3Path: ".",
     addPath: ".",
+    musicPaths: [],
     columnsVisible: {
       title: true,
       album: true,
@@ -19,11 +20,14 @@ export default new Vuex.Store({
     searchFilter: {}
   },
   mutations: {
+    addMusicPath(state, path) {
+      state.musicPaths = state.musicPaths.concat(path);
+    },
+    removeMusicPath(state, path) {
+      state.musicPaths = state.musicPaths.filter(p => p !== path);
+    },
     setMp3Path(state, path) {
       state.mp3Path = path;
-    },
-    setAddPath(state, path) {
-      state.addPath = path;
     },
     setState(state, newState) {
       Object.entries(newState).forEach(([key, value]) => {

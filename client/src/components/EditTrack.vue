@@ -26,6 +26,7 @@
 import axios from "axios";
 import { serverUrl } from "../js/utils";
 import AutoTagModal from "./AutoTagModal";
+import { mapState } from "vuex";
 
 export default {
   name: "EditTrack",
@@ -42,15 +43,24 @@ export default {
       title: ""
     };
   },
+  computed: {
+    ...mapState(["musicPaths"])
+  },
   methods: {
     requestQuery() {
-      axios
-        .post(`${serverUrl}scanfiles`, {
-          path: this.$store.state.addPath
+      const rows = [];
+      Promise.all(
+        this.musicPaths.map(path => {
+          return axios.post(`${serverUrl}scanfiles`, {
+            path: this.$store.state.addPath
+          });
         })
-        .then(({ data }) => {
-          this.rows = data.map(({ metadata }) => metadata);
-        });
+      ).then(responses => {
+        this.rows = responses.reduce(
+          (rows, { data }) => rows.concat(data.map(({ metadata }) => metadata)),
+          []
+        );
+      });
     },
     getInitialvalue(key) {
       return this.rows.length

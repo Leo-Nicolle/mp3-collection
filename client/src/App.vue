@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Toaster />
     <router-view />
   </div>
 </template>
@@ -7,6 +8,7 @@
 <script>
 import axios from "axios";
 import { serverUrl } from "./js/utils";
+import Toaster from "./components/Toaster.vue";
 
 export default {
   name: "App",
@@ -37,6 +39,9 @@ export default {
           });
         });
     });
+  },
+  components: {
+    Toaster
   }
 };
 </script>

@@ -10,9 +10,12 @@
   font-weight: 100;
   font-style: normal;
 }
-document {
-  background: red;
+:root {
+  --main-green: #61b02e;
+  --main-red: #b11511;
+  --main-orange: #ff7c04;
 }
+
 body {
   font-family: Oswald;
   display: flex;
