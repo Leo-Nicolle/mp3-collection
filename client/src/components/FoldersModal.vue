@@ -11,7 +11,7 @@
       <div slot="modal-body" class="modal-body">
         <ul>
           <li v-for="path in musicPaths">
-            {{ path }}
+            <span>{{ path }}</span>
             <i class="icon-cancel" @click="onDelete(path)"></i>
           </li>
         </ul>
@@ -117,6 +117,9 @@ export default {
 .modal-body > ul > li {
   display: flex;
   justify-content: space-around;
+}
+.modal-body > ul > li > span {
+  flex: 2;
 }
 li > i {
   margin-right: 5px;

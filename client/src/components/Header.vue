@@ -6,25 +6,30 @@
     />
     <div>
       <span class="buttons-container">
-        <i class="icon-folder" @click="onFolderClick()"></i>
-        <FoldersModal ref="folderModal" @validate="onFolderModalValidate" />
-        <i class="icon-mp3-player" @click="onMp3Click()"></i>
-        <FileModal
-          ref="mp3Modal"
-          :title="'mp3 location:'"
-          @validate="onMp3ModalValidate"
-          :value="$store.state.mp3Path"
-        />
-        <i class="icon-add" @click="onAddClick()"></i>
-        <FileModal
-          ref="addModal"
-          :title="'to add:'"
-          @validate="onAddValidate"
-          :value="$store.state.addPath"
-        />
-        <i class="icon-settings" @click="onSettingsClick()"></i>
-        <SettingsModal ref="settingsModal" />
-        <i class="icon-sync" @click="onSyncClick()"></i>
+        <span>
+          <i class="icon-folder" @click="onFolderClick()"></i>
+          <span class="tooltip">Music folders</span>
+          <FoldersModal ref="folderModal" @validate="onFolderModalValidate" />
+        </span>
+        <span>
+          <i class="icon-mp3-player" @click="onMp3Click()"></i>
+          <span class="tooltip">Mp3 path</span>
+          <FileModal
+            ref="mp3Modal"
+            :title="'mp3 location:'"
+            @validate="onMp3ModalValidate"
+            :value="$store.state.mp3Path"
+          />
+        </span>
+        <span>
+          <i class="icon-settings" @click="onSettingsClick()"> </i>
+          <span class="tooltip">Settings</span>
+          <SettingsModal ref="settingsModal" />
+        </span>
+        <span>
+          <i class="icon-sync" @click="onSyncClick()"></i>
+          <span class="tooltip">Sync with mp3</span>
+        </span>
       </span>
       <SearchBar />
     </div>
@@ -180,5 +185,35 @@ i {
 }
 .buttons-container {
   display: flex;
+}
+.tooltip {
+  display: none;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+  margin-left: -48px;
+  left: calc(50% + 12px);
+  top: -10px;
+  opacity: 0;
+  transition: 1s;
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 5px);
+  left: -5px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #555 transparent transparent;
+}
+*:hover > .tooltip {
+  display: initial;
+  opacity: 1;
 }
 </style>

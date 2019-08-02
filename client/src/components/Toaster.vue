@@ -21,8 +21,7 @@ export default {
   name: "Toaster",
   data() {
     return {
-      toasters: [{ text: "coucou", icon: "icon-folder" }],
-      defaultTiming: 1000
+      toasters: []
     };
   },
   methods: {
