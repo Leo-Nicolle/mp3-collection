@@ -121,6 +121,8 @@ export default {
         query[type] = { value: row[type] };
       } else if (type === "title") {
         query["track"] = { title: row[type] };
+      } else if (type === "path") {
+        query["files"] = { source: row[type] };
       } else {
         query[type] = { name: row[type] };
       }

@@ -14,6 +14,7 @@ export default new Vuex.Store({
       title: true,
       album: true,
       artist: true,
+      path: false,
       added: true
     },
     query: {},

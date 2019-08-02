@@ -80,7 +80,8 @@ class Database2 {
 
   select(query = {}) {
     query = Object.assign({ artist: {}, album: {}, track: {} }, query);
-    const rows = [];
+
+    let rows = [];
     db.get("artists")
       .filter(query.artist)
       .value()
@@ -100,11 +101,18 @@ class Database2 {
                   artistId: artist.id,
                   album: album.name,
                   albumId: album.id,
+                  path: path.dirname(track.files.source),
                   ...track
                 }))
             )
           )
       );
+    if (query.files) {
+      console.log("ici ", query.files);
+      rows = rows.filter(({ files }) =>
+        files.source.includes(query.files.source)
+      );
+    }
     return rows;
   }
 
