@@ -36,37 +36,6 @@ class Database2 {
     }
     this.subFoldersDepth = 3;
   }
-  //
-  // addAudioPath(path) {
-  //   return db
-  //     .get("audioPaths")
-  //     .push({
-  //       path
-  //     })
-  //     .write();
-  // }
-  //
-  // getAudioPaths() {
-  //   return db.get("audioPaths").value();
-  // }
-  //
-  // async addFolder(folderPath) {
-  //   const file = req.body.file;
-  //   folderPath = path.resolve(folderPath);
-  //   if (!fs.existsSync(filePath)) {
-  //     res.send(500);
-  //     return;
-  //   }
-  //   if (file.type !== "folder") {
-  //     return;
-  //   }
-  //   const files = fs
-  //     .readdirSync(filePath)
-  //     .map(f => filePath + "/" + f)
-  //     .filter(f => isFileSupported(f));
-  //   await this.addFiles(files);
-  //   res.send(200);
-  // }
 
   async addFiles(files) {
     state.reinitTasks({ name: "adding files", tasks: files.length });
@@ -76,6 +45,15 @@ class Database2 {
       await this._addFile(file);
     }
     this.syncDataFiles();
+  }
+  _getByIds(table, ids = []) {
+    return ids.reduce(
+      (rows, id) => rows.concat(table.filter({ id }).value()),
+      []
+    );
+  }
+  _getSetOfValuesForKey(rows, key) {
+    return [...new Set(rows.map(r => r[key]))];
   }
 
   select(query = {}) {
@@ -98,9 +76,7 @@ class Database2 {
                 .value()
                 .map(track => ({
                   artist: artist.name,
-                  artistId: artist.id,
                   album: album.name,
-                  albumId: album.id,
                   path: path.dirname(track.files.source),
                   ...track
                 }))
@@ -108,7 +84,6 @@ class Database2 {
           )
       );
     if (query.files) {
-      console.log("ici ", query.files);
       rows = rows.filter(({ files }) =>
         files.source.includes(query.files.source)
       );
@@ -116,12 +91,104 @@ class Database2 {
     return rows;
   }
 
-  update(query) {
-    const select = {};
-    select[query.type] = { id: query.id };
-    const rows = this.select(query);
-    rows.forEach(row => {});
-    return rows;
+  updateMetadata({ table, metadata, trackId }) {
+    console.log(table, metadata, trackId);
+    const track = db
+      .get("tracks")
+      .find({ id: trackId })
+      .value();
+    console.log(track);
+
+    const trackAlbum = db
+      .get("albums")
+      .find({ id: track.albumId })
+      .value();
+
+    // const trackArtist = db
+    //   .get("artist")
+    //   .find({ id: track.artistId })
+    //   .value();
+
+    if (table === "artist") {
+      let artist = db
+        .get("artists")
+        .find({ name: metadata.name })
+        .value();
+      if (artist) {
+        db.get("artists")
+          .find({ name: metadata.name })
+          .assign(metadata)
+          .write();
+      } else {
+        artist = this._addArtist(metadata);
+      }
+      const artistId = artist.id;
+
+      let album = db
+        .get("albums")
+        .find({ artistId, name: trackAlbum.name })
+        .value();
+      if (!album) {
+        album = this._addAlbum({ ...trackAlbum, artistId });
+      }
+      const albumId = album.id;
+      db.get("tracks")
+        .find({ id: trackId })
+        .assign({ artistId, albumId })
+        .write();
+    }
+
+    // if (table === "albums") {
+    //   let album = db
+    //     .get("albums")
+    //     .find({ name: query.name, artistId: metadata.id })
+    //     .value();
+    //   if (!album) {
+    //     album = this._addAlbum({ ...metadata });
+    //   }
+    // }
+  }
+
+  updateRow(table, id, update) {
+    db.get(table)
+      .find({ id })
+      .assign(update)
+      .value();
+  }
+
+  removeEmptyRows() {
+    const albumIds = this._getSetOfValuesForKey(
+      db.get("tracks").values,
+      "albumId"
+    );
+    // TODO: save data files paths to reuse them
+    db.get("albums")
+      .value()
+      .forEach(({ id }) => {
+        const index = albumIds.findIndex(albumId => albumId === id);
+        if (index < 0) {
+          db.get("albums").remove({ id });
+        } else {
+          albumIds.splice(index, 1);
+        }
+      });
+    db.get("albums").write();
+
+    const artistIds = this._getSetOfValuesForKey(
+      db.get("tracks").values,
+      "artistId"
+    );
+    db.get("artists")
+      .value()
+      .forEach(({ id }) => {
+        const index = artistIds.findIndex(artistId => artistId === id);
+        if (index < 0) {
+          db.get("artists").remove({ id });
+        } else {
+          artistIds.splice(index, 1);
+        }
+      });
+    db.get("artists").write();
   }
 
   async _addFile(file) {
@@ -135,25 +202,14 @@ class Database2 {
       return;
     }
     const { common } = await extractMusicTags(file);
-    console.log("artist", common.artist);
     let artist = db
       .get("artists")
       .find({ name: common.artist })
       .value();
     if (!artist) {
-      db.get("artists")
-        .push({
-          id: uuid(),
-          name: common.artist,
-          file: this._getDataFilePath(),
-          allTracksFile: this._getDataFilePath(),
-          added: Date.now()
-        })
-        .write();
-      artist = db
-        .get("artists")
-        .find({ name: common.artist })
-        .value();
+      artist = this._addArtist({
+        name: common.artist
+      });
     }
     const artistId = artist.id;
 
@@ -162,19 +218,9 @@ class Database2 {
       .find({ name: common.album, artistId })
       .value();
     if (!album) {
-      db.get("albums")
-        .push({
-          id: uuid(),
-          artistId,
-          name: common.album,
-          file: this._getDataFilePath(),
-          added: Date.now()
-        })
-        .write();
-      album = db
-        .get("albums")
-        .find({ name: common.album, artistId })
-        .value();
+      album = this._addAlbum({
+        name: common.album
+      });
     }
     const albumId = album.id;
 
@@ -182,19 +228,13 @@ class Database2 {
       source: file,
       target: this._getAudioFilePath(file)
     };
-    const trackId = db
-      .get("tracks")
-      .push({
-        id: uuid(),
-        title: common.title,
-        albumId,
-        artistId,
-        hash,
-        added: Date.now(),
-        files,
-        added: Date.now()
-      })
-      .write().id;
+    const track = this._addTrack({
+      title: common.title,
+      albumId,
+      artistId,
+      hash,
+      files
+    });
     const filePath = path.join(this.audioFolderRoot, files.target);
     mkdirRec(filePath);
     fs.copyFile(files.source, filePath, error => {
@@ -203,6 +243,7 @@ class Database2 {
   }
 
   syncDataFiles() {
+    this.removeEmptyRows();
     const dataFilesToCopy = this._createDataFiles();
     this._copyDataFiles(dataFilesToCopy);
   }
@@ -226,7 +267,6 @@ class Database2 {
   _export() {
     this.save();
     this.syncDataFiles();
-    this.copyAudioFiles();
     this.save();
     socket.emit("update");
   }
@@ -312,7 +352,77 @@ class Database2 {
     const sum = `${trimed}${separator}${file}${separator}`;
     return sum + "_".repeat(127 - sum.length) + "\n";
   }
+
+  _addTrack(data) {
+    const id = uuid();
+    db.get("tracks")
+      .push({
+        ...this._getDefaultValue("tracks"),
+        ...data,
+        id
+      })
+      .write();
+    return db
+      .get("tracks")
+      .find({ id })
+      .value();
+  }
+
+  _addAlbum(data) {
+    const id = uuid();
+    db.get("albums")
+      .push({
+        ...this._getDefaultValue("albums"),
+        ...data,
+        id
+      })
+      .write();
+    return db
+      .get("albums")
+      .find({ id })
+      .value();
+  }
+  _addArtist(data) {
+    const id = uuid();
+    db.get("artists")
+      .push({
+        ...this._getDefaultValue("artists"),
+        ...data,
+        id
+      })
+      .write();
+    return db
+      .get("artists")
+      .find({ id })
+      .value();
+  }
+
+  _getDefaultValue(table) {
+    if (table === "artists") {
+      return {
+        id: uuid(),
+        file: this._getDataFilePath(),
+        allTracksFile: this._getDataFilePath(),
+        added: Date.now()
+      };
+    } else if (table === "albums") {
+      return {
+        id: uuid(),
+        file: this._getDataFilePath(),
+        added: Date.now()
+      };
+    } else if (table === "tracks") {
+      return {
+        id: uuid(),
+        added: Date.now(),
+        added: Date.now()
+      };
+    } else {
+      return {};
+    }
+  }
 }
 
 const database2 = new Database2();
+
 export default database2;

@@ -55,6 +55,7 @@ export default {
     return {
       value: null,
       state: "",
+      trackIds: [],
       artistsToTag: [],
       albumsToTag: [],
       tracksToTag: [],
@@ -70,17 +71,17 @@ export default {
     onValidate() {
       if (this.value && this.selected) {
         const selected = this.selected;
-        const updates = {
-          id: selected.id,
-          type: this.state,
-          newValues: {
-            "sort-name": selected["sort-name"],
-            name: selected.name,
-            mid: selected.id
-          }
+        const metadata = {
+          "sort-name": selected["sort-name"],
+          name: selected.name,
+          mid: selected.id
         };
-        axios.post(`${serverUrl}update-metadata`, {
-          query: updates
+        this.trackIds.forEach(trackId => {
+          axios.post(`${serverUrl}update-metadata`, {
+            table: this.state,
+            trackId,
+            metadata
+          });
         });
       }
       this.shift();
@@ -88,7 +89,8 @@ export default {
     },
     shift() {
       if (this.artistsToTag.length) {
-        const artistName = this.artistsToTag.shift();
+        const { trackIds, artistName } = this.artistsToTag.shift();
+        this.trackIds = trackIds;
         this.getValueForArtistName({ artistName }).then(() => {
           this.$refs.modal.show();
           this.state = "artist";
@@ -105,7 +107,14 @@ export default {
       this.$emit("cancel");
     },
     show() {
-      this.artistsToTag = [...new Set(this.rows.map(({ artist }) => artist))];
+      this.artistsToTag = [
+        ...new Set(this.rows.map(({ artist }) => artist))
+      ].map(artistName => ({
+        artistName,
+        trackIds: this.rows
+          .filter(r => r.artist === artistName)
+          .map(({ id }) => id)
+      }));
       this.shift();
     },
     getValueForArtistName({ artistName, originalName = false } = {}) {
