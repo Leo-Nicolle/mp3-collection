@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "Adafruit MPR121 Capacitive Touch Shield")(type KiCad)(uri "$(KIPRJMOD)/Adafruit MPR121 Capacitive Touch Shield.pretty")(options "")(descr ""))
+)

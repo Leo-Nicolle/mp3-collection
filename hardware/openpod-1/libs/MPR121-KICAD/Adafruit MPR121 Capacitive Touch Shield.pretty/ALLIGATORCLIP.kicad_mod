@@ -1,0 +1,12 @@
+(module ALLIGATORCLIP (layer F.Cu) (tedit 0)
+  (fp_text reference AL12 (at 0 0) (layer F.SilkS) hide
+    (effects (font (size 1.27 1.27) (thickness 0.15)))
+  )
+  (fp_text value ALLIGATORCLIP_MICRO (at 0 0) (layer F.SilkS) hide
+    (effects (font (size 1.27 1.27) (thickness 0.15)))
+  )
+  (pad P$1 thru_hole circle (at 0 -3.048) (size 5.08 5.08) (drill 3.2) (layers *.Cu *.Mask)
+    (solder_mask_margin 0.0508))
+  (pad P$2 thru_hole circle (at 0 3.048) (size 5.08 5.08) (drill 3.2) (layers *.Cu *.Mask)
+    (solder_mask_margin 0.0508))
+)

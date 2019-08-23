@@ -1,0 +1,12 @@
+(sym_lib_table
+  (lib (name adafruit-M0)(type Legacy)(uri /home/leo/Documents/schematics/openpod-1/libs/Feather-M0-KICAD/Adafruit_Feather_M0_Basic_rev_C-eagle-import.lib)(options "")(descr ""))
+  (lib (name adafruit-Music)(type Legacy)(uri /home/leo/Documents/schematics/openpod-1/libs/Music-Maker-KICAD/Adafruit_VS1053_Headphone_FeatherWing-eagle-import.lib)(options "")(descr ""))
+  (lib (name adafruit-MP121)(type Legacy)(uri /home/leo/Documents/schematics/MPR121-KICAD/Adafruit_MPR121_Capacitive_Touch_Shield-eagle-import.lib)(options "")(descr ""))
+  (lib (name VS1053B)(type Legacy)(uri ${VS1053}/VS1053B.lib)(options "")(descr ""))
+  (lib (name ABM8G)(type Legacy)(uri /home/leo/Documents/schematics/ABM8G-12.288MHZ-18-D2Y-T/ABM8G-12.288MHZ-18-D2Y-T.lib)(options "")(descr ""))
+  (lib (name mp121)(type Legacy)(uri /home/leo/Documents/schematics/MPR121QR2/MPR121QR2.lib)(options "")(descr ""))
+  (lib (name openpod-1-rescue)(type Legacy)(uri ${KIPRJMOD}/openpod-1-rescue.lib)(options "")(descr ""))
+  (lib (name little-helper)(type Legacy)(uri /home/leo/Documents/schematics/LittleHelper/Hardware/kicad/Little_Helper_Rev_1.9-eagle-import.lib)(options "")(descr ""))
+  (lib (name clickwheel)(type Legacy)(uri /home/leo/Documents/schematics/ipod/libs/click-wheel.lib)(options "")(descr ""))
+  (lib (name slider)(type Legacy)(uri /home/leo/Documents/schematics/slider/450302014072.lib)(options "")(descr ""))
+)

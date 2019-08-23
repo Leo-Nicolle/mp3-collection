@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name Adafruit_VS1053_Headphone_FeatherWing-eagle-import)(type Legacy)(uri ${KIPRJMOD}/Adafruit_VS1053_Headphone_FeatherWing-eagle-import.lib)(options "")(descr ""))
+)

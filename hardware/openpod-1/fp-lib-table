@@ -1,0 +1,11 @@
+(fp_lib_table
+  (lib (name "adafruit -music")(type KiCad)(uri "/home/leo/Documents/schematics/Music-Maker-KICAD/Adafruit VS1053 Headphone FeatherWing.pretty")(options "")(descr ""))
+  (lib (name adafruit-m0)(type KiCad)(uri "/home/leo/Documents/schematics/Feather-M0-KICAD/Adafruit Feather M0 Basic rev C.pretty")(options "")(descr ""))
+  (lib (name mpr121)(type KiCad)(uri "/home/leo/Documents/schematics/MPR121-KICAD/Adafruit MPR121 Capacitive Touch Shield.pretty")(options "")(descr ""))
+  (lib (name custom)(type KiCad)(uri /home/leo/Documents/schematics/footprints)(options "")(descr ""))
+  (lib (name nokia-breakout)(type KiCad)(uri /home/leo/Documents/schematics/nokia-kicad/footprints/LCD_Connectors.pretty)(options "")(descr ""))
+  (lib (name click-wheel)(type KiCad)(uri /home/leo/Documents/schematics/ipod/click-wheel)(options "")(descr ""))
+  (lib (name little-helper)(type KiCad)(uri "/home/leo/Documents/schematics/LittleHelper/Hardware/kicad/Little Helper Rev 1.9.pretty")(options "")(descr ""))
+  (lib (name click-wheel-2)(type KiCad)(uri /home/leo/Documents/schematics/ipod/libs)(options "")(descr ""))
+  (lib (name slider)(type KiCad)(uri /home/leo/Documents/schematics/slider)(options "")(descr ""))
+)
