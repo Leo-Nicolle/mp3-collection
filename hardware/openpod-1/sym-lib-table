@@ -9,4 +9,5 @@
   (lib (name little-helper)(type Legacy)(uri /home/leo/Documents/schematics/LittleHelper/Hardware/kicad/Little_Helper_Rev_1.9-eagle-import.lib)(options "")(descr ""))
   (lib (name clickwheel)(type Legacy)(uri /home/leo/Documents/schematics/ipod/libs/click-wheel.lib)(options "")(descr ""))
   (lib (name slider)(type Legacy)(uri /home/leo/Documents/schematics/slider/450302014072.lib)(options "")(descr ""))
+  (lib (name sparkfun)(type Legacy)(uri /home/leo/Documents/schematics/sparkfun-tft/LCD_TFT_Breakout_1in8_128x160-eagle-import.lib)(options "")(descr ""))
 )

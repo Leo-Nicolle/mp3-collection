@@ -1,0 +1,61 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>KiCad BOM Example 5</title>
+    </head>
+    <body>
+    <h1>/home/leo/Documents/schematics/openpod-1/openpod-1.sch</h1>
+    <p>Fri 30 Aug 2019 19:49:54 AEST</p>
+    <p>Eeschema 5.1.3-ffb9f22~84~ubuntu18.10.1</p>
+    <p><b>Component Count:</b>80</p>
+    <table>
+    <tr><th style='width:640px'>Ref</th><th>Qnty</th><th>Value</th><th>Part</th><th>Footprint</th><th>Description</th><th>Vendor</th></tr>
+    <tr><td>C1, C3</td><td>2</td><td>22pF</td><td>adafruit-M0:CAP_CERAMIC_0603</td><td>Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td></td><td></td></tr>
+    <tr><td>C2, C4, C5, C9, C22, C23</td><td>6</td><td>10uF</td><td>Device:C</td><td>Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Unpolarized capacitor</td><td></td></tr>
+    <tr><td>C6, C7, C8, C15, C18, C21</td><td>6</td><td>1uF</td><td>Device:C</td><td>Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Unpolarized capacitor</td><td></td></tr>
+    <tr><td>C10, C13</td><td>2</td><td>22pF</td><td>Device:C</td><td>Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Unpolarized capacitor</td><td></td></tr>
+    <tr><td>C14</td><td>1</td><td>0.1uF</td><td>Device:C</td><td>Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Unpolarized capacitor</td><td></td></tr>
+    <tr><td>C16, C17</td><td>2</td><td>10nF</td><td>Device:C</td><td>Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Unpolarized capacitor</td><td></td></tr>
+    <tr><td>C19, C20</td><td>2</td><td>220uF</td><td>Device:CP1</td><td>Capacitor_THT:CP_Radial_D5.0mm_P2.00mm</td><td>Polarized capacitor, US symbol</td><td></td></tr>
+    <tr><td>C24</td><td>1</td><td>0.1uF</td><td>Device:C</td><td>Capacitor_SMD:C_0805_2012Metric</td><td>Unpolarized capacitor</td><td></td></tr>
+    <tr><td>CHG1</td><td>1</td><td>ORANGE</td><td>Device:LED</td><td>LED_SMD:LED_0805_2012Metric</td><td>Light emitting diode</td><td></td></tr>
+    <tr><td>D1</td><td>1</td><td>MBR120</td><td>adafruit-M0:DIODE-SCHOTTKYSOD-123</td><td>mpr121:CHIPLED_0805_NOOUTLINE</td><td></td><td></td></tr>
+    <tr><td>FB1, FB2</td><td>2</td><td>Ferrite_Bead</td><td>Device:Ferrite_Bead</td><td>Capacitor_SMD:C_0805_2012Metric</td><td>Ferrite bead</td><td></td></tr>
+    <tr><td>J1</td><td>1</td><td>USB_B_Micro</td><td>Connector:USB_B_Micro</td><td>Connector_USB:USB_Micro-B_Molex_47346-0001</td><td>USB Micro Type B connector</td><td></td></tr>
+    <tr><td>J2</td><td>1</td><td>AudioJack2_Ground</td><td>Connector:AudioJack2_Ground</td><td>Connector_Audio:Jack_3.5mm_CUI_SJ-3524-SMT_Horizontal</td><td>Audio Jack, 2 Poles (Mono / TS), Grounded Sleeve</td><td></td></tr>
+    <tr><td>J3</td><td>1</td><td>Micro_SD_Card</td><td>Connector:Micro_SD_Card</td><td>Connector_Card:microSD_HC_Hirose_DM3D-SF</td><td>Micro SD Card Socket</td><td></td></tr>
+    <tr><td>JP1</td><td>1</td><td>SolderJumper_2_Bridged</td><td>Jumper:SolderJumper_2_Bridged</td><td>Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm</td><td>Solder Jumper, 2-pole, closed/bridged</td><td></td></tr>
+    <tr><td>JP3, JP4</td><td>2</td><td>HEADER-1X2ROUND</td><td>adafruit-Music:HEADER-1X2ROUND</td><td>adafruit -music:1X02_ROUND</td><td></td><td></td></tr>
+    <tr><td>MIDI1</td><td>1</td><td>SolderJumper</td><td>Jumper:SolderJumper_2_Open</td><td>Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm</td><td>Solder Jumper, 2-pole, open</td><td></td></tr>
+    <tr><td>Q1</td><td>1</td><td>220mA/50V/3.5Ω</td><td>sparkfun:MOSFET-NCH-BSS138</td><td>sparkfun:SOT23-3</td><td></td><td></td></tr>
+    <tr><td>R1</td><td>1</td><td>10k</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Resistor</td><td></td></tr>
+    <tr><td>R2, R4, R5, R6, R16A1, R16B1, R16C1, R16D1</td><td>8</td><td>100k</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Resistor</td><td></td></tr>
+    <tr><td>R3</td><td>1</td><td>1k</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Resistor</td><td></td></tr>
+    <tr><td>R7, R9, R14, R17, R18</td><td>5</td><td>10k</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric</td><td>Resistor</td><td></td></tr>
+    <tr><td>R8</td><td>1</td><td>1M</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Resistor</td><td></td></tr>
+    <tr><td>R10, R11</td><td>2</td><td>22</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Resistor</td><td></td></tr>
+    <tr><td>R12, R13</td><td>2</td><td>100</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</td><td>Resistor</td><td></td></tr>
+    <tr><td>R15, R28</td><td>2</td><td>1</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric</td><td>Resistor</td><td></td></tr>
+    <tr><td>R16</td><td>1</td><td>47k</td><td>Device:R</td><td>Resistor_SMD:R_0805_2012Metric</td><td>Resistor</td><td></td></tr>
+    <tr><td>R19, R20, R21, R22, R23, R24, R25, R26, R27</td><td>9</td><td>1k</td><td>Device:R</td><td>Resistor_SMD:R_0402_1005Metric</td><td>Resistor</td><td></td></tr>
+    <tr><td>RST1</td><td>1</td><td>SolderJumper_2_Bridged</td><td>Jumper:SolderJumper_2_Bridged</td><td>Jumper:SolderJumper-2_P1.3mm_Bridged2Bar_RoundedPad1.0x1.5mm</td><td>Solder Jumper, 2-pole, closed/bridged</td><td></td></tr>
+    <tr><td>S1</td><td>1</td><td>450302014072</td><td>slider:450302014072</td><td>slider:slider</td><td></td><td></td></tr>
+    <tr><td>SW1</td><td>1</td><td>SW_Push</td><td>Switch:SW_Push</td><td>Button_Switch_SMD:SW_Push_SPST_NO_Alps_SKRK</td><td>Push button switch, generic, two pins</td><td></td></tr>
+    <tr><td>U1</td><td>1</td><td>MCP73831-2-OT</td><td>Battery_Management:MCP73831-2-OT</td><td>adafruit-m0:SOT23-5</td><td>Single cell, Li-Ion/Li-Po charge management controller, 4.20V, Tri-State Status Output, in SOT23-5 package</td><td></td></tr>
+    <tr><td>U2</td><td>1</td><td>SPX3819M5-L-3-3</td><td>Regulator_Linear:SPX3819M5-L-3-3</td><td>Package_TO_SOT_SMD:SOT-23-5</td><td>500mA Low drop-out regulator, Fixed Output 3.3V, SOT-23-5</td><td></td></tr>
+    <tr><td>U3</td><td>1</td><td>click-wheel</td><td>clickwheel:click-wheel</td><td>click-wheel-2:connector</td><td></td><td></td></tr>
+    <tr><td>U4</td><td>1</td><td>ATSAMD21G18A-AUT</td><td>MCU_Microchip_SAMD:ATSAMD21G18A-AUT</td><td>Package_QFP:TQFP-48_7x7mm_P0.5mm</td><td>SAM D21 Microchip SMART ARM-based Flash MCU, 48Mhz, 256K Flash, 32K SRAM, TQFP-48</td><td></td></tr>
+    <tr><td>U5</td><td>1</td><td>AT42QT2120_COMMS</td><td>little-helper:AT42QT2120_COMMS</td><td>little-helper:QT2120</td><td></td><td></td></tr>
+    <tr><td>U6</td><td>1</td><td>VS1053B</td><td>openpod-1-rescue:VS1053B-VS1053B</td><td>adafruit -music:LQFP48</td><td></td><td></td></tr>
+    <tr><td>U7</td><td>1</td><td>TLV733P-Q1</td><td>adafruit-Music:VREG_SOT23-6_DUALAP7312</td><td>adafruit -music:SOT23-6</td><td></td><td></td></tr>
+    <tr><td>U8</td><td>1</td><td>KWH018ST14-F01_4WSPI-TOP</td><td>sparkfun:KWH018ST14-F01_4WSPI-TOP</td><td>sparkfun:FPC05040-17204</td><td></td><td></td></tr>
+    <tr><td>X2</td><td>1</td><td>JSTPH</td><td>adafruit-M0:CON_JST_PH_2PIN</td><td>Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal</td><td></td><td></td></tr>
+    <tr><td>Y1</td><td>1</td><td>ABM8G-12.288MHZ-18-D2Y-T</td><td>ABM8G:ABM8G-12.288MHZ-18-D2Y-T</td><td>Crystal:Crystal_SMD_5032-4Pin_5.0x3.2mm</td><td></td><td></td></tr>
+    <tr><td>Y2</td><td>1</td><td>Crystal</td><td>Device:Crystal</td><td>Crystal:Crystal_SMD_TXC_7A-2Pin_5x3.2mm</td><td>Two pin crystal</td><td></td></tr><!--TABLEROW-->
+    </table>
+    </body>
+</html>
+    
