@@ -10,4 +10,5 @@
   (lib (name clickwheel)(type Legacy)(uri /home/leo/Documents/schematics/ipod/libs/click-wheel.lib)(options "")(descr ""))
   (lib (name slider)(type Legacy)(uri /home/leo/Documents/schematics/slider/450302014072.lib)(options "")(descr ""))
   (lib (name sparkfun)(type Legacy)(uri /home/leo/Documents/schematics/sparkfun-tft/LCD_TFT_Breakout_1in8_128x160-eagle-import.lib)(options "")(descr ""))
+  (lib (name jack)(type Legacy)(uri /home/leo/Documents/schematics/SJ-3524-SMT/SJ-3524-SMT.lib)(options "")(descr ""))
 )

@@ -9,4 +9,5 @@
   (lib (name click-wheel-2)(type KiCad)(uri /home/leo/Documents/schematics/ipod/libs)(options "")(descr ""))
   (lib (name slider)(type KiCad)(uri /home/leo/Documents/schematics/slider)(options "")(descr ""))
   (lib (name sparkfun)(type KiCad)(uri /home/leo/Documents/schematics/sparkfun-tft/LCD_TFT_Breakout_1in8_128x160.pretty)(options "")(descr ""))
+  (lib (name jack)(type KiCad)(uri /home/leo/Documents/schematics/SJ-3524-SMT)(options "")(descr ""))
 )

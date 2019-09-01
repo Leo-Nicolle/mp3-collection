@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A0 46811 33110
 encoding utf-8
-Sheet 1 5
+Sheet 1 4
 Title ""
 Date ""
 Rev ""
@@ -130,7 +130,9 @@ P 5200 8100
 F 0 "J1" H 5257 8567 50  0000 C CNN
 F 1 "USB_B_Micro" H 5257 8476 50  0000 C CNN
 F 2 "Connector_USB:USB_Micro-B_Molex_47346-0001" H 5350 8050 50  0001 C CNN
-F 3 "~" H 5350 8050 50  0001 C CNN
+F 3 "https://au.mouser.com/datasheet/2/276/0473460001_IO_CONNECTORS-229243.pdf" H 5350 8050 50  0001 C CNN
+F 4 "538-47346-0001" H 5200 8100 50  0001 C CNN "Mouser"
+F 5 "47346-0001" H 5200 8100 50  0001 C CNN "MFR"
 	1    5200 8100
 	1    0    0    -1  
 $EndComp
@@ -266,7 +268,7 @@ $EndComp
 Wire Wire Line
 	2450 12000 2450 12300
 Wire Wire Line
-	2750 12300 2750 12400
+	2750 12300 2750 12350
 $Comp
 L Device:C C5
 U 1 1 5D6FDB3B
@@ -300,21 +302,13 @@ Wire Wire Line
 Wire Wire Line
 	3600 11600 3600 11900
 Wire Wire Line
-	3600 11900 3150 11900
+	3600 11900 3300 11900
 Connection ~ 3600 11900
 Wire Wire Line
 	3600 11900 3600 12000
 Connection ~ 3150 11900
-$Sheet
-S 850  10800 6200 1950
-U 5D6DBD78
-F0 "POWER and FILTERING" 50
-F1 "POWER and FILTERING.sch" 50
-$EndSheet
 Wire Wire Line
 	1800 11600 1800 11500
-Wire Wire Line
-	2450 12300 2200 12300
 Wire Wire Line
 	1800 12000 1800 11900
 Wire Wire Line
@@ -410,7 +404,7 @@ U 1 1 5D79CCA6
 P 4700 11900
 F 0 "X2" H 4778 12003 59  0000 L CNN
 F 1 "JSTPH" H 4778 11898 59  0000 L CNN
-F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 4700 11900 50  0001 C CNN
+F 2 "little-helper:JST-2-SMD" H 4700 11900 50  0001 C CNN
 F 3 "http://www.jst-mfg.com/product/pdf/eng/ePH.pdf" H 4700 11900 50  0001 C CNN
 F 4 "S2B-PH-SM4-TB(LF)(SN) " H 4700 11900 50  0001 C CNN "MFR"
 	1    4700 11900
@@ -1284,34 +1278,15 @@ U 1 1 5DCD1C08
 P 19300 1600
 F 0 "C19" V 19552 1600 50  0000 C CNN
 F 1 "220uF" V 19461 1600 50  0000 C CNN
-F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" H 19300 1600 50  0001 C CNN
-F 3 "~" H 19300 1600 50  0001 C CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x5.4" H 19300 1600 50  0001 C CNN
+F 3 "https://au.mouser.com/datasheet/2/315/ABA0000C1145-947633.pdf" H 19300 1600 50  0001 C CNN
+F 4 "667-EEE-0JA221WP" V 19300 1600 50  0001 C CNN "Mouser"
+F 5 "EEE-0JA221WP" V 19300 1600 50  0001 C CNN "MFR"
 	1    19300 1600
 	0    -1   -1   0   
 $EndComp
-$Comp
-L Device:CP1 C20
-U 1 1 5DCD2014
-P 19300 2100
-F 0 "C20" V 19552 2100 50  0000 C CNN
-F 1 "220uF" V 19461 2100 50  0000 C CNN
-F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" H 19300 2100 50  0001 C CNN
-F 3 "~" H 19300 2100 50  0001 C CNN
-	1    19300 2100
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	19900 2500 19900 2100
-Wire Wire Line
-	19900 2100 19450 2100
 Wire Wire Line
 	19450 1600 19800 1600
-Wire Wire Line
-	19800 1600 19800 2500
-Text GLabel 20350 2700 2    50   Input ~ 0
-AGND
-Wire Wire Line
-	20350 2700 20100 2700
 Wire Wire Line
 	19150 2100 18900 2100
 Wire Wire Line
@@ -1324,9 +1299,6 @@ Text GLabel 20150 1600 2    50   Input ~ 0
 R_OUT
 Text GLabel 20150 2100 2    50   Input ~ 0
 L_OUT
-Wire Wire Line
-	19900 2100 20150 2100
-Connection ~ 19900 2100
 Wire Wire Line
 	19800 1600 20150 1600
 Connection ~ 19800 1600
@@ -1662,7 +1634,7 @@ Wire Wire Line
 Wire Wire Line
 	23500 2550 23500 2750
 Wire Wire Line
-	22950 2050 22950 2750
+	22950 2050 22950 2650
 Wire Wire Line
 	22950 1950 23200 1950
 Wire Wire Line
@@ -1757,19 +1729,6 @@ Wire Wire Line
 Connection ~ 2050 2150
 Wire Wire Line
 	2050 2150 2050 2300
-$Comp
-L Connector:AudioJack2_Ground J2
-U 1 1 5D7C0FB1
-P 19900 2700
-F 0 "J2" V 19978 2887 50  0000 L CNN
-F 1 "AudioJack2_Ground" V 19887 2887 50  0000 L CNN
-F 2 "Connector_Audio:Jack_3.5mm_CUI_SJ-3524-SMT_Horizontal" H 19900 2700 50  0001 C CNN
-F 3 "https://au.mouser.com/datasheet/2/670/sj-352x-smt_series-1313220.pdf" H 19900 2700 50  0001 C CNN
-F 4 "490-SJ-3523-SMT-TR " V 19900 2700 50  0001 C CNN "Mouser"
-F 5 "SJ-3523-SMT-TR " V 19900 2700 50  0001 C CNN "MFR"
-	1    19900 2700
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	21700 3900 21700 4250
 Wire Wire Line
@@ -1784,8 +1743,10 @@ U 1 1 5D842A8D
 P 7500 8000
 F 0 "SW1" H 7500 8285 50  0000 C CNN
 F 1 "SW_Push" H 7500 8194 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_Push_SPST_NO_Alps_SKRK" H 7500 8200 50  0001 C CNN
-F 3 "~" H 7500 8200 50  0001 C CNN
+F 2 "reset-button:PTS647" H 7500 8200 50  0001 C CNN
+F 3 "https://www.ckswitches.com/media/2567/pts647.pdf" H 7500 8200 50  0001 C CNN
+F 4 "611-PTS647SM38SMTR2L" H 7500 8000 50  0001 C CNN "Mouser"
+F 5 "PTS647SM38SMTR2LFS" H 7500 8000 50  0001 C CNN "MFR"
 	1    7500 8000
 	1    0    0    -1  
 $EndComp
@@ -1808,7 +1769,7 @@ SDCS
 Text GLabel 6200 2700 2    50   Input ~ 0
 DREQ
 Text GLabel 5750 2700 0    50   Input ~ 0
-D9
+D8
 Text GLabel 5750 3550 0    50   Input ~ 0
 D11
 Text GLabel 6200 2800 2    50   Input ~ 0
@@ -2299,12 +2260,6 @@ F 5 "450302014072" H 20350 8550 50  0001 C CNN "MFR"
 $EndComp
 Connection ~ 21250 5800
 Connection ~ 19100 6600
-$Sheet
-S 8750 1000 15550 6700
-U 5DA42305
-F0 "music" 50
-F1 "music.sch" 50
-$EndSheet
 Wire Notes Line
 	9000 7750 24200 7750
 Wire Wire Line
@@ -2581,7 +2536,6 @@ Text Notes 7700 8850 0    50   ~ 0
 SCREEN\n
 NoConn ~ 5100 8500
 NoConn ~ 5500 8300
-NoConn ~ 7950 9600
 $Comp
 L Device:R R31
 U 1 1 5D74ED5A
@@ -2639,4 +2593,161 @@ Wire Wire Line
 	16800 8750 16800 9850
 Wire Wire Line
 	16800 9850 16850 9850
+Wire Wire Line
+	19800 1600 19800 2500
+Text GLabel 19550 2500 0    50   Input ~ 0
+AGND
+$Sheet
+S 8050 1200 15550 6700
+U 5DA42305
+F0 "music" 50
+F1 "music.sch" 50
+$EndSheet
+Wire Wire Line
+	19450 2100 20000 2100
+Wire Wire Line
+	20000 2500 20000 2100
+Connection ~ 20000 2100
+Wire Wire Line
+	20000 2100 20150 2100
+Wire Wire Line
+	19550 2500 19700 2500
+NoConn ~ 19900 2500
+Wire Wire Line
+	3300 11650 3300 11900
+Connection ~ 3300 11900
+Wire Wire Line
+	3300 11900 3150 11900
+Wire Wire Line
+	2200 11550 2200 11900
+$Comp
+L Mechanical:Heatsink_Pad HS1
+U 1 1 5DE8248F
+P 2200 11450
+F 0 "HS1" H 2341 11489 50  0000 L CNN
+F 1 "Heatsink_Pad" H 2341 11398 50  0000 L CNN
+F 2 "custom:medium-thermal" H 2212 11400 50  0001 C CNN
+F 3 "~" H 2212 11400 50  0001 C CNN
+	1    2200 11450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:Heatsink_Pad HS2
+U 1 1 5DE85DD1
+P 2550 12600
+F 0 "HS2" H 2408 12547 50  0000 R CNN
+F 1 "Heatsink_Pad" H 2408 12638 50  0000 R CNN
+F 2 "custom:medium-thermal" H 2562 12550 50  0001 C CNN
+F 3 "~" H 2562 12550 50  0001 C CNN
+	1    2550 12600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2550 12500 2550 12350
+Wire Wire Line
+	2550 12350 2750 12350
+Connection ~ 2750 12350
+Wire Wire Line
+	2750 12350 2750 12400
+Wire Wire Line
+	2200 12300 2450 12300
+$Comp
+L Mechanical:Heatsink_Pad HS3
+U 1 1 5DEE8469
+P 4550 5900
+F 0 "HS3" H 4408 5847 50  0000 R CNN
+F 1 "Heatsink_Pad" H 4408 5938 50  0000 R CNN
+F 2 "custom:thermal" H 4562 5850 50  0001 C CNN
+F 3 "~" H 4562 5850 50  0001 C CNN
+	1    4550 5900
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4200 5800 4550 5800
+Connection ~ 4200 5800
+$Comp
+L Mechanical:Heatsink_Pad HS4
+U 1 1 5DF0FF8C
+P 22600 2750
+F 0 "HS4" H 22458 2697 50  0000 R CNN
+F 1 "Heatsink_Pad" H 22458 2788 50  0000 R CNN
+F 2 "custom:small-thermal" H 22612 2700 50  0001 C CNN
+F 3 "~" H 22612 2700 50  0001 C CNN
+	1    22600 2750
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	22600 2650 22950 2650
+Connection ~ 22950 2650
+Wire Wire Line
+	22950 2650 22950 2750
+$Comp
+L jack:SJ-3524-SMT J2
+U 1 1 5DFAFDC6
+P 19900 3000
+F 0 "J2" V 20053 2770 50  0000 R CNN
+F 1 "SJ-3524-SMT-jack" V 19962 2770 50  0000 R CNN
+F 2 "Connector_Audio:Jack_3.5mm_CUI_SJ-3524-SMT_Horizontal" H 19900 3000 50  0001 L BNN
+F 3 "https://au.mouser.com/datasheet/2/670/sj-352x-smt_series-1313220.pdf" H 19900 3000 50  0001 L BNN
+F 4 "490-SJ-3523-SMT-TR " H 19900 3000 50  0001 L BNN "Mouser"
+F 5 "SJ-3523-SMT-TR " H 19900 3000 50  0001 L BNN "MFR"
+	1    19900 3000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:CP1 C20
+U 1 1 5DCD2014
+P 19300 2100
+F 0 "C20" V 19552 2100 50  0000 C CNN
+F 1 "220uF" V 19461 2100 50  0000 C CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x5.4" H 19300 2100 50  0001 C CNN
+F 3 "https://au.mouser.com/datasheet/2/315/ABA0000C1145-947633.pdf" H 19300 2100 50  0001 C CNN
+F 4 "667-EEE-0JA221WP" V 19300 2100 50  0001 C CNN "Mouser"
+F 5 "EEE-0JA221WP" V 19300 2100 50  0001 C CNN "MFR"
+	1    19300 2100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 5D6E1739
+P 19100 10200
+F 0 "H1" H 19200 10246 50  0000 L CNN
+F 1 "MountingHole" H 19200 10155 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad" H 19100 10200 50  0001 C CNN
+F 3 "~" H 19100 10200 50  0001 C CNN
+	1    19100 10200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 5D6E18E4
+P 19100 10400
+F 0 "H2" H 19200 10446 50  0000 L CNN
+F 1 "MountingHole" H 19200 10355 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad" H 19100 10400 50  0001 C CNN
+F 3 "~" H 19100 10400 50  0001 C CNN
+	1    19100 10400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 5D6E1C49
+P 19100 10600
+F 0 "H3" H 19200 10646 50  0000 L CNN
+F 1 "MountingHole" H 19200 10555 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad" H 19100 10600 50  0001 C CNN
+F 3 "~" H 19100 10600 50  0001 C CNN
+	1    19100 10600
+	1    0    0    -1  
+$EndComp
+Text Notes 19050 9950 0    50   ~ 0
+Mounting Holes
+Wire Notes Line
+	18800 9800 18800 10800
+Wire Notes Line
+	18800 10800 19950 10800
+Wire Notes Line
+	19950 10800 19950 9800
+Wire Notes Line
+	19950 9800 18800 9800
 $EndSCHEMATC

@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A0 46811 33110
 encoding utf-8
-Sheet 1 5
+Sheet 1 4
 Title ""
 Date ""
 Rev ""
@@ -23,7 +23,7 @@ F 1 "1k" V 3184 9050 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 3230 9050 50  0001 C CNN
 F 3 "~" H 3300 9050 50  0001 C CNN
 	1    3300 9050
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L Device:LED CHG1
@@ -34,7 +34,7 @@ F 1 "ORANGE" H 3793 8886 50  0000 C CNN
 F 2 "LED_SMD:LED_0805_2012Metric" H 3800 9050 50  0001 C CNN
 F 3 "~" H 3800 9050 50  0001 C CNN
 	1    3800 9050
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 $Comp
 L Device:C C4
@@ -45,7 +45,7 @@ F 1 "10uF" H 2835 8295 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2988 8100 50  0001 C CNN
 F 3 "~" H 2950 8250 50  0001 C CNN
 	1    2950 8250
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 $Comp
 L Device:R R1
@@ -56,7 +56,7 @@ F 1 "10k" H 2080 9445 50  0000 R CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 2080 9400 50  0001 C CNN
 F 3 "~" H 2150 9400 50  0001 C CNN
 	1    2150 9400
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 $Comp
 L Battery_Management:MCP73831-2-OT U1
@@ -66,10 +66,10 @@ F 0 "U1" H 2550 9431 50  0000 C CNN
 F 1 "MCP73831-2-OT" H 2550 9340 50  0000 C CNN
 F 2 "adafruit-m0:SOT23-5" H 2600 8700 50  0001 L CIN
 F 3 "https://au.mouser.com/datasheet/2/268/20001984g-846362.pdf" H 2400 8900 50  0001 C CNN
-F 4 "579-MCP73831T-2ACIOT" H 2550 8950 50  0001 C CNN "Mouser"
-F 5 "MCP73831T-2ACI/OT" H 2550 8950 50  0001 C CNN "MFR"
+F 4 "579-MCP73831T-2ACIOT" H 2550 8950 50  0001 C CNN "Mouser Number"
+F 5 "MCP73831T-2ACI/OT" H 2550 8950 50  0001 C CNN "Reference"
 	1    2550 8950
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR05
@@ -80,7 +80,7 @@ F 1 "Earth" H 2950 7650 50  0001 C CNN
 F 2 "" H 2950 7800 50  0001 C CNN
 F 3 "~" H 2950 7800 50  0001 C CNN
 	1    2950 7800
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 Wire Wire Line
 	2950 7800 2950 8100
@@ -112,7 +112,7 @@ F 1 "Earth" H 2550 9750 50  0001 C CNN
 F 2 "" H 2550 9900 50  0001 C CNN
 F 3 "~" H 2550 9900 50  0001 C CNN
 	1    2550 9900
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	2550 9250 2550 9550
@@ -131,10 +131,10 @@ F 0 "J1" H 5257 8567 50  0000 C CNN
 F 1 "USB_B_Micro" H 5257 8476 50  0000 C CNN
 F 2 "Connector_USB:USB_Micro-B_Molex_47346-0001" H 5350 8050 50  0001 C CNN
 F 3 "https://au.mouser.com/datasheet/2/276/0473460001_IO_CONNECTORS-229243.pdf" H 5350 8050 50  0001 C CNN
-F 4 "538-47346-0001" H 5200 8100 50  0001 C CNN "Mouser"
-F 5 "47346-0001" H 5200 8100 50  0001 C CNN "MFR"
+F 4 "538-47346-0001" H 5200 8100 50  0001 C CNN "Mouser Number"
+F 5 "47346-0001" H 5200 8100 50  0001 C CNN "Reference"
 	1    5200 8100
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR012
@@ -145,7 +145,7 @@ F 1 "Earth" H 5200 8500 50  0001 C CNN
 F 2 "" H 5200 8650 50  0001 C CNN
 F 3 "~" H 5200 8650 50  0001 C CNN
 	1    5200 8650
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text GLabel 5600 7900 2    50   Input ~ 0
 VBUS
@@ -176,7 +176,7 @@ F 1 "Earth" H 5200 9800 50  0001 C CNN
 F 2 "" H 5200 9950 50  0001 C CNN
 F 3 "~" H 5200 9950 50  0001 C CNN
 	1    5200 9950
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R5
@@ -187,7 +187,7 @@ F 1 "100k" H 5270 9605 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5130 9650 50  0001 C CNN
 F 3 "~" H 5200 9650 50  0001 C CNN
 	1    5200 9650
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R4
@@ -198,7 +198,7 @@ F 1 "100k" H 5270 9105 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5130 9150 50  0001 C CNN
 F 3 "~" H 5200 9150 50  0001 C CNN
 	1    5200 9150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text GLabel 5500 9000 2    50   Input ~ 0
 VBAT
@@ -227,10 +227,10 @@ F 0 "U2" H 2750 12342 50  0000 C CNN
 F 1 "SPX3819M5-L-3-3" H 2750 12251 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-5" H 2750 12325 50  0001 C CNN
 F 3 "https://au.mouser.com/datasheet/2/146/SPX3819-1079947.pdf" H 2750 12000 50  0001 C CNN
-F 4 "701-SPX3819M5-L-50TR" H 2750 12000 50  0001 C CNN "Mouser"
-F 5 "SPX3819M5-L-5-0/TR" H 2750 12000 50  0001 C CNN "MFR"
+F 4 "701-SPX3819M5-L-50TR" H 2750 12000 50  0001 C CNN "Mouser Number"
+F 5 "SPX3819M5-L-5-0/TR" H 2750 12000 50  0001 C CNN "Reference"
 	1    2750 12000
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR04
@@ -241,7 +241,7 @@ F 1 "Earth" H 2750 12250 50  0001 C CNN
 F 2 "" H 2750 12400 50  0001 C CNN
 F 3 "~" H 2750 12400 50  0001 C CNN
 	1    2750 12400
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR07
@@ -252,7 +252,7 @@ F 1 "Earth" H 3150 12250 50  0001 C CNN
 F 2 "" H 3150 12400 50  0001 C CNN
 F 3 "~" H 3150 12400 50  0001 C CNN
 	1    3150 12400
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR08
@@ -263,12 +263,12 @@ F 1 "Earth" H 3600 12250 50  0001 C CNN
 F 2 "" H 3600 12400 50  0001 C CNN
 F 3 "~" H 3600 12400 50  0001 C CNN
 	1    3600 12400
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	2450 12000 2450 12300
 Wire Wire Line
-	2750 12300 2750 12400
+	2750 12300 2750 12350
 $Comp
 L Device:C C5
 U 1 1 5D6FDB3B
@@ -278,7 +278,7 @@ F 1 "10uF" H 3265 12105 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3188 12000 50  0001 C CNN
 F 3 "~" H 3150 12150 50  0001 C CNN
 	1    3150 12150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C6
@@ -289,7 +289,7 @@ F 1 "1uF" H 3715 12105 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3638 12000 50  0001 C CNN
 F 3 "~" H 3600 12150 50  0001 C CNN
 	1    3600 12150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	3150 12400 3150 12300
@@ -302,21 +302,13 @@ Wire Wire Line
 Wire Wire Line
 	3600 11600 3600 11900
 Wire Wire Line
-	3600 11900 3150 11900
+	3600 11900 3300 11900
 Connection ~ 3600 11900
 Wire Wire Line
 	3600 11900 3600 12000
 Connection ~ 3150 11900
-$Sheet
-S 850  10800 6200 1950
-U 5D6DBD78
-F0 "POWER and FILTERING" 50
-F1 "POWER and FILTERING.sch" 50
-$EndSheet
 Wire Wire Line
 	1800 11600 1800 11500
-Wire Wire Line
-	2450 12300 2200 12300
 Wire Wire Line
 	1800 12000 1800 11900
 Wire Wire Line
@@ -330,7 +322,7 @@ F 1 "10uF" H 1915 12105 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1838 12000 50  0001 C CNN
 F 3 "~" H 1800 12150 50  0001 C CNN
 	1    1800 12150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	1800 11900 1600 11900
@@ -350,7 +342,7 @@ F 1 "100k" H 2270 12105 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 2130 12150 50  0001 C CNN
 F 3 "~" H 2200 12150 50  0001 C CNN
 	1    2200 12150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR02
@@ -361,7 +353,7 @@ F 1 "Earth" H 1800 12250 50  0001 C CNN
 F 2 "" H 1800 12400 50  0001 C CNN
 F 3 "~" H 1800 12400 50  0001 C CNN
 	1    1800 12400
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	1800 11900 2200 11900
@@ -378,10 +370,10 @@ F 0 "D1" V 1840 11622 42  0000 R CNN
 F 1 "MBR120" V 1761 11622 42  0000 R CNN
 F 2 "mpr121:CHIPLED_0805_NOOUTLINE" H 1800 11700 50  0001 C CNN
 F 3 "https://au.mouser.com/datasheet/2/308/MBR120VLSFT1-D-107081.pdf" H 1800 11700 50  0001 C CNN
-F 4 "MBR120VLSFT3G" V 1800 11700 50  0001 C CNN "MFR"
-F 5 "863-MBR120VLSFT3G" V 1800 11700 50  0001 C CNN "Mouser"
+F 4 "MBR120VLSFT3G" V 1800 11700 50  0001 C CNN "Reference"
+F 5 "863-MBR120VLSFT3G" V 1800 11700 50  0001 C CNN "Mouser Number"
 	1    1800 11700
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	1800 11800 1800 11900
@@ -402,7 +394,7 @@ F 1 "Earth" H 7700 8100 50  0001 C CNN
 F 2 "" H 7700 8250 50  0001 C CNN
 F 3 "~" H 7700 8250 50  0001 C CNN
 	1    7700 8250
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text Notes 7400 7450 0    50   ~ 0
 RESET
@@ -412,11 +404,11 @@ U 1 1 5D79CCA6
 P 4700 11900
 F 0 "X2" H 4778 12003 59  0000 L CNN
 F 1 "JSTPH" H 4778 11898 59  0000 L CNN
-F 2 "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" H 4700 11900 50  0001 C CNN
+F 2 "little-helper:JST-2-SMD" H 4700 11900 50  0001 C CNN
 F 3 "http://www.jst-mfg.com/product/pdf/eng/ePH.pdf" H 4700 11900 50  0001 C CNN
-F 4 "S2B-PH-SM4-TB(LF)(SN) " H 4700 11900 50  0001 C CNN "MFR"
+F 4 "S2B-PH-SM4-TB(LF)(SN) " H 4700 11900 50  0001 C CNN "Reference"
 	1    4700 11900
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C8
@@ -427,7 +419,7 @@ F 1 "1uF" H 5365 11805 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5288 11700 50  0001 C CNN
 F 3 "~" H 5250 11850 50  0001 C CNN
 	1    5250 11850
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C9
@@ -438,7 +430,7 @@ F 1 "10uF" H 5865 11805 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5788 11700 50  0001 C CNN
 F 3 "~" H 5750 11850 50  0001 C CNN
 	1    5750 11850
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR014
@@ -449,7 +441,7 @@ F 1 "Earth" H 5250 12100 50  0001 C CNN
 F 2 "" H 5250 12250 50  0001 C CNN
 F 3 "~" H 5250 12250 50  0001 C CNN
 	1    5250 12250
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR016
@@ -460,7 +452,7 @@ F 1 "Earth" H 5750 12100 50  0001 C CNN
 F 2 "" H 5750 12250 50  0001 C CNN
 F 3 "~" H 5750 12250 50  0001 C CNN
 	1    5750 12250
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR010
@@ -471,7 +463,7 @@ F 1 "Earth" H 4600 12050 50  0001 C CNN
 F 2 "" H 4600 12200 50  0001 C CNN
 F 3 "~" H 4600 12200 50  0001 C CNN
 	1    4600 12200
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:+3.3V #PWR015
@@ -482,7 +474,7 @@ F 1 "+3.3V" H 5765 11473 50  0000 C CNN
 F 2 "" H 5750 11300 50  0001 C CNN
 F 3 "" H 5750 11300 50  0001 C CNN
 	1    5750 11300
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	5750 11300 5750 11700
@@ -508,9 +500,9 @@ F 0 "U4" H 3800 1911 50  0000 C CNN
 F 1 "ATSAMD21G18A-AUT" H 3800 1820 50  0000 C CNN
 F 2 "Package_QFP:TQFP-48_7x7mm_P0.5mm" H 2850 2150 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/SAMD21-Family-DataSheet-DS40001882D.pdf" H 3800 4900 50  0001 C CNN
-F 4 "556-ATSAMD21G18A-AUT " H 3800 3900 50  0001 C CNN "mouser"
+F 4 "556-ATSAMD21G18A-AUT " H 3800 3900 50  0001 C CNN "Mouser Number"
 	1    3800 3900
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L adafruit-M0:CAP_CERAMIC_0603 C1
@@ -521,7 +513,7 @@ F 1 "22pF" H 1728 1855 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1650 1850 50  0001 C CNN
 F 3 "" H 1650 1850 50  0001 C CNN
 	1    1650 1850
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L adafruit-M0:CAP_CERAMIC_0603 C3
@@ -532,7 +524,7 @@ F 1 "22pF" H 2128 1855 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2050 1850 50  0001 C CNN
 F 3 "" H 2050 1850 50  0001 C CNN
 	1    2050 1850
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR01
@@ -543,7 +535,7 @@ F 1 "Earth" H 1650 1200 50  0001 C CNN
 F 2 "" H 1650 1350 50  0001 C CNN
 F 3 "~" H 1650 1350 50  0001 C CNN
 	1    1650 1350
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 $Comp
 L power:Earth #GND01
@@ -554,7 +546,7 @@ F 1 "Earth" H 2050 1200 50  0001 C CNN
 F 2 "" H 2050 1350 50  0001 C CNN
 F 3 "~" H 2050 1350 50  0001 C CNN
 	1    2050 1350
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 Wire Wire Line
 	1650 1750 1650 1650
@@ -688,7 +680,7 @@ F 1 "+3.3V" H 3015 2173 50  0000 C CNN
 F 2 "" H 3000 2000 50  0001 C CNN
 F 3 "" H 3000 2000 50  0001 C CNN
 	1    3000 2000
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C7
@@ -699,7 +691,7 @@ F 1 "1uF" V 4289 2000 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4488 1850 50  0001 C CNN
 F 3 "~" H 4450 2000 50  0001 C CNN
 	1    4450 2000
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L power:Earth #PWR011
@@ -710,7 +702,7 @@ F 1 "Earth" H 4750 1850 50  0001 C CNN
 F 2 "" H 4750 2000 50  0001 C CNN
 F 3 "~" H 4750 2000 50  0001 C CNN
 	1    4750 2000
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	4750 2000 4600 2000
@@ -765,7 +757,7 @@ F 1 "Earth" H 4200 5650 50  0001 C CNN
 F 2 "" H 4200 5800 50  0001 C CNN
 F 3 "~" H 4200 5800 50  0001 C CNN
 	1    4200 5800
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	3700 5800 3900 5800
@@ -780,9 +772,9 @@ F 0 "U6" H 13250 6820 50  0000 C CNN
 F 1 "VS1053B" H 13250 6729 50  0000 C CNN
 F 2 "adafruit -music:LQFP48" H 13250 4450 50  0001 L BNN
 F 3 "http://www.vlsi.fi/fileadmin/datasheets/vs8053.pdf" H 13250 4450 50  0001 L BNN
-F 4 "485-1681 " H 13250 4450 50  0001 C CNN "Mouser"
+F 4 "485-1681 " H 13250 4450 50  0001 C CNN "Mouser Number"
 	1    13250 4450
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C14
@@ -793,7 +785,7 @@ F 1 "0.1uF" H 11015 2455 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10938 2350 50  0001 C CNN
 F 3 "~" H 10900 2500 50  0001 C CNN
 	1    10900 2500
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R6
@@ -804,7 +796,7 @@ F 1 "100k" V 10334 2350 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 10380 2350 50  0001 C CNN
 F 3 "~" H 10450 2350 50  0001 C CNN
 	1    10450 2350
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 Text GLabel 10300 2000 1    50   Input ~ 0
 AVDD
@@ -817,7 +809,7 @@ F 1 "Earth" H 10900 2650 50  0001 C CNN
 F 2 "" H 10900 2800 50  0001 C CNN
 F 3 "~" H 10900 2800 50  0001 C CNN
 	1    10900 2800
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text HLabel 11750 2350 1    50   Input ~ 0
 MP3RST
@@ -839,7 +831,7 @@ F 1 "Earth" H 12350 6650 50  0001 C CNN
 F 2 "" H 12350 6800 50  0001 C CNN
 F 3 "~" H 12350 6800 50  0001 C CNN
 	1    12350 6800
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	12350 6050 12350 6150
@@ -902,7 +894,7 @@ F 1 "+1V8" V 12215 6078 50  0000 L CNN
 F 2 "" H 12200 5950 50  0001 C CNN
 F 3 "" H 12200 5950 50  0001 C CNN
 	1    12200 5950
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	12350 5550 12350 5650
@@ -926,7 +918,7 @@ F 1 "+3.3V" V 12165 5578 50  0000 L CNN
 F 2 "" H 12150 5450 50  0001 C CNN
 F 3 "" H 12150 5450 50  0001 C CNN
 	1    12150 5450
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	12150 5450 12250 5450
@@ -959,7 +951,7 @@ F 1 "22pF" H 10265 4305 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10188 4200 50  0001 C CNN
 F 3 "~" H 10150 4350 50  0001 C CNN
 	1    10150 4350
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C10
@@ -970,7 +962,7 @@ F 1 "22pF" V 9339 3150 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 9538 3000 50  0001 C CNN
 F 3 "~" H 9500 3150 50  0001 C CNN
 	1    9500 3150
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L Device:R R8
@@ -981,7 +973,7 @@ F 1 "1M" H 10820 3405 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 10680 3450 50  0001 C CNN
 F 3 "~" H 10750 3450 50  0001 C CNN
 	1    10750 3450
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR018
@@ -992,7 +984,7 @@ F 1 "Earth" H 9150 3000 50  0001 C CNN
 F 2 "" H 9150 3150 50  0001 C CNN
 F 3 "~" H 9150 3150 50  0001 C CNN
 	1    9150 3150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR022
@@ -1003,7 +995,7 @@ F 1 "Earth" H 10150 4450 50  0001 C CNN
 F 2 "" H 10150 4600 50  0001 C CNN
 F 3 "~" H 10150 4600 50  0001 C CNN
 	1    10150 4600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	10150 4200 10150 4100
@@ -1049,7 +1041,7 @@ F 1 "1uF" H 14515 6405 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 14438 6300 50  0001 C CNN
 F 3 "~" H 14400 6450 50  0001 C CNN
 	1    14400 6450
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	14150 6050 14400 6050
@@ -1116,7 +1108,7 @@ F 1 "+3.3V" H 14965 4523 50  0000 C CNN
 F 2 "" H 14950 4350 50  0001 C CNN
 F 3 "" H 14950 4350 50  0001 C CNN
 	1    14950 4350
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:+3.3V #PWR031
@@ -1127,7 +1119,7 @@ F 1 "+3.3V" H 15765 4523 50  0000 C CNN
 F 2 "" H 15750 4350 50  0001 C CNN
 F 3 "" H 15750 4350 50  0001 C CNN
 	1    15750 4350
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R16B1
@@ -1138,7 +1130,7 @@ F 1 "100k" H 15020 4555 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 14880 4600 50  0001 C CNN
 F 3 "~" H 14950 4600 50  0001 C CNN
 	1    14950 4600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R16A1
@@ -1149,7 +1141,7 @@ F 1 "100k" H 15820 4555 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 15680 4600 50  0001 C CNN
 F 3 "~" H 15750 4600 50  0001 C CNN
 	1    15750 4600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text GLabel 14950 4900 0    50   Input ~ 0
 MP3CS
@@ -1172,7 +1164,7 @@ F 1 "100k" H 15820 3605 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 15680 3650 50  0001 C CNN
 F 3 "~" H 15750 3650 50  0001 C CNN
 	1    15750 3650
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R16D1
@@ -1183,7 +1175,7 @@ F 1 "100k" H 15370 3605 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 15230 3650 50  0001 C CNN
 F 3 "~" H 15300 3650 50  0001 C CNN
 	1    15300 3650
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text GLabel 15300 3400 0    50   Input ~ 0
 GPIO0
@@ -1198,7 +1190,7 @@ F 1 "SolderJumper" V 15795 3218 50  0000 L CNN
 F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 15750 3150 50  0001 C CNN
 F 3 "~" H 15750 3150 50  0001 C CNN
 	1    15750 3150
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L power:+3.3V #PWR030
@@ -1209,7 +1201,7 @@ F 1 "+3.3V" H 15765 3073 50  0000 C CNN
 F 2 "" H 15750 2900 50  0001 C CNN
 F 3 "" H 15750 2900 50  0001 C CNN
 	1    15750 2900
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR032
@@ -1220,7 +1212,7 @@ F 1 "Earth" H 16150 3650 50  0001 C CNN
 F 2 "" H 16150 3800 50  0001 C CNN
 F 3 "~" H 16150 3800 50  0001 C CNN
 	1    16150 3800
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	16150 3800 15750 3800
@@ -1244,7 +1236,7 @@ F 1 "SolderJumper_2_Bridged" V 15295 6218 50  0000 L CNN
 F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged2Bar_RoundedPad1.0x1.5mm" H 15250 6150 50  0001 C CNN
 F 3 "~" H 15250 6150 50  0001 C CNN
 	1    15250 6150
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 Text GLabel 15250 6550 0    50   Input ~ 0
 RESET
@@ -1267,7 +1259,7 @@ F 1 "100" V 18634 1600 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 18680 1600 50  0001 C CNN
 F 3 "~" H 18750 1600 50  0001 C CNN
 	1    18750 1600
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L Device:R R13
@@ -1278,7 +1270,7 @@ F 1 "100" V 18634 2100 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 18680 2100 50  0001 C CNN
 F 3 "~" H 18750 2100 50  0001 C CNN
 	1    18750 2100
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L Device:CP1 C19
@@ -1286,34 +1278,15 @@ U 1 1 5DCD1C08
 P 19300 1600
 F 0 "C19" V 19552 1600 50  0000 C CNN
 F 1 "220uF" V 19461 1600 50  0000 C CNN
-F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" H 19300 1600 50  0001 C CNN
-F 3 "~" H 19300 1600 50  0001 C CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x5.4" H 19300 1600 50  0001 C CNN
+F 3 "https://au.mouser.com/datasheet/2/315/ABA0000C1145-947633.pdf" H 19300 1600 50  0001 C CNN
+F 4 "667-EEE-0JA221WP" V 19300 1600 50  0001 C CNN "Mouser Number"
+F 5 "EEE-0JA221WP" V 19300 1600 50  0001 C CNN "Reference"
 	1    19300 1600
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
-$Comp
-L Device:CP1 C20
-U 1 1 5DCD2014
-P 19300 2100
-F 0 "C20" V 19552 2100 50  0000 C CNN
-F 1 "220uF" V 19461 2100 50  0000 C CNN
-F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" H 19300 2100 50  0001 C CNN
-F 3 "~" H 19300 2100 50  0001 C CNN
-	1    19300 2100
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	19900 2500 19900 2100
-Wire Wire Line
-	19900 2100 19450 2100
 Wire Wire Line
 	19450 1600 19800 1600
-Wire Wire Line
-	19800 1600 19800 2500
-Text GLabel 20350 2700 2    50   Input ~ 0
-AGND
-Wire Wire Line
-	20350 2700 20100 2700
 Wire Wire Line
 	19150 2100 18900 2100
 Wire Wire Line
@@ -1327,9 +1300,6 @@ R_OUT
 Text GLabel 20150 2100 2    50   Input ~ 0
 L_OUT
 Wire Wire Line
-	19900 2100 20150 2100
-Connection ~ 19900 2100
-Wire Wire Line
 	19800 1600 20150 1600
 Connection ~ 19800 1600
 $Comp
@@ -1341,7 +1311,7 @@ F 1 "22" H 18020 2555 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 17880 2600 50  0001 C CNN
 F 3 "~" H 17950 2600 50  0001 C CNN
 	1    17950 2600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R11
@@ -1352,7 +1322,7 @@ F 1 "22" H 18620 2555 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 18480 2600 50  0001 C CNN
 F 3 "~" H 18550 2600 50  0001 C CNN
 	1    18550 2600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C16
@@ -1363,7 +1333,7 @@ F 1 "10nF" H 18065 3055 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 17988 2950 50  0001 C CNN
 F 3 "~" H 17950 3100 50  0001 C CNN
 	1    17950 3100
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C17
@@ -1374,7 +1344,7 @@ F 1 "10nF" H 18665 3055 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 18588 2950 50  0001 C CNN
 F 3 "~" H 18550 3100 50  0001 C CNN
 	1    18550 3100
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text GLabel 18550 3550 2    50   Input ~ 0
 AGND
@@ -1407,7 +1377,7 @@ F 1 "HEADER-1X2ROUND" H 18278 4198 59  0000 L CNN
 F 2 "adafruit -music:1X02_ROUND" H 18200 4200 50  0001 C CNN
 F 3 "" H 18200 4200 50  0001 C CNN
 	1    18200 4200
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text GLabel 18100 4500 2    50   Input ~ 0
 AGND
@@ -1426,7 +1396,7 @@ F 1 "HEADER-1X2ROUND" H 19578 4198 59  0000 L CNN
 F 2 "adafruit -music:1X02_ROUND" H 19500 4200 50  0001 C CNN
 F 3 "" H 19500 4200 50  0001 C CNN
 	1    19500 4200
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text GLabel 19400 3850 2    50   Input ~ 0
 R_OUT
@@ -1447,7 +1417,7 @@ F 1 "+3.3V" H 18065 6073 50  0000 C CNN
 F 2 "" H 18050 5900 50  0001 C CNN
 F 3 "" H 18050 5900 50  0001 C CNN
 	1    18050 5900
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:Ferrite_Bead FB2
@@ -1457,9 +1427,9 @@ F 0 "FB2" V 18226 5900 50  0000 C CNN
 F 1 "Ferrite_Bead" V 18317 5900 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric" V 18430 5900 50  0001 C CNN
 F 3 "https://au.mouser.com/datasheet/2/281/QNFA9102-1485076.pdf" H 18500 5900 50  0001 C CNN
-F 4 "BLM21SP181SH1D" V 18500 5900 50  0001 C CNN "Mouser"
+F 4 "BLM21SP181SH1D" V 18500 5900 50  0001 C CNN "Mouser Number"
 	1    18500 5900
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 Wire Wire Line
 	18050 5900 18350 5900
@@ -1473,9 +1443,9 @@ F 0 "FB1" V 18176 6600 50  0000 C CNN
 F 1 "Ferrite_Bead" V 18267 6600 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric" V 18380 6600 50  0001 C CNN
 F 3 "https://au.mouser.com/datasheet/2/281/QNFA9102-1485076.pdf" H 18450 6600 50  0001 C CNN
-F 4 "BLM21SP181SH1D" V 18450 6600 50  0001 C CNN "Mouser"
+F 4 "BLM21SP181SH1D" V 18450 6600 50  0001 C CNN "Mouser Number"
 	1    18450 6600
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L power:Earth #PWR034
@@ -1486,7 +1456,7 @@ F 1 "Earth" H 18050 6450 50  0001 C CNN
 F 2 "" H 18050 6600 50  0001 C CNN
 F 3 "~" H 18050 6600 50  0001 C CNN
 	1    18050 6600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	18050 6600 18300 6600
@@ -1501,7 +1471,7 @@ F 1 "1uF" H 19215 6205 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 19138 6100 50  0001 C CNN
 F 3 "~" H 19100 6250 50  0001 C CNN
 	1    19100 6250
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	19100 6100 19100 5900
@@ -1528,10 +1498,10 @@ F 0 "J3" H 22650 6517 50  0000 C CNN
 F 1 "Micro_SD_Card" H 22650 6426 50  0000 C CNN
 F 2 "Connector_Card:microSD_HC_Hirose_DM3D-SF" H 23850 6100 50  0001 C CNN
 F 3 "https://au.mouser.com/datasheet/2/185/DM3_catalog-939223.pdf" H 22700 5800 50  0001 C CNN
-F 4 "798-DM3D-SF" H 22700 5800 50  0001 C CNN "Mouser"
-F 5 "DM3D-SF" H 22700 5800 50  0001 C CNN "MFR"
+F 4 "798-DM3D-SF" H 22700 5800 50  0001 C CNN "Mouser Number"
+F 5 "DM3D-SF" H 22700 5800 50  0001 C CNN "Reference"
 	1    22700 5800
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR037
@@ -1542,7 +1512,7 @@ F 1 "Earth" H 21700 6550 50  0001 C CNN
 F 2 "" H 21700 6700 50  0001 C CNN
 F 3 "~" H 21700 6700 50  0001 C CNN
 	1    21700 6700
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	21250 5800 21800 5800
@@ -1565,7 +1535,7 @@ F 1 "+3.3V" H 21265 5773 50  0000 C CNN
 F 2 "" H 21250 5600 50  0001 C CNN
 F 3 "" H 21250 5600 50  0001 C CNN
 	1    21250 5600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	21250 5600 21250 5800
@@ -1595,7 +1565,7 @@ F 1 "Earth" H 21750 2600 50  0001 C CNN
 F 2 "" H 21750 2750 50  0001 C CNN
 F 3 "~" H 21750 2750 50  0001 C CNN
 	1    21750 2750
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text Notes 21400 1300 0    50   ~ 0
 Power Supply/ Decoupling
@@ -1608,7 +1578,7 @@ F 1 "+3.3V" H 21765 1773 50  0000 C CNN
 F 2 "" H 21750 1600 50  0001 C CNN
 F 3 "" H 21750 1600 50  0001 C CNN
 	1    21750 1600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR040
@@ -1619,7 +1589,7 @@ F 1 "Earth" H 22950 2600 50  0001 C CNN
 F 2 "" H 22950 2750 50  0001 C CNN
 F 3 "~" H 22950 2750 50  0001 C CNN
 	1    22950 2750
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR043
@@ -1630,7 +1600,7 @@ F 1 "Earth" H 23500 2600 50  0001 C CNN
 F 2 "" H 23500 2750 50  0001 C CNN
 F 3 "~" H 23500 2750 50  0001 C CNN
 	1    23500 2750
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:+3.3V #PWR041
@@ -1641,7 +1611,7 @@ F 1 "+3.3V" H 23215 2323 50  0000 C CNN
 F 2 "" H 23200 2150 50  0001 C CNN
 F 3 "" H 23200 2150 50  0001 C CNN
 	1    23200 2150
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 $Comp
 L power:+1V8 #PWR042
@@ -1652,7 +1622,7 @@ F 1 "+1V8" H 23515 1773 50  0000 C CNN
 F 2 "" H 23500 1600 50  0001 C CNN
 F 3 "" H 23500 1600 50  0001 C CNN
 	1    23500 1600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	22950 1850 23500 1850
@@ -1664,7 +1634,7 @@ Wire Wire Line
 Wire Wire Line
 	23500 2550 23500 2750
 Wire Wire Line
-	22950 2050 22950 2750
+	22950 2050 22950 2650
 Wire Wire Line
 	22950 1950 23200 1950
 Wire Wire Line
@@ -1682,7 +1652,7 @@ F 1 "10uF" H 21865 2355 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 21788 2250 50  0001 C CNN
 F 3 "~" H 21750 2400 50  0001 C CNN
 	1    21750 2400
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C23
@@ -1693,7 +1663,7 @@ F 1 "10uF" H 23615 2355 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 23538 2250 50  0001 C CNN
 F 3 "~" H 23500 2400 50  0001 C CNN
 	1    23500 2400
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	21750 1850 21750 1600
@@ -1714,10 +1684,10 @@ F 0 "U7" H 22350 2297 42  0000 C CNN
 F 1 "TLV733P-Q1" H 22350 2218 42  0000 C CNN
 F 2 "adafruit -music:SOT23-6" H 22350 1950 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tlv733p-q1.pdf?HQS=TI-null-null-mousermode-df-pf-null-wwe&DCM=yes&ref_url=https%3A%2F%2Fau.mouser.com%2F" H 22350 1950 50  0001 C CNN
-F 4 "595-TLV73318PQDBVRQ1" H 22350 1950 50  0001 C CNN "Mouser"
-F 5 "TLV73318PQDBVRQ1 " H 22350 1950 50  0001 C CNN "MFR"
+F 4 "595-TLV73318PQDBVRQ1" H 22350 1950 50  0001 C CNN "Mouser Number"
+F 5 "TLV73318PQDBVRQ1 " H 22350 1950 50  0001 C CNN "Reference"
 	1    22350 1950
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Connection ~ 10150 3300
 Connection ~ 10150 4100
@@ -1729,10 +1699,10 @@ F 0 "Y1" V 10004 3930 50  0000 L CNN
 F 1 "ABM8G-12.288MHZ-18-D2Y-T" V 10095 3930 50  0000 L CNN
 F 2 "Crystal:Crystal_SMD_5032-4Pin_5.0x3.2mm" H 10050 3700 50  0001 L BNN
 F 3 "https://au.mouser.com/datasheet/2/3/ABM8G-10572.pdf" H 10050 3700 50  0001 L BNN
-F 4 "ABM8G-12.288MHZ-18-D2Y-T" H 10050 3700 50  0001 L BNN "MFR"
-F 5 "815-ABM8G-12.2-18D2Y" H 10050 3700 50  0001 L BNN "Mouser"
+F 4 "ABM8G-12.288MHZ-18-D2Y-T" H 10050 3700 50  0001 L BNN "Reference"
+F 5 "815-ABM8G-12.2-18D2Y" H 10050 3700 50  0001 L BNN "Mouser Number"
 	1    10050 3700
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L Device:Crystal Y2
@@ -1743,7 +1713,7 @@ F 1 "Crystal" H 1850 2327 50  0000 C CNN
 F 2 "Crystal:Crystal_SMD_TXC_7A-2Pin_5x3.2mm" H 1850 2150 50  0001 C CNN
 F 3 "~" H 1850 2150 50  0001 C CNN
 	1    1850 2150
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	2050 1950 2050 2150
@@ -1759,19 +1729,6 @@ Wire Wire Line
 Connection ~ 2050 2150
 Wire Wire Line
 	2050 2150 2050 2300
-$Comp
-L Connector:AudioJack2_Ground J2
-U 1 1 5D7C0FB1
-P 19900 2700
-F 0 "J2" V 19978 2887 50  0000 L CNN
-F 1 "AudioJack2_Ground" V 19887 2887 50  0000 L CNN
-F 2 "Connector_Audio:Jack_3.5mm_CUI_SJ-3524-SMT_Horizontal" H 19900 2700 50  0001 C CNN
-F 3 "https://au.mouser.com/datasheet/2/670/sj-352x-smt_series-1313220.pdf" H 19900 2700 50  0001 C CNN
-F 4 "490-SJ-3523-SMT-TR " V 19900 2700 50  0001 C CNN "Mouser"
-F 5 "SJ-3523-SMT-TR " V 19900 2700 50  0001 C CNN "MFR"
-	1    19900 2700
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	21700 3900 21700 4250
 Wire Wire Line
@@ -1786,10 +1743,12 @@ U 1 1 5D842A8D
 P 7500 8000
 F 0 "SW1" H 7500 8285 50  0000 C CNN
 F 1 "SW_Push" H 7500 8194 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_Push_SPST_NO_Alps_SKRK" H 7500 8200 50  0001 C CNN
-F 3 "~" H 7500 8200 50  0001 C CNN
+F 2 "reset-button:PTS647" H 7500 8200 50  0001 C CNN
+F 3 "https://www.ckswitches.com/media/2567/pts647.pdf" H 7500 8200 50  0001 C CNN
+F 4 "611-PTS647SM38SMTR2L" H 7500 8000 50  0001 C CNN "Mouser Number"
+F 5 "PTS647SM38SMTR2LFS" H 7500 8000 50  0001 C CNN "Reference"
 	1    7500 8000
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Notes Line
 	7900 2350 7900 5350
@@ -1810,7 +1769,7 @@ SDCS
 Text GLabel 6200 2700 2    50   Input ~ 0
 DREQ
 Text GLabel 5750 2700 0    50   Input ~ 0
-D9
+D8
 Text GLabel 5750 3550 0    50   Input ~ 0
 D11
 Text GLabel 6200 2800 2    50   Input ~ 0
@@ -1846,7 +1805,7 @@ F 1 "+3.3V" H 3615 11773 50  0000 C CNN
 F 2 "" H 3600 11600 50  0001 C CNN
 F 3 "" H 3600 11600 50  0001 C CNN
 	1    3600 11600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Notes Line
 	7550 8750 7550 11000
@@ -1861,7 +1820,7 @@ F 1 "0.1uF" H 12465 9005 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric" H 12388 8900 50  0001 C CNN
 F 3 "~" H 12350 9050 50  0001 C CNN
 	1    12350 9050
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R23
@@ -1872,7 +1831,7 @@ F 1 "1k" H 15870 10905 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 10950 50  0001 C CNN
 F 3 "~" H 15800 10950 50  0001 C CNN
 	1    15800 10950
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L Device:R R22
@@ -1883,7 +1842,7 @@ F 1 "1k" H 15870 10705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 10750 50  0001 C CNN
 F 3 "~" H 15800 10750 50  0001 C CNN
 	1    15800 10750
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L Device:R R21
@@ -1894,7 +1853,7 @@ F 1 "1k" H 15870 10505 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 10550 50  0001 C CNN
 F 3 "~" H 15800 10550 50  0001 C CNN
 	1    15800 10550
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L Device:R R16
@@ -1905,7 +1864,7 @@ F 1 "47k" H 13120 9055 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 12980 9100 50  0001 C CNN
 F 3 "~" H 13050 9100 50  0001 C CNN
 	1    13050 9100
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R17
@@ -1916,7 +1875,7 @@ F 1 "10k" H 13320 9355 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 13180 9400 50  0001 C CNN
 F 3 "~" H 13250 9400 50  0001 C CNN
 	1    13250 9400
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R18
@@ -1927,7 +1886,7 @@ F 1 "10k" H 13430 9895 50  0000 R CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 13430 9850 50  0001 C CNN
 F 3 "~" H 13500 9850 50  0001 C CNN
 	1    13500 9850
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 $Comp
 L power:Earth #PWR0104
@@ -1938,7 +1897,7 @@ F 1 "Earth" H 12350 11200 50  0001 C CNN
 F 2 "" H 12350 11350 50  0001 C CNN
 F 3 "~" H 12350 11350 50  0001 C CNN
 	1    12350 11350
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:+3.3V #PWR0105
@@ -1949,7 +1908,7 @@ F 1 "+3.3V" H 12365 8723 50  0000 C CNN
 F 2 "" H 12350 8550 50  0001 C CNN
 F 3 "" H 12350 8550 50  0001 C CNN
 	1    12350 8550
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	12350 8900 12350 8750
@@ -2020,7 +1979,7 @@ F 1 "1k" H 15870 10305 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 10350 50  0001 C CNN
 F 3 "~" H 15800 10350 50  0001 C CNN
 	1    15800 10350
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L Device:R R19
@@ -2031,7 +1990,7 @@ F 1 "1k" H 15870 10105 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 10150 50  0001 C CNN
 F 3 "~" H 15800 10150 50  0001 C CNN
 	1    15800 10150
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	15500 10150 15650 10150
@@ -2068,7 +2027,7 @@ F 1 "1k" H 15870 9905 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 9950 50  0001 C CNN
 F 3 "~" H 15800 9950 50  0001 C CNN
 	1    15800 9950
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L Device:R R26
@@ -2079,7 +2038,7 @@ F 1 "1k" H 15870 9705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 9750 50  0001 C CNN
 F 3 "~" H 15800 9750 50  0001 C CNN
 	1    15800 9750
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L Device:R R25
@@ -2090,7 +2049,7 @@ F 1 "1k" H 15870 9505 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 9550 50  0001 C CNN
 F 3 "~" H 15800 9550 50  0001 C CNN
 	1    15800 9550
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	15950 10750 16300 10750
@@ -2129,7 +2088,7 @@ F 1 "1k" H 15870 9305 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 9350 50  0001 C CNN
 F 3 "~" H 15800 9350 50  0001 C CNN
 	1    15800 9350
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	15950 9350 16650 9350
@@ -2166,10 +2125,10 @@ F 0 "U5" H 14600 11513 42  0000 C CNN
 F 1 "AT42QT2120_COMMS" H 14600 11434 42  0000 C CNN
 F 2 "little-helper:QT2120" H 14600 9950 50  0001 C CNN
 F 3 "https://au.mouser.com/datasheet/2/268/doc9634-1369146.pdf" H 14600 9950 50  0001 C CNN
-F 4 "556-AT42QT2120-SUR" H 14600 9950 50  0001 C CNN "Mouser"
-F 5 "AT42QT2120-SUR" H 14600 9950 50  0001 C CNN "MFR"
+F 4 "556-AT42QT2120-SUR" H 14600 9950 50  0001 C CNN "Mouser Number"
+F 5 "AT42QT2120-SUR" H 14600 9950 50  0001 C CNN "Reference"
 	1    14600 9950
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:+3.3V #PWR0106
@@ -2180,7 +2139,7 @@ F 1 "+3.3V" H 19715 8623 50  0000 C CNN
 F 2 "" H 19700 8450 50  0001 C CNN
 F 3 "" H 19700 8450 50  0001 C CNN
 	1    19700 8450
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	19700 8450 20150 8450
@@ -2193,7 +2152,7 @@ F 1 "Earth" H 20550 9050 50  0001 C CNN
 F 2 "" H 20550 9200 50  0001 C CNN
 F 3 "~" H 20550 9200 50  0001 C CNN
 	1    20550 9200
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	20550 9200 20550 8950
@@ -2216,7 +2175,7 @@ F 1 "10k" H 20620 8755 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 20480 8800 50  0001 C CNN
 F 3 "~" H 20550 8800 50  0001 C CNN
 	1    20550 8800
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text Notes 5700 4300 0    50   ~ 0
 hold\n
@@ -2245,7 +2204,7 @@ F 1 "SolderJumper_2_Bridged" H 21900 4014 50  0000 C CNN
 F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm" H 21900 3900 50  0001 C CNN
 F 3 "~" H 21900 3900 50  0001 C CNN
 	1    21900 3900
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	21750 3900 21700 3900
@@ -2280,7 +2239,7 @@ F 1 "click-wheel" H 17528 9110 50  0000 L CNN
 F 2 "click-wheel-2:connector" H 17000 9700 50  0001 C CNN
 F 3 "" H 17000 9700 50  0001 C CNN
 	1    17000 9700
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Text Notes 19550 9250 0    50   ~ 0
 HOLD button\n
@@ -2294,19 +2253,13 @@ F 0 "S1" H 20350 8831 50  0000 C CNN
 F 1 "450302014072" H 20350 8740 50  0000 C CNN
 F 2 "slider:slider" H 20350 8550 50  0001 L BNN
 F 3 "https://au.mouser.com/datasheet/2/445/450302014072-1626986.pdf" H 20350 8550 50  0001 L BNN
-F 4 "710-450302014072" H 20350 8550 50  0001 L BNN "Mouser"
-F 5 "450302014072" H 20350 8550 50  0001 C CNN "MFR"
+F 4 "710-450302014072" H 20350 8550 50  0001 L BNN "Mouser Number"
+F 5 "450302014072" H 20350 8550 50  0001 C CNN "Reference"
 	1    20350 8550
-	-1   0    0    1   
+	-1   0    0    1
 $EndComp
 Connection ~ 21250 5800
 Connection ~ 19100 6600
-$Sheet
-S 8750 1000 15550 6700
-U 5DA42305
-F0 "music" 50
-F1 "music.sch" 50
-$EndSheet
 Wire Notes Line
 	9000 7750 24200 7750
 Wire Wire Line
@@ -2322,7 +2275,7 @@ F 1 "Earth" H 21250 6550 50  0001 C CNN
 F 2 "" H 21250 6700 50  0001 C CNN
 F 3 "~" H 21250 6700 50  0001 C CNN
 	1    21250 6700
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:C C21
@@ -2333,7 +2286,7 @@ F 1 "1uF" H 21365 6355 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 21288 6250 50  0001 C CNN
 F 3 "~" H 21250 6400 50  0001 C CNN
 	1    21250 6400
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Notes Line
 	20950 1200 20950 7750
@@ -2349,10 +2302,10 @@ F 0 "U8" H 9250 10610 70  0000 C CNN
 F 1 "KWH018ST14-F01_4WSPI-TOP" H 9250 10489 70  0000 C CNN
 F 2 "sparkfun:FPC05040-17204" H 9200 9800 50  0001 C CNN
 F 3 "https://omronfs.omron.com/en_US/ecb/products/pdf/en-xf3m.pdf" H 9200 9800 50  0001 C CNN
-F 4 " 653-XF3M-4015-1B" H 9200 9800 50  0001 C CNN "Mouser"
-F 5 "XF3M-4015-1B" H 9200 9800 50  0001 C CNN "MFR"
+F 4 " 653-XF3M-4015-1B" H 9200 9800 50  0001 C CNN "Mouser Number"
+F 5 "XF3M-4015-1B" H 9200 9800 50  0001 C CNN "Reference"
 	1    9200 9800
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	8700 9700 8300 9700
@@ -2413,7 +2366,7 @@ F 1 "+3.3V" H 10215 9173 50  0000 C CNN
 F 2 "" H 10200 9000 50  0001 C CNN
 F 3 "" H 10200 9000 50  0001 C CNN
 	1    10200 9000
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:+3.3V #PWR0109
@@ -2424,7 +2377,7 @@ F 1 "+3.3V" H 8415 9173 50  0000 C CNN
 F 2 "" H 8400 9000 50  0001 C CNN
 F 3 "" H 8400 9000 50  0001 C CNN
 	1    8400 9000
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	9800 9300 10200 9300
@@ -2439,7 +2392,7 @@ F 1 "10k" V 9934 9950 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 9980 9950 50  0001 C CNN
 F 3 "~" H 10050 9950 50  0001 C CNN
 	1    10050 9950
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 Wire Wire Line
 	9800 10100 9800 9950
@@ -2477,10 +2430,10 @@ F 0 "Q1" H 8864 12661 70  0000 L CNN
 F 1 "220mA/50V/3.5Ω" H 8864 12540 70  0000 L CNN
 F 2 "sparkfun:SOT23-3" H 8700 12600 50  0001 C CNN
 F 3 "https://www.mouser.com/ds/2/149/BSS138-1006682.pdf" H 8700 12600 50  0001 C CNN
-F 4 "512-BSS138 " H 8700 12600 50  0001 C CNN "Mouser"
-F 5 "BSS138 " H 8700 12600 50  0001 C CNN "MFR"
+F 4 "512-BSS138 " H 8700 12600 50  0001 C CNN "Mouser Number"
+F 5 "BSS138 " H 8700 12600 50  0001 C CNN "Reference"
 	1    8700 12600
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R14
@@ -2491,7 +2444,7 @@ F 1 "10k" H 8520 12255 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 8380 12300 50  0001 C CNN
 F 3 "~" H 8450 12300 50  0001 C CNN
 	1    8450 12300
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L Device:R R15
@@ -2502,7 +2455,7 @@ F 1 "1" V 9184 12400 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 9230 12400 50  0001 C CNN
 F 3 "~" H 9300 12400 50  0001 C CNN
 	1    9300 12400
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L Device:R R28
@@ -2513,7 +2466,7 @@ F 1 "1" V 9484 12400 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" V 9530 12400 50  0001 C CNN
 F 3 "~" H 9600 12400 50  0001 C CNN
 	1    9600 12400
-	0    1    1    0   
+	0    1    1    0
 $EndComp
 $Comp
 L power:+3.3V #PWR0102
@@ -2524,7 +2477,7 @@ F 1 "+3.3V" H 8465 12223 50  0000 C CNN
 F 2 "" H 8450 12050 50  0001 C CNN
 F 3 "" H 8450 12050 50  0001 C CNN
 	1    8450 12050
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR0103
@@ -2535,7 +2488,7 @@ F 1 "Earth" H 8150 10700 50  0001 C CNN
 F 2 "" H 8150 10850 50  0001 C CNN
 F 3 "~" H 8150 10850 50  0001 C CNN
 	1    8150 10850
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 $Comp
 L power:Earth #PWR0110
@@ -2546,7 +2499,7 @@ F 1 "Earth" H 8800 12800 50  0001 C CNN
 F 2 "" H 8800 12950 50  0001 C CNN
 F 3 "~" H 8800 12950 50  0001 C CNN
 	1    8800 12950
-	1    0    0    -1  
+	1    0    0    -1
 $EndComp
 Wire Wire Line
 	8800 12950 8800 12800
@@ -2583,7 +2536,6 @@ Text Notes 7700 8850 0    50   ~ 0
 SCREEN\n
 NoConn ~ 5100 8500
 NoConn ~ 5500 8300
-NoConn ~ 7950 9600
 $Comp
 L Device:R R31
 U 1 1 5D74ED5A
@@ -2593,7 +2545,7 @@ F 1 "1k" H 15870 9105 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 9150 50  0001 C CNN
 F 3 "~" H 15800 9150 50  0001 C CNN
 	1    15800 9150
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L Device:R R30
@@ -2604,7 +2556,7 @@ F 1 "1k" H 15870 8905 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 8950 50  0001 C CNN
 F 3 "~" H 15800 8950 50  0001 C CNN
 	1    15800 8950
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 $Comp
 L Device:R R29
@@ -2615,7 +2567,7 @@ F 1 "1k" H 15870 8705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 15730 8750 50  0001 C CNN
 F 3 "~" H 15800 8750 50  0001 C CNN
 	1    15800 8750
-	0    -1   -1   0   
+	0    -1   -1   0
 $EndComp
 Wire Wire Line
 	15500 8750 15650 8750
@@ -2641,4 +2593,162 @@ Wire Wire Line
 	16800 8750 16800 9850
 Wire Wire Line
 	16800 9850 16850 9850
+Wire Wire Line
+	19800 1600 19800 2500
+Text GLabel 19550 2500 0    50   Input ~ 0
+AGND
+$Sheet
+S 8050 1200 15550 6700
+U 5DA42305
+F0 "music" 50
+F1 "music.sch" 50
+$EndSheet
+Wire Wire Line
+	19450 2100 20000 2100
+Wire Wire Line
+	20000 2500 20000 2100
+Connection ~ 20000 2100
+Wire Wire Line
+	20000 2100 20150 2100
+Wire Wire Line
+	19550 2500 19700 2500
+NoConn ~ 19900 2500
+Wire Wire Line
+	3300 11650 3300 11900
+Connection ~ 3300 11900
+Wire Wire Line
+	3300 11900 3150 11900
+Wire Wire Line
+	2200 11550 2200 11900
+$Comp
+L Mechanical:Heatsink_Pad HS1
+U 1 1 5DE8248F
+P 2200 11450
+F 0 "HS1" H 2341 11489 50  0000 L CNN
+F 1 "Heatsink_Pad" H 2341 11398 50  0000 L CNN
+F 2 "custom:medium-thermal" H 2212 11400 50  0001 C CNN
+F 3 "~" H 2212 11400 50  0001 C CNN
+	1    2200 11450
+	1    0    0    -1
+$EndComp
+$Comp
+L Mechanical:Heatsink_Pad HS2
+U 1 1 5DE85DD1
+P 2550 12600
+F 0 "HS2" H 2408 12547 50  0000 R CNN
+F 1 "Heatsink_Pad" H 2408 12638 50  0000 R CNN
+F 2 "custom:medium-thermal" H 2562 12550 50  0001 C CNN
+F 3 "~" H 2562 12550 50  0001 C CNN
+	1    2550 12600
+	-1   0    0    1
+$EndComp
+Wire Wire Line
+	2550 12500 2550 12350
+Wire Wire Line
+	2550 12350 2750 12350
+Connection ~ 2750 12350
+Wire Wire Line
+	2750 12350 2750 12400
+Wire Wire Line
+	2200 12300 2450 12300
+$Comp
+L Mechanical:Heatsink_Pad HS3
+U 1 1 5DEE8469
+P 4550 5900
+F 0 "HS3" H 4408 5847 50  0000 R CNN
+F 1 "Heatsink_Pad" H 4408 5938 50  0000 R CNN
+F 2 "custom:thermal" H 4562 5850 50  0001 C CNN
+F 3 "~" H 4562 5850 50  0001 C CNN
+	1    4550 5900
+	-1   0    0    1
+$EndComp
+Wire Wire Line
+	4200 5800 4550 5800
+Connection ~ 4200 5800
+$Comp
+L Mechanical:Heatsink_Pad HS4
+U 1 1 5DF0FF8C
+P 22600 2750
+F 0 "HS4" H 22458 2697 50  0000 R CNN
+F 1 "Heatsink_Pad" H 22458 2788 50  0000 R CNN
+F 2 "custom:small-thermal" H 22612 2700 50  0001 C CNN
+F 3 "~" H 22612 2700 50  0001 C CNN
+	1    22600 2750
+	-1   0    0    1
+$EndComp
+Wire Wire Line
+	22600 2650 22950 2650
+Connection ~ 22950 2650
+Wire Wire Line
+	22950 2650 22950 2750
+$Comp
+L jack:SJ-3524-SMT J2
+U 1 1 5DFAFDC6
+P 19900 3000
+F 0 "J2" V 20053 2770 50  0000 R CNN
+F 1 "SJ-3524-SMT-jack" V 19962 2770 50  0000 R CNN
+F 2 "Connector_Audio:Jack_3.5mm_CUI_SJ-3524-SMT_Horizontal" H 19900 3000 50  0001 L BNN
+F 3 "https://au.mouser.com/datasheet/2/670/sj-352x-smt_series-1313220.pdf" H 19900 3000 50  0001 L BNN
+F 4 "490-SJ-3523-SMT-TR " H 19900 3000 50  0001 L BNN "Mouser Number"
+F 5 "SJ-3523-SMT-TR " H 19900 3000 50  0001 L BNN "Reference"
+	1    19900 3000
+	0    -1   -1   0
+$EndComp
+$Comp
+L Device:CP1 C20
+U 1 1 5DCD2014
+P 19300 2100
+F 0 "C20" V 19552 2100 50  0000 C CNN
+F 1 "220uF" V 19461 2100 50  0000 C CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x5.4" H 19300 2100 50  0001 C CNN
+F 3 "https://au.mouser.com/datasheet/2/315/ABA0000C1145-947633.pdf" H 19300 2100 50  0001 C CNN
+F 4 "667-EEE-0JA221WP" V 19300 2100 50  0001 C CNN "Mouser Number"
+F 5 "EEE-0JA221WP" V 19300 2100 50  0001 C CNN "Reference"
+	1    19300 2100
+	0    -1   -1   0
+$EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 5D6E1739
+P 19100 10200
+F 0 "H1" H 19200 10246 50  0000 L CNN
+F 1 "MountingHole" H 19200 10155 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad" H 19100 10200 50  0001 C CNN
+F 3 "~" H 19100 10200 50  0001 C CNN
+	1    19100 10200
+	1    0    0    -1
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 5D6E18E4
+P 19100 10400
+F 0 "H2" H 19200 10446 50  0000 L CNN
+F 1 "MountingHole" H 19200 10355 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad" H 19100 10400 50  0001 C CNN
+F 3 "~" H 19100 10400 50  0001 C CNN
+	1    19100 10400
+	1    0    0    -1
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 5D6E1C49
+P 19100 10600
+F 0 "H3" H 19200 10646 50  0000 L CNN
+F 1 "MountingHole" H 19200 10555 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_DIN965_Pad" H 19100 10600 50  0001 C CNN
+F 3 "~" H 19100 10600 50  0001 C CNN
+	1    19100 10600
+	1    0    0    -1
+$EndComp
+Text Notes 19050 9950 0    50   ~ 0
+Mounting Holes
+Wire Notes Line
+	18800 9800 18800 10800
+Wire Notes Line
+	18800 10800 19950 10800
+Wire Notes Line
+	19950 10800 19950 9800
+Wire Notes Line
+	19950 9800 18800 9800
+NoConn ~ 9800 9500
 $EndSCHEMATC
